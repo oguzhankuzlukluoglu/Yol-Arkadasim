@@ -1,0 +1,56 @@
+@keyframes navMenu {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+.container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.menu{
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.links{
+    position: absolute;
+    right: 0;
+    top: 42px;
+    width: 165px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation-name: navMenu;
+    animation-duration: 1s;
+}
+
+.links > a{
+    padding: 2px;
+}
+
+.links > a:hover{
+    scale: 0.9;
+}
+
+@media screen and (max-width:640px) {
+    .links{
+        width: 140px;
+        height: 120px;
+    }
+}
+
+@media screen and (max-width:460px) {
+    .links{
+        width: 120px;
+    }
+    .links > a:hover{
+        scale: 1;
+    }
+}
