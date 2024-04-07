@@ -19,7 +19,7 @@
 .links{
     position: absolute;
     right: 0;
-    top: 42px;
+    top: 41px;
     width: 165px;
     height: 140px;
     display: flex;
@@ -29,6 +29,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     animation-name: navMenu;
     animation-duration: 1s;
+    z-index: 10;
+    background-color: #fff;
 }
 
 .links > a{

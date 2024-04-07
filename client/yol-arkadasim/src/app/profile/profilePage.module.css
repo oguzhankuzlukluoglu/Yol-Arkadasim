@@ -1,0 +1,175 @@
+.container{
+    
+}
+
+.userInfos{
+    display: flex;
+    flex-direction: column;
+}
+
+.coverImage{
+    position: relative;
+    width: 100%;
+    height: calc(50vh - 3rem);
+    border: solid 1px #d8c2d8;
+    cursor: pointer;
+}
+.coverImage > img{
+    object-fit: cover;
+}
+
+.coverImage > img:hover{
+    opacity: 0.95;
+}
+
+.profile{
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.profileImage{
+    position: relative;
+    height: 100px;
+    width: 210px;
+}
+.profileImage > img{
+    position: absolute;
+    cursor: pointer;
+    top: -103px;
+    left: 10px;
+    width: 206px;
+    height: 206px;
+    border-radius: 50%;
+}
+
+.profileBio{
+    padding-top: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.profileBio > span{
+    margin-left: 5px;
+}
+
+.profileBio > .userName{
+    font-weight: 500;
+}
+.profileBio > .userDesc{
+
+}
+.profileBio > .userLocation{
+    display: flex;
+    gap: 1px;
+    align-items: center;
+}
+.profileBio > .userLocation > img{
+    width: 16px;
+    height: 16px;
+}
+.profileBio > .userLocation > span{
+    font-weight: 500;
+}
+
+@media screen and (max-width:960px) {
+    .coverImage{
+        height: calc(45vh - 3rem);
+    }
+    .profileImage{
+        width: 180px;
+    }
+    .profileImage > img{
+        top: -90px;
+        left: 5px;
+        width: 180px;
+        height: 180px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .coverImage{
+        height: calc(40vh - 3rem);
+    }
+    .profileImage{
+        width: 150px;
+    }
+    .profileImage > img{
+        top: -75px;
+        left: 5px;
+        width: 150px;
+        height: 150px;
+    }
+    .profileBio > .userName{
+        font-size: 14px;
+    }
+    .profileBio > .userDesc{
+        font-size: 14px;
+    }
+    .profileBio > .userLocation > img{
+        width: 12px;
+        height: 12px;
+    }
+    .profileBio > .userLocation > span{
+        font-size: 14px;
+    }
+}
+@media screen and (max-width:640px) {
+    .coverImage{
+        height: calc(35vh - 3rem);
+    }
+    .profileImage{
+        width: 100px;
+    }
+    .profileImage > img{
+        top: -50px;
+        left: 5px;
+        width: 100px;
+        height: 100px;
+    }
+    .profileBio{
+        gap: 2px;
+    }
+    .profileBio > .userName{
+        font-size: 10px;
+    }
+    .profileBio > .userDesc{
+        font-size: 10px;
+    }
+    .profileBio > .userLocation > img{
+        width: 12px;
+        height: 12px;
+    }
+    .profileBio > .userLocation > span{
+        font-size: 10px;
+    }
+}
+@media screen and (max-width:330px) {
+    .coverImage{
+        height: calc(30vh - 3rem);
+    }
+    .profileImage{
+        width: 80px;
+    }
+    .profileImage > img{
+        top: -40px;
+        left: 5px;
+        width: 80px;
+        height: 80px;
+    }
+    .profileBio{
+        gap: 1px;
+    }
+    .profileBio > .userName{
+        font-size: 8px;
+    }
+    .profileBio > .userDesc{
+        font-size: 8px;
+    }
+    .profileBio > .userLocation > img{
+        width: 12px;
+        height: 12px;
+    }
+    .profileBio > .userLocation > span{
+        font-size: 8px;
+    }
+}
