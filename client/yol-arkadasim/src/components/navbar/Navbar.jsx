@@ -16,7 +16,7 @@ const Navbar = () => {
         <div className={styles.links}>
           <Link href={`/`}>Ana Sayfa</Link>
           <Link href={`/`}>Keşfet</Link>
-          <Link href={`/`}>İlanlar</Link>
+          <Link href={`/profile`}>İlanlar</Link>
           <Link href={`/`}>Çıkış Yap</Link>
         </div>
         <div className={styles.navmenu}>
