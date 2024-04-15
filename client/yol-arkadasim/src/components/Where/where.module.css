@@ -1,0 +1,57 @@
+.whereContainer{
+    display: flex;
+    flex-direction: column;
+    height: 32px;
+    gap: 2px;
+    position: relative;
+}
+
+.whereInput{
+    display: flex;
+}
+
+.whereInput > label{
+    padding: 3px;
+    min-width: 75px;
+}
+.whereInput > input {
+    outline: none;
+    padding-left: 6px;
+}
+
+.scrollContainer {
+    max-height: 150px;
+    width: 150px;
+    overflow-y: auto; 
+    z-index: 1;
+    position: absolute;
+    top: 25px;
+    left: 85px;
+    background-color: #b8a1a1;
+}
+
+.scrollContainer > p{
+    padding: 0 2px;
+    text-align: center;
+
+}
+
+.scrollContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+    background: #b8a1a1; 
+    border-radius: 4px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.selected{
+    background-color: #b8b8b8;
+}
