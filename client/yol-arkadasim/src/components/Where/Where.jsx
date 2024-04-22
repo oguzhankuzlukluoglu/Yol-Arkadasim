@@ -43,9 +43,9 @@ const Where = ({ type }) => {
         if (iller.includes(filtrelenmisIller[seciliIndex])) {
           setIl(filtrelenmisIller[seciliIndex]);
         }
-        if (type === "from") {
-          document.getElementById("to").value = "";
-        }
+        // if (type === "from") {
+        //   document.getElementById("to").value = "";
+        // }
         setGoster(false);
       } else if (e.key === "Escape") {
         setGoster(false);
