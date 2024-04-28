@@ -1,0 +1,115 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 3rem);
+}
+
+.registerContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 34%;
+    max-width: 100%;
+}
+.registerTitle{
+    font-weight: 300;
+    font-family: monospace;
+    text-align: center;
+}
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.FormInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.FormInfo > label{
+    font-family: cursive;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.FormInfo > input{
+    padding: 2px 1px;
+    max-width: 50%;
+    outline: none;
+    border-radius: 3px;
+}
+
+.RegisterButton{
+    text-align: end;
+}
+.RegisterButton > button{
+    padding: 8px 8px;
+    border-radius: 8px;
+    border: none;
+    background-color: burlywood;
+    cursor: pointer;
+    width: 85px;
+    height: 40px;
+    font-weight: 500;
+    font-family: cursive;
+}
+
+.GoogleSection{
+    border-top: solid 1px gray;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.GoogleSection > a{
+    padding: 4px 0px;
+    font-family: fangsong;
+    font-size: 24px;
+    font-weight: 500;
+}
+.GoogleSection > span{
+    padding: 4px 0;
+    font-weight: 300;
+}
+
+@media screen and (max-width:960px) {
+    .registerContainer{
+        width: 40%;
+    }
+    .registerTitle{
+        font-size: 24px;
+    }
+    .FormInfo > label{
+        font-size: 16px;
+    }
+    .RegisterButton > button{
+        width: 80px;
+        height: 35px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .registerContainer{
+        width: 50%;
+    }
+    .registerTitle{
+        font-size: 20px;
+    }
+    .FormInfo > label{
+        font-size: 16px;
+    }
+    .RegisterButton > button{
+        width: auto;
+        height: auto;
+    }
+}
+@media screen and (max-width:476px) {
+    .registerContainer{
+        width: 80%;
+        gap: 12px;
+    }
+    .FormInfo > input{
+        width: 60%;
+    }
+}
