@@ -1,0 +1,121 @@
+.footer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 20px 10px;
+    justify-content: space-around;
+    height: 30vh;
+    background-color: rgb(128, 214, 241);
+}
+.popular, .routes, .about, .socials{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.popular h1, .routes h1, .about h1, .socials  h1{
+    margin: 0;
+    font-weight: 500;
+    font-size: 24px;
+}
+.roads, .links{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+}
+.roads a, .links a{
+    font-size: 18px;
+    font-weight: 400;
+}
+.meet{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.meet span{
+    font-size: 18px;
+}
+.meet span a{
+    font-size: 18px;
+    font-family: cursive,'Times New Roman';
+    padding: 0 2px;
+}
+.icons{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.icons a img{
+    width: 24px;
+    height: 24px;
+}
+.company{
+    display: flex;
+    gap: 4px;
+    background-color: gray;
+    padding: 2px;
+}
+.company span{
+    font-weight: 300;
+}
+
+
+@media screen and (max-width:768px){
+    .footer{
+        height: 40vh;
+    }
+    .popular, .routes,.about, .socials{
+        gap: 6px;
+    }
+    .popular h1, .routes h1,.about h1, .socials  h1{
+        font-size: 20px;
+    }
+    .roads, .links{
+        gap: 3px;
+    }
+    .roads a, .links a{
+        font-size: 16px;
+    }
+    .meet{
+        max-width: 170px;
+    }
+    .meet span{
+        font-size: 16px;
+    }
+    .meet span a{
+        font-size: 16px;
+    }
+    
+}
+
+@media screen and (max-width:368px){
+    .footer{
+        height: 60vh;
+    }
+    .popular, .routes,.about, .socials{
+        gap: 5px;
+    }
+    .popular h1, .routes h1,.about h1, .socials  h1{
+        font-size: 18px;
+    }
+    .roads, .links{
+        gap: 2px;
+    }
+    .roads a, .links a{
+        font-size: 16px;
+    }
+    .meet{
+        max-width:165px;
+    }
+    .meet span{
+        font-size: 16px;
+    }
+    .meet span a{
+        font-size: 16px;
+    }
+    .company span{
+        font-size: 12px;
+    }
+}

@@ -133,6 +133,7 @@
     flex-direction: column;
     gap: 10px;
     max-width: 700px;
+    padding: 20px 0;
 }
 
 .adverts > .advertsTitle{
