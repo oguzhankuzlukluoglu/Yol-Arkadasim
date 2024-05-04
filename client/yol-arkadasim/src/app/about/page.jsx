@@ -4,7 +4,8 @@ import Image from 'next/image'
 
 const aboutPage = () => {
     return (
-    <><div className={contents}>
+        <div className={styles.container}>
+    <div className={contents}>
             <Image src="images/resim4.jpg" className={Image} />
             <h1>Ekibimizle Tanışın</h1>
             <br /><br /><br />
@@ -61,7 +62,8 @@ const aboutPage = () => {
                     <i className="fa-regular fa-envelope"></i>
                 </div>
             </div>
-            <br /><br /><br /><br /><br /><br /><br /><br /></>
+            <br /><br /><br /><br /><br /><br /><br /><br />
+            </div>
     )
 }
 
