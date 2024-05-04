@@ -1,3 +1,9 @@
+.container{
+    height: calc(100vh - 3rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 :root{
     --main-color: #cdc9c9;
     --border: 0.1rem solid rgba(255,255,255,0.4);
@@ -63,7 +69,7 @@
     margin: 0;
     padding: 0;
     color: black;
-    font-size: 16px;
+        font-size: 16px;
     font-weight: bold;
     text-align:center;
     margin-top:50px;

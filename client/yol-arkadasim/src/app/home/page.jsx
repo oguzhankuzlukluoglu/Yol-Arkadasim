@@ -37,9 +37,10 @@ const HomePage = () => {
     }
     
     return (
+        <div className={styles.container}>
         <div>
-            <div className="main">
-                <div className="slider">
+            <div className={main}>
+                <div className={slider}>
                     <Image src="images/resim1.jpg" alt="resim1" width={50} height={50}/>
                         <div className="buton">
                             <i className="fa-solid fa-arrow-left fa-2x" onclick="next()"></i>
@@ -47,70 +48,70 @@ const HomePage = () => {
                         </div>
                 </div>
 
-                <div className="content">
+                <div className={content}>
                     <h2>Hemen bir yol arkadaşı bulun!</h2>
                     <p>Yolculuklarınızı unutulmaz kılacak yol arkadaşınızı bulun!
                         <br /> Yolculuklarınızı daha eğlenceli ve güvenli hale getirin.
                             <br />Yol Arkadaşım size eşlik etsin!</p>
                         </div>
                 </div>
-                <div className="ingredient">
+                <div className={ingredient}>
                     <h3>Uygulamayı kullananlardan okuyun</h3>
                 </div>
                 <br /><br /><br />
-                <section className="products">
-                    <div className="box-container">
+                <section className={products}>
+                    <div className={box-container}>
 
-                        <div className="box">
-                            <div className="box-head">
-                                <h3 className="title">Kullanıcı</h3>
-                                <p className="name">Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br /> Kesinlikle bu uygulamayı tavsiye ediyorum. <br /> Hem güvenli, hem kullanışlı.</p>
+                        <div className={box}>
+                            <div className={box-head}>
+                                <h3 className={title}>Kullanıcı</h3>
+                                <p className={name}>Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br /> Kesinlikle bu uygulamayı tavsiye ediyorum. <br /> Hem güvenli, hem kullanışlı.</p>
                                 </div>
                             </div>
-                            <div className="box">
-                                <div className="box-head">
-                                    <h3 className="title">Kullanıcı 2</h3>
-                                    <p className="name">Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br /> <br />Kesinlikle bu uygulamayı tavsiye ediyorum.Hem güvenli, hem kullanışlı.</p>
+                            <div className={box}>
+                                <div className={box-head}>
+                                    <h3 className={title}>Kullanıcı 2</h3>
+                                    <p className={name}>Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br /> <br />Kesinlikle bu uygulamayı tavsiye ediyorum.Hem güvenli, hem kullanışlı.</p>
                                 </div>
                             </div>
-                            <div className="box">
-                                <div className="box-head">
-                                    <h3 className="title">Kullanıcı 3</h3>
-                                    <p className="name">Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br /> Kesinlikle bu uygulamayı tavsiye ediyorum. <br /> Hem güvenli, hem kullanışlı.</p>
+                            <div className={box}>
+                                <div className={box-head}>
+                                    <h3 className={title}>Kullanıcı 3</h3>
+                                    <p className={name}>Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br /> Kesinlikle bu uygulamayı tavsiye ediyorum. <br /> Hem güvenli, hem kullanışlı.</p>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
                         <br /><br /><br /><br /><br /><br />
-                        <div className="ingredient">
+                        <div className={ingredient}>
                             <h3>Neden Yol Arkadaşımı seçmelisin</h3>
                         </div>
 
                         <br /><br /><br />
-                        <div className="buto">
+                        <div className={buto}>
                             <i className="fa-solid fa-shield-halved"></i>
                             <i className="fa-solid fa-user-group"></i>
                             <i className="fa-solid fa-rocket"></i>
                         </div>
-                        <div className="buto" style="height: 15%;font-size:medium;">
+                        <div className={buto} style="height: 15%;font-size:medium;">
                             <p>Güvenilir</p>
                             <p>Kullanıcı Dostu</p>
                             <p style="width: 50px;">Hızlı</p>
                         </div>
 
                         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                        <div className="ingredient">
+                        <div className={ingredient}>
                             <h3>Nereye gitmek istersiniz?</h3>
                         </div>
 
                         <br /><br /><br />
-                        <div className="ingredient">
+                        <div className={ingredient}>
                             <div>
                                 <h3 style="width: 45rem;background-color:#cdc9cd;" >
                                     <p style="margin-right: auto;background-color: #cdc9cd;">Nereden:</p>
 
-                                    <div className="select" style="margin-right:60%;">
+                                    <div className={select} style="margin-right:60%;">
                                         <select name="slct" id="slct">
                                             <option selected disabled>Seçiniz</option>
                                             <option value="1">Adana</option>
@@ -198,9 +199,9 @@ const HomePage = () => {
                                     </div>
                                 </h3>
                             </div>
-                            <div className="button">
-                                <button className="btn">Ara</button>
-                                <a href="#" className="btn">
+                            <div className={button}>
+                                <button className={btn}>Ara</button>
+                                <a href="#" className={btn}>
                                     <i className="fa-solid fa-magnifying-glass" aria-hidden="true" ></i>
                                 </a>
                             </div>
@@ -208,7 +209,7 @@ const HomePage = () => {
                                 <h3 style="width: 45rem;background-color: #cdc9cd;">
                                     <p style="margin-right: auto;background-color: #cdc9cd;">Nereye:</p>
 
-                                    <div className="select" style="margin-right:60%;">
+                                    <div className={select} style="margin-right:60%;">
                                         <select name="slct" id="slct">
                                             <option selected disabled>Seçiniz</option>
                                             <option value="1">Adana</option>
@@ -299,16 +300,17 @@ const HomePage = () => {
                         </div>
 
                         <br /><br /><br /><br /><br /><br /><br />
-                        <div className="ingredient">
+                        <div className={ingredient}>
                             <h3>Aradığın yolculuk yok mu?</h3>
                         </div>
                         <br /><br /><br />
-                        <p className="name">Aradığın yolculuk ilanı yoksa ve yol  <br />  arkadaşı arıyorsan hemen bir ilan paylaş!</p>
+                        <p className={name}>Aradığın yolculuk ilanı yoksa ve yol  <br />  arkadaşı arıyorsan hemen bir ilan paylaş!</p>
                         <br /><br /><br />
-                        <div className="button" style="left: 50%;">
+                        <div className={button} style="left: 50%;">
                             <button className="btn" >İlan Ver</button>
                         </div>
                         <br /><br /><br /><br />
+                    </div>
                     </div>
                     )
 }
