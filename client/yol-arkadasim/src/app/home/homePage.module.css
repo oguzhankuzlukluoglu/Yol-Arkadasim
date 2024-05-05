@@ -4,11 +4,6 @@
     align-items: center;
     justify-content: center;
 }
-:root{
-    --main-color: #cdc9c9;
-    --border: 0.1rem solid rgba(255,255,255,0.4);
-
-}
 
 .main{
     width: 100%;
@@ -160,9 +155,8 @@ line-height: 3em;
 overflow: hidden;
 border-radius: .25em;
 }
-
 select::after{
-   content: '\25BC';
+   
    position: absolute;
    top: 0;
    right: 0;
