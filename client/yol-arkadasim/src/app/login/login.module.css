@@ -3,6 +3,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url("../../../public/loginbg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: rgba(176, 160, 160, 0.5);
+    background-blend-mode: overlay;
 }
 .form{
     background: #cdc9c9;

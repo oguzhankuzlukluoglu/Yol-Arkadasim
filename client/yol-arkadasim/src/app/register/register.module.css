@@ -3,6 +3,13 @@
     align-items: center;
     justify-content: center;
     height: calc(100vh - 3rem);
+    background-image: url("../../../public/backgroundimg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: rgba(176, 160, 160, 0.5);
+    background-blend-mode: overlay;
 }
 
 .registerContainer{
@@ -11,6 +18,11 @@
     gap: 6px;
     width: 34%;
     max-width: 100%;
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 12px;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
 }
 .registerTitle{
     font-weight: 300;
