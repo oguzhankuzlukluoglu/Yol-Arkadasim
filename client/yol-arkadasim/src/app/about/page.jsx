@@ -52,7 +52,7 @@ const aboutPage = () => {
             <br /><br /><br /><br /><br /><br /><br />
             <div className={text}>
                 <h2>Vizyonumuz</h2>
-                <p>Yol Arkadaşım Projesi'nin vizyonu, seyahat eden herkesin, gidecekleri yerlere ulaşırken yanlarında güvenilir ve dostça bir yol arkadaşı bulabilmesidir. Bu proje, insanların dünyayı keşfederken tek başına değil, birlikte deneyimlemelerini sağlayarak daha zengin ve anlamlı seyahat deneyimleri yaşamalarını hedefler. Aynı zamanda, farklı kültürler arasında köprüler kurarak insanların birbirini anlaması ve küresel bir topluluk oluşturması için bir platform sağlar. Yol Arkadaşım, sadece bir seyahat aracı değil, aynı zamanda bir arkadaşlık ve kültürel değişim platformu olarak önemli bir rol oynamayı amaçlar.</p>
+                <p>Yol Arkadaşım Projesinin vizyonu, seyahat eden herkesin, gidecekleri yerlere ulaşırken yanlarında güvenilir ve dostça bir yol arkadaşı bulabilmesidir. Bu proje, insanların dünyayı keşfederken tek başına değil, birlikte deneyimlemelerini sağlayarak daha zengin ve anlamlı seyahat deneyimleri yaşamalarını hedefler. Aynı zamanda, farklı kültürler arasında köprüler kurarak insanların birbirini anlaması ve küresel bir topluluk oluşturması için bir platform sağlar. Yol Arkadaşım, sadece bir seyahat aracı değil, aynı zamanda bir arkadaşlık ve kültürel değişim platformu olarak önemli bir rol oynamayı amaçlar.</p>
             </div>
             <br /><br /><br /><br /><br /><br /><br />
             <div className={text}>
