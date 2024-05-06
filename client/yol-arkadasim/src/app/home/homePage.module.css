@@ -155,7 +155,7 @@ line-height: 3em;
 overflow: hidden;
 border-radius: .25em;
 }
-select::after{
+.select::after{
    
    position: absolute;
    top: 0;
@@ -174,7 +174,7 @@ select::after{
     color: aliceblue;
 }
 
-select{
+.select{
     flex:1;
     /* padding: 0 5em; */
     color: black;
