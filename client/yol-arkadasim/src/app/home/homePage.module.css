@@ -159,8 +159,6 @@ border-radius: .25em;
 
 .select::after{
    content: '\25BC';
-select::after{
-   
    position: absolute;
    top: 0;
    right: 0;
