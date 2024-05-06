@@ -12,12 +12,11 @@
     justify-content: center;
     padding-top: 5rem;
     padding-bottom: 3rem;
-    /*align-items:center; */
 }
 
 .slider{
    width: 366px;
-   height: 338px;
+   /* height: 338px; */
    position: relative;
 }
 
@@ -64,7 +63,7 @@
     margin: 0;
     padding: 0;
     color: black;
-        font-size: 16px;
+    font-size: 16px;
     font-weight: bold;
     text-align:center;
     margin-top:50px;
@@ -73,14 +72,14 @@
 }
 
 .ingredient h3{
-background-color:#5983ac;
-display: flex;
-text-align: center;
-justify-content: center;
-align-items: center;
-width:25rem;
-height: 4rem;
-margin:auto
+    background-color:#5983ac;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width:25rem;
+    height: 4rem;
+    margin:auto
 }
 
 .products .box-container{
@@ -104,26 +103,27 @@ margin:auto
     justify-content: space-between;
     padding: 3rem;
 }
- .products .box-container .box .box-head{
+
+.products .box-container .box .box-head{
     flex-direction: column;
     align-items:flex-start;
     position: relative;
     z-index: 10;
     display: inline-block;
 } 
+
 .products .box-container .box .box-head .title{
    font-size: 1.4rem;
    justify-content: center;
    align-items: center;
 }
+
 .products .box-container .box .box-head .name{
- font-size: 1rem;
- font-weight: bold;
- text-align:center;
- overflow-wrap: anywhere;
- 
+    font-size: 1rem;
+    font-weight: bold;
+    text-align:center;
+    overflow-wrap: anywhere;
 }
-         
 
 .buto{
     position: absolute;
@@ -135,39 +135,37 @@ margin:auto
     padding-left: 500px;
     padding-right: 500px;
     font-size: x-large;
- }
+}
 
 .select{
--webkit-appearance: none;
--moz-appearance: none;
--ms-appearance:none;
-appearance: none;
-outline: 0;
-box-shadow: none;
-border:0 !important;
-background: white;
-background-image: none;
-position: relative;
-display: flex;
-width: 20em;
-height: 2em;
-line-height: 3em;
-overflow: hidden;
-border-radius: .25em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance:none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border:0 !important;
+    background: white;
+    background-image: none;
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 2em;
+    line-height: 3em;
+    overflow: hidden;
+    border-radius: .25em;
 }
-.select::after{
-   
-   position: absolute;
-   top: 0;
-   right: 0;
-   padding: 0 1em;
-   background:white;
-   cursor: pointer;
-   pointer-events: none;
-   -webkit-transition: .25s all ease;
-   transition: .25s all ease;
-   -o-transition: .25s all ease;
 
+.select::after{
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background:white;
+    cursor: pointer;
+    pointer-events: none;
+    transition: .25s all ease;
 }
 
 .select:hover::after{
@@ -176,14 +174,12 @@ border-radius: .25em;
 
 .select{
     flex:1;
-    /* padding: 0 5em; */
     color: black;
     cursor: pointer;
 }
 
 .button{
     position: absolute;
-   /*  top: 90%;*/
     left: 62%; 
     transform: translate(-50% , -50%);
     text-align: center;
@@ -194,7 +190,6 @@ border-radius: .25em;
     border: 2px solid #2c3e50;
     font-size: 14px;
     font-family: "Thoma",sans-serif;
-    /* text-transform: uppercase; */
     padding: 12px 20px;
     min-width: 150px;
     margin: 10px;

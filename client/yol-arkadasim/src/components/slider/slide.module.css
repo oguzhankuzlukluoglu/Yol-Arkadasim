@@ -1,0 +1,49 @@
+.container{
+    display: flex;
+    height: calc(100vh - 48px);
+}
+.slider{
+    transition: all 0.5s ease-in-out;
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    position: relative;
+    gap: 10px;
+}
+.image{
+    flex: 2;
+}
+
+.image > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 5%, rgba(255, 255, 255, 0.5) 45%, rgba(255, 255, 255, 0.5) 55%, rgba(255, 255, 255, 0) 95%, rgba(255, 255, 255, 0)); 
+    border-radius: 32px;
+    opacity: 0.9;
+}
+
+.slide{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.arrows > .arrowLeft{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.arrows > .arrowRight{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    opacity: 0.5;
+    cursor: pointer;
+}
