@@ -3,6 +3,7 @@ import styles from "./homePage.module.css";
 import Slider from "@/components/slider/Slider";
 import Image from "next/image";
 import Where from "@/components/Where/Where";
+import Link from "next/link";
 
 const HomePage = () => {
 
@@ -88,7 +89,7 @@ const HomePage = () => {
              <Where type="to"/>
         </div>
         <div className={styles.button}>
-          <button className={styles.btn}>Ara</button>
+          <Link href="/advert" className={styles.btn}>Ara</Link>
         </div>
       </div>
 
@@ -101,7 +102,7 @@ const HomePage = () => {
           paylaş!
         </p>
         <div className={styles.button}>
-          <button className={styles.publish}>İlan Ver</button>
+          <Link href="/advertise-travel" className={styles.publish}>İlan Ver</Link>
         </div>
       </div>
     </div>

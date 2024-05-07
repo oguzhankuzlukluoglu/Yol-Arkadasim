@@ -6,7 +6,7 @@ const Register = () => {
   return (
     <div className={styles.container}>
         <div className={styles.registerContainer}>
-            <h1 className={styles.registerTitle}>Yol Arkadaşıma Kayıt Ol</h1>
+            <h1 className={styles.registerTitle}>Kayıt Ol</h1>
             <div className={styles.registerForm}>
                 <div className={styles.FormInfo}>
                     <label htmlFor="isim">İsim</label>
