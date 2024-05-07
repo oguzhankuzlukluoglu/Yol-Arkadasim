@@ -111,24 +111,14 @@
 
 
 .select{
--webkit-appearance: none;
--moz-appearance: none;
--ms-appearance:none;
-appearance: none;
-box-shadow: none;
-border:0 !important;
-background: white;
-background-image: none;
-position: relative;
 display: flex;
-height: 2em;
-line-height: 3em;
-overflow: hidden;
 border-radius: .25em;
+align-items: center;
 }
 
 .select select{
     outline: none;
+    width: 100%;
 }
 
 
@@ -150,6 +140,7 @@ border-radius: .25em;
 
 .where p{
     font-size: 20px;
+    min-width: 100px;
 }
 
 .button{
