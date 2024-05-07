@@ -1,35 +1,106 @@
-.container{
-    height: calc(100vh - 3rem);
+.ingredient{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 20vh;
+    padding: 20px 20px 0;
 }
 
-.main{
-    width: 100%;
+.ingredient h3{
+    background-color: #abc8e4;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 20px;
+    font-family: sans-serif;
+    width: 50%;
+    border-bottom-left-radius: 20px;
+    letter-spacing: 1px;
+    border-top-right-radius: 20px;
+}
+
+.products{
+    height: 45vh;
+}
+
+.products .boxContainer{
+    display:flex;
+    gap:20px; 
+    justify-content: center;
+    text-align: left;
+    height: auto;
+    min-height: 260px;
+}
+.products .boxContainer .box{
+    text-align: left;
+    background-color: #cdc9c9;
+    border-radius: 1rem;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    height: auto;
+}
+
+.products .box-container .box .boxHead{
     height: 100%;
     display: flex;
+    flex-direction: column;
+    gap: 18px;
+} 
+
+.userInfo{
+    display: flex;
+    gap: 4px;
+    padding: 8px;
+    align-items: center;
+}
+
+.products .boxContainer .box .boxHead .title{
+    font-size: 1.4rem;
     justify-content: center;
-    padding-top: 5rem;
-    padding-bottom: 3rem;
+    align-items: center;
+    font-weight: 500;
+ }
+
+ .products .boxContainer .box .boxHead .name{
+    text-align:left;
+    overflow-wrap: anywhere;
+    font-family: "Thoma",sans-serif;
+    padding: 2px;
+    font-size: 18px;
+    font-weight: 400;
 }
 
-.slider{
-   width: 366px;
-   /* height: 338px; */
-   position: relative;
+.buto{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: x-large;
+    background: #d5d5d5;
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
-.slider img{
-   width: 100%;
-   height: 100%;
-   border-radius: 3px; 
+.buto .icon{
+    padding: 10px 0;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.findAdvert{
+    height: 20vh;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-around;
+    background: #d5d5d5;
+    border-radius: 20px 20px 0 0;
 }
 
 .buton{
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     display: flex;
@@ -38,137 +109,28 @@
     padding: 10px;
 }
 
-.buton i{
-    color: white; 
-}
-
-.buton i:hover{
-    color: gray;
-}
-
-.main .content{
-    background-color:#e8e8e8;
-}
-
-.main .content h2{
-    margin: 10px 0;
-    padding: 0;
-    color: black;
-    font-size: 30px;
-    margin-top: 60px;
-    text-align: center;
-}
-
-.main .content p{
-    margin: 0;
-    padding: 0;
-    color: black;
-        font-size: 16px;
-    font-weight: bold;
-    text-align:center;
-    margin-top:50px;
-    margin-left: 10px;
-    margin-right:10px;
-}
-
-.ingredient h3{
-background-color:#5983ac;
-display: flex;
-text-align: center;
-justify-content: center;
-align-items: center;
-width:25rem;
-height: 4rem;
-margin:auto
-}
-
-.products .box-container{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem,1fr));
-    gap:1.5px; 
-    margin:5px;
-    padding-left: 10rem;
-    justify-content: center;
-    text-align: left;
-}
-
-.products .box-container .box{
-    text-align: left;
-    background-color: #cdc9c9;
-    position: relative;
-    border-radius:1rem;
-    height:15rem;
-    width:20rem;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 3rem;
-}
- .products .box-container .box .box-head{
-    flex-direction: column;
-    align-items:flex-start;
-    position: relative;
-    z-index: 10;
-    display: inline-block;
-} 
-.products .box-container .box .box-head .title{
-   font-size: 1.4rem;
-   justify-content: center;
-   align-items: center;
-}
-.products .box-container .box .box-head .name{
- font-size: 1rem;
- font-weight: bold;
- text-align:center;
- overflow-wrap: anywhere;
- 
-}
-         
-
-.buto{
-    position: absolute;
-    width: 100%;
-    height: 7%;
-    display: flex;
-    justify-content:space-around;
-    align-items:center;
-    padding-left: 500px;
-    padding-right: 500px;
-    font-size: x-large;
- }
 
 .select{
 -webkit-appearance: none;
 -moz-appearance: none;
 -ms-appearance:none;
 appearance: none;
-outline: 0;
 box-shadow: none;
 border:0 !important;
 background: white;
 background-image: none;
 position: relative;
 display: flex;
-width: 20em;
 height: 2em;
 line-height: 3em;
 overflow: hidden;
 border-radius: .25em;
 }
 
-.select::after{
-   content: '\25BC';
-   position: absolute;
-   top: 0;
-   right: 0;
-   padding: 0 1em;
-   background:white;
-   cursor: pointer;
-   pointer-events: none;
-   -webkit-transition: .25s all ease;
-   transition: .25s all ease;
-   -o-transition: .25s all ease;
-
+.select select{
+    outline: none;
 }
+
 
 .select:hover::after{
     color: aliceblue;
@@ -180,28 +142,34 @@ border-radius: .25em;
     cursor: pointer;
 }
 
+.where{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.where p{
+    font-size: 20px;
+}
+
 .button{
-    position: absolute;
-    left: 62%; 
-    transform: translate(-50% , -50%);
     text-align: center;
 }
 
 .btn{
-    background: none;
+    background: #abc8e4;
     border: 2px solid #2c3e50;
-    font-size: 14px;
+    font-size: 18px;
     font-family: "Thoma",sans-serif;
-    padding: 12px 20px;
-    min-width: 150px;
-    margin: 10px;
+    padding: 4px 5px;
+    border-bottom-right-radius: 16px;
+    min-width: 100px;
     cursor: pointer;
-    position: relative;
     transition: color 0.4s linear;
 }
 
 .btn:hover{
-    color: #5983ac;
+    color: #fff;
 }
 
 .btn::before{
@@ -218,9 +186,122 @@ border-radius: .25em;
     transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
 }
 
-.name{
-    font-size: 20px;
-    text-align: center;
+.createAdvert{
+    display: flex;
+    padding: 20px;
+    gap: 10px;
+    height: 20vh;
+    align-items: center;
     justify-content: center;
+}
+
+.createAdvert .name{
+    width: 50%;
+    font-size: 24px;
+    padding: 10px;
+    font-family: sans-serif;
+}
+.publish{
+    padding: 10px;
+    background: #abc8e4;
+    border: 2px solid #2c3e50;
+    font-size: 18px;
     font-family: "Thoma",sans-serif;
-} 
+    min-width: 100px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+    border: none;
+}
+@media screen and (max-width:960px) {
+   .ingredient h3{
+    font-size: 18px;
+   }
+   .userInfo h3{
+    font-size: 20px;
+   }
+   .findAdvert{
+    height: 15vh;
+   }
+   .createAdvert p{
+    font-size: 20px;
+   }
+}
+
+@media screen and (max-width:768px) {
+    .products{
+        height: 42vh;
+    }
+    .ingredient h3{
+        font-size: 15px;
+        width: auto;
+       }
+       .userInfo h3{
+        font-size: 20px;
+       }
+       .boxHead p{
+        font-size: 16px;
+       }
+       .buto{
+        font-size: large;
+       }
+       .findAdvert{
+        height: 15vh;
+       }
+       .createAdvert .name{
+        font-size: 20px;
+       }
+       .city{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+       }
+       .where p{
+        min-width: 100px;
+       }
+}
+@media screen and (max-width:640px) {
+   .products{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: center;
+   }
+   .boxContainer{
+    flex-wrap: wrap;
+    max-width: 250px;
+   }
+   .icon{
+    font-size: medium;
+   }
+   .icon img{
+    width: 24px;
+    height: 24px;
+   }
+   .createAdvert .name{
+    font-size: 18px;
+   }
+}
+@media screen and (max-width:474px) {
+    .buto{
+        flex-direction: column;
+        background: none;
+        gap: 2px;
+    }
+    .icon{
+        background: #cdc9c9;
+        justify-content: center;
+        width: 100%;
+    }
+    .findAdvert{
+        flex-direction: column;
+        height: 18vh;
+    }
+    .createAdvert{
+        flex-direction: column;
+    height: 25vh;
+    }
+    .createAdvert .name{
+        width: 100%;
+    }
+
+}

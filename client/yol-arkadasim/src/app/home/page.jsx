@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./homePage.module.css";
 import Slider from "@/components/slider/Slider";
+import Image from "next/image";
 
 const HomePage = () => {
 
@@ -9,14 +10,17 @@ const HomePage = () => {
       <Slider/>
       
       <div className={styles.ingredient}>
-        <h3>Uygulamayı kullananlardan okuyun</h3>
+        <h3>Uygulamayı kullananlardan okuyun !</h3>
       </div>
 
       <section className={styles.products}>
         <div className={styles.boxContainer}>
           <div className={styles.box}>
             <div className={styles.boxHead}>
-              <h3 className={styles.title}>Kullanıcı</h3>
+              <div className={styles.userInfo}>
+                <Image alt="user" src="/navbarLogo.png" width={32} height={32}/>
+                <h3 className={styles.title}>Kullanıcı</h3>
+              </div>
               <p className={styles.name}>
                 Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br />{" "}
                 Kesinlikle bu uygulamayı tavsiye ediyorum. <br /> Hem güvenli,
@@ -26,9 +30,12 @@ const HomePage = () => {
           </div>
           <div className={styles.box}>
             <div className={styles.boxHead}>
-              <h3 className={styles.title}>Kullanıcı 2</h3>
+            <div className={styles.userInfo}>
+                <Image alt="user" src="/navbarLogo.png" width={32} height={32}/>
+                <h3 className={styles.title}>Kullanıcı</h3>
+              </div>
               <p className={styles.name}>
-                Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br />{" "}
+                Bu uygulamayı kullanarak çok iyi arkadaşlar edindim.
                 <br />
                 Kesinlikle bu uygulamayı tavsiye ediyorum.Hem güvenli, hem
                 kullanışlı.
@@ -37,7 +44,10 @@ const HomePage = () => {
           </div>
           <div className={styles.box}>
             <div className={styles.boxHead}>
-              <h3 className={styles.title}>Kullanıcı 3</h3>
+            <div className={styles.userInfo}>
+                <Image alt="user" src="/navbarLogo.png" width={32} height={32}/>
+                <h3 className={styles.title}>Kullanıcı</h3>
+              </div>
               <p className={styles.name}>
                 Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br />{" "}
                 Kesinlikle bu uygulamayı tavsiye ediyorum. <br /> Hem güvenli,
@@ -49,35 +59,35 @@ const HomePage = () => {
       </section>
 
       <div className={styles.ingredient}>
-        <h3>Neden Yol Arkadaşımı seçmelisin</h3>
+        <h3>Neden Yol Arkadaşımı seçmelisin ?</h3>
       </div>
 
       <div className={styles.buto}>
-        <i className="fa-solid fa-shield-halved"></i>
-        <i className="fa-solid fa-user-group"></i>
-        <i className="fa-solid fa-rocket"></i>
-      </div>
-      <div
-        className={styles.buto}
-        style={{ height: "15%", fontSize: "medium" }}
-      >
-        <p>Güvenilir</p>
-        <p>Kullanıcı Dostu</p>
-        <p style={{ width: "50px" }}>Hızlı</p>
-      </div>
-
-      <div className={styles.ingredient}>
-        <h3>Nereye gitmek istersiniz?</h3>
+        <div className={styles.icon}>
+          <Image alt="safe" src="/safe.png" width={32} height={32}/>
+          <p>Güvenilir</p>
+        </div>
+        <div className={styles.icon}>
+          <Image alt="safe" src="/friendly.png" width={32} height={32}/>
+          <p>Kullanıcı Dostu</p>
+        </div>
+        <div className={styles.icon}>
+          <Image alt="safe" src="/fast.png" width={32} height={32}/>
+          <p>Hızlı</p>
+        </div>
       </div>
 
       <div className={styles.ingredient}>
-        <div>
-          <h3 style={{ width: "45rem", backgroundColor: "#cdc9cd" }}>
-            <p style={{ marginRight: "auto", backgroundColor: "#cdc9cd" }}>
+        <h3>Nereye gitmek istersiniz ?</h3>
+      </div>
+
+      <div className={styles.findAdvert}>
+        <div className={styles.city}>
+        <div className={styles.where}>
+            <p>
               Nereden:
             </p>
-
-            <div className={styles.select} style={{ marginRight: "60%" }}>
+            <div className={styles.select}>
               <select name="slct" id="slct">
                 <option selected disabled>
                   Seçiniz
@@ -165,21 +175,13 @@ const HomePage = () => {
                 <option value="81">Düzce</option>
               </select>
             </div>
-          </h3>
         </div>
-        <div className={styles.button}>
-          <button className={styles.btn}>Ara</button>
-          <a href="#" className={styles.btn}>
-            <i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-          </a>
-        </div>
-        <div>
-          <h3 style={{ width: "45rem", backgroundColor: "#cdc9cd" }}>
-            <p style={{ marginRight: "auto", backgroundColor: "#cdc9cd" }}>
+        <div className={styles.where}>
+            <p>
               Nereye:
             </p>
 
-            <div className={styles.select} style={{ marginRight: "60%" }}>
+            <div className={styles.select} >
               <select name="slct" id="slct">
                 <option selected disabled>
                   Seçiniz
@@ -267,19 +269,24 @@ const HomePage = () => {
                 <option value="81">Düzce</option>
               </select>
             </div>
-          </h3>
+        </div>
+        </div>
+        <div className={styles.button}>
+          <button className={styles.btn}>Ara</button>
         </div>
       </div>
 
       <div className={styles.ingredient}>
         <h3>Aradığın yolculuk yok mu?</h3>
       </div>
-      <p className={styles.name}>
-        Aradığın yolculuk ilanı yoksa ve yol arkadaşı arıyorsan hemen bir ilan
-        paylaş!
-      </p>
-      <div className={styles.button} style={{ left: "50%" }}>
-        <button className={styles.btn}>İlan Ver</button>
+      <div className={styles.createAdvert}>
+        <p className={styles.name}>
+          Aradığın yolculuk ilanı yoksa ve yol arkadaşı arıyorsan hemen bir ilan
+          paylaş!
+        </p>
+        <div className={styles.button}>
+          <button className={styles.publish}>İlan Ver</button>
+        </div>
       </div>
     </div>
   );
