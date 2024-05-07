@@ -40,7 +40,7 @@ const advertPage = () => {
                 <div className={styles.routeInfos}>
                     <div className={styles.desc}>
                         <div className={styles.advertButton}>
-                            <button>İlanı Aç</button>
+                            <button>İlan Ara</button>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ const advertPage = () => {
             <div className={styles.ingredient}>
                 <h3>Kendi İlanını Oluşturmak İster Misin?</h3>
                 <div className={styles.btns}>
-                    <button className={styles.btn}>İlan Aç</button>
+                    <Link href="/advertise-travel" className={styles.btn}>İlan Aç</Link>
                 </div>
             </div>
             <br /><br /><br />

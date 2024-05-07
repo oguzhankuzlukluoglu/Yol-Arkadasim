@@ -137,6 +137,7 @@
     transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
 }
 .btns{
+    padding: 20px 0;
     text-align: center;
     margin-top: 10px;
 }
