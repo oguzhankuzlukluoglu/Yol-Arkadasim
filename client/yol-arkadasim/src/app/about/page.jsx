@@ -5,41 +5,41 @@ import Image from 'next/image'
 const aboutPage = () => {
     return (
         <div className={styles.container}>
-    <div className={styles.contents}>
-            <Image src="images/resim4.jpg" className={styles.Image} />
-            <h1>Ekibimizle Tanışın</h1>
-            <br /><br /><br />
-            <p>Ekibimizin bütün üyeleri yazılımcılardan<br></br> oluşmakla beraber projemizi her geçen <br></br>gün ileriye taşımaya gayret ediyoruz.</p>
-        </div>
-        <br /><br /><br /><br />
-        <div className={styles.row}>
+            <div className={styles.contents}>
+                <Image src="/slide1.jpg" className={styles.Image} width={500} height={500} />
+                <h1>Ekibimizle Tanışın</h1>
+                <br /><br /><br />
+                <p>Ekibimizin bütün üyeleri yazılımcılardan<br></br> oluşmakla beraber projemizi her geçen <br></br>gün ileriye taşımaya gayret ediyoruz.</p>
+            </div>
+            <br /><br /><br /><br />
+            <div className={styles.row}>
                 <div className={styles.column}>
-                    <Image src="images/resim5.jpg" style="width:100%" />
+                    <Image src="/slide1.jpg" width={120} height={120} />
                     <h4>Deniz Ök</h4>
                     <br />
                     <p>Frontend Developer</p>
                 </div>
                 <div className={styles.column}>
-                    <Image src="images/resim5.jpg" style="width:100%" />
+                    <Image src="/slide1.jpg" width={120} height={120} />
                     <h4>Mehmet Fatih Kavala</h4>
                     <br />
                     <p>Veritabanı Geliştiricisi</p>
                 </div>
                 <div className={styles.column}>
-                    <Image src="images/resim5.jpg" style="width:100%" />
+                    <Image src="/slide1.jpg" width={120} height={120} />
                     <h4>Mert Sancar</h4>
                     <br />
                     <p>Backend Developer</p>
                 </div>
             </div><div className={styles.row}>
                 <div className={styles.column}>
-                    <Image src="images/resim5.jpg" style="width:100%" />
+                    <Image src="/slide1.jpg" width={120} height={120} />
                     <h4>Oğuzhan Kuzlukluoğlu</h4>
                     <br />
                     <p>Backend Developer</p>
                 </div>
                 <div className={styles.column}>
-                    <Image src="images/resim5.jpg" style="width:100%" />
+                    <Image src="/slide1.jpg" width={120} height={120} />
                     <h4>Tuğba Biçer</h4>
                     <br />
                     <p>Frontend Developer</p>
@@ -57,13 +57,13 @@ const aboutPage = () => {
             </div>
             <br /><br /><br /><br /><br /><br /><br />
             <div className={styles.text}>
-                <p style="font-size: x-large;text-align: center;">Öneri ve görüşleriniz için bize ulaşın </p>
+                <p>Öneri ve görüşleriniz için bize ulaşın </p>
                 <div className="icon">
                     <i className="fa-regular fa-envelope"></i>
                 </div>
             </div>
             <br /><br /><br /><br /><br /><br /><br /><br />
-            </div>
+        </div>
     )
 }
 
