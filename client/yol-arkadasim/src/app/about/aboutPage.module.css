@@ -1,18 +1,71 @@
 .container {
-  height: calc(100vh - 3rem);
   display: flex;
   align-items: center;
   justify-content: center;
-
+  flex-direction: column;
+}
 
 .contents {
-  width: 900px;
-  margin-top: 10%;
-  margin-left: 22%;
+  height: calc(90vh - 3rem);
+  display: flex;
+  gap: 12px;
+  padding: 20px 0;
 }
-.contents p {
-  font-size: 20px;
+.teamDesc{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
 }
+
+.desc{
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.desc h1{
+  font-size: 40px;
+}
+
+.desc p{
+  font-size: 24px;
+}
+.aboutImg{
+  flex: 1;
+}
+
+.aboutImg img{
+  width: 100%;
+  height: 85%;
+}
+
+.row {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.row .column{
+  padding: 5px;
+    width: 225px;
+    height: 225px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.column img{
+  border-radius: 64px;
+  object-fit: cover;
+}
+
+.desc h1{
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
 
 .image {
   float: right;
@@ -21,81 +74,98 @@
   height: 300px;
 }
 
-.row {
-  display: flex;
-  margin-top: 10%;
-  justify-content: space-evenly;
-}
-.row .column h4 {
-  text-align: center;
+.text{
+  padding: 20px 0;
 }
 
-.row .column p {
-  text-align: center;
-}
-
-.column {
-  padding: 5px;
-  width: 170px;
-  height: 170px;
-}
 
 .text h2 {
   text-align: center;
+  font-family: serif;
+  letter-spacing: 2px;
 }
 .text p {
   margin-left: 15%;
   margin-right: 15%;
-}
-.icon {
-  font-size: 40px;
-  text-align: center;
+  padding: 10px 0;
 }
 
-.contents {
-  width: 900px;
-  margin-top: 10%;
-  margin-left: 22%;
-}
-.contents p {
-  font-size: 20px;
-}
-
-.image {
-  float: right;
-  padding: 0 0 10px 10px;
-  width: 300px;
-  height: 300px;
-}
-
-.row {
+.mailText{
   display: flex;
-  margin-top: 10%;
-  justify-content: space-evenly;
-}
-.row .column h4 {
-  text-align: center;
+  gap: 8px;
+  align-items: center;
+  padding: 20px 0;
 }
 
-.row .column p {
-  text-align: center;
+.mailText p{
+  font-size: 18px;
+  font-weight: 400;
 }
 
-.column {
-  padding: 5px;
-  width: 170px;
-  height: 170px;
+.mailText img{
+  cursor: pointer;
 }
 
-.text h2 {
-  text-align: center;
+@media screen and (max-width:960px) {
+  .contents{
+    height: calc(70vh - 3rem);
+  }
+  .aboutImg img{
+    height: 80%;
+  }
+  .desc h1{
+    font-size: 34px;
+  }
+  .desc p{
+    font-size: 20px;
+  }
 }
-.text p {
-  margin-left: 15%;
-  margin-right: 15%;
-}
-.icon {
-  font-size: 40px;
-  text-align: center;
+@media screen and (max-width:768px) {
+  .contents{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 20px;
+  }
+  .teamDesc{
+    align-items: center;
+  }
+  .text p{
+    margin: 0;
+  }
 }
 
+@media screen and (max-width:640px) {
+  .desc h1{
+    font-size: 30px;
+  }
+  .desc p{
+    font-size: 18px;
+  }
+  .row .column{
+    width: 195px;
+    height: 210px;
+  }
+}
+@media screen and (max-width:474px) {
+  .row .column{
+    width: 160px;
+    height: 195px;
+  }
+  .column img{
+    width: 96px;
+    height: 96px;
+  }
+  .column h4, .column p{
+    font-size: 14px;
+  }
+  .text h2{
+    font-size: 18px;
+  }
+  .text p{
+    font-size: 14px;
+  }
+  .mailText p{
+    font-size: 14px;
+  }
+}
