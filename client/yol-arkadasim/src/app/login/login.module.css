@@ -65,3 +65,42 @@ margin-top: 20px;
     background: #5983ac;
     color: #182c61;
 }
+
+@media screen and (max-width:960px) {
+.form h3{
+    font-size: 20px;
+}
+.form input[type="submit"]{
+    height: 47px;
+    width: 38%;
+}
+ }
+ 
+ @media screen and (max-width:768px) {
+    .form h3{
+        font-size: 17px;
+    }   
+    .form input[type="submit"]{
+        height: 44px;
+        width: 36%;
+    }
+ }
+ @media screen and (max-width:640px) {
+    .form h3{
+        font-size: 15px;
+    }
+    .form input[type="submit"]{
+        height: 38px;
+        width: 33%;
+    }
+ }
+ @media screen and (max-width:474px) {
+    .form h3{
+        font-size: 13px;
+    }
+    .form input[type="submit"]{
+        height: 35px;
+        width: 30%;
+    }
+ 
+ }
