@@ -4,6 +4,8 @@
     align-items: center;
     height: 3rem;
     border-bottom: 1px solid rgb(216, 194, 216);
+    padding: 0 80px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .title{
@@ -46,6 +48,11 @@
     }
     .navmenu{
         display: block;
+    }
+}
+@media screen and (max-width:640px) {
+    .container{
+        padding: 0 40px;
     }
 }
 
