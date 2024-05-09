@@ -11,55 +11,55 @@ const HomePage = () => {
     <div>
       <Slider/>
       
-      <div className={styles.ingredient}>
-        <h3>Uygulamayı kullananlardan okuyun !</h3>
-      </div>
-
-      <section className={styles.products}>
-        <div className={styles.boxContainer}>
-          <div className={styles.box}>
-            <div className={styles.boxHead}>
-              <div className={styles.userInfo}>
-                <Image alt="user" src="/navbarLogo.png" width={32} height={32}/>
-                <h3 className={styles.title}>Kullanıcı</h3>
-              </div>
-              <p className={styles.name}>
-                Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br />{" "}
-                Kesinlikle bu uygulamayı tavsiye ediyorum. <br /> Hem güvenli,
-                hem kullanışlı.
-              </p>
-            </div>
-          </div>
-          <div className={styles.box}>
-            <div className={styles.boxHead}>
-            <div className={styles.userInfo}>
-                <Image alt="user" src="/navbarLogo.png" width={32} height={32}/>
-                <h3 className={styles.title}>Kullanıcı</h3>
-              </div>
-              <p className={styles.name}>
-                Bu uygulamayı kullanarak çok iyi arkadaşlar edindim.
-                <br />
-                Kesinlikle bu uygulamayı tavsiye ediyorum.Hem güvenli, hem
-                kullanışlı.
-              </p>
-            </div>
-          </div>
-          <div className={styles.box}>
-            <div className={styles.boxHead}>
-            <div className={styles.userInfo}>
-                <Image alt="user" src="/navbarLogo.png" width={32} height={32}/>
-                <h3 className={styles.title}>Kullanıcı</h3>
-              </div>
-              <p className={styles.name}>
-                Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br />{" "}
-                Kesinlikle bu uygulamayı tavsiye ediyorum. <br /> Hem güvenli,
-                hem kullanışlı.
-              </p>
-            </div>
-          </div>
+      <div className={styles.commentSection}>
+        <div className={styles.ingredient}>
+          <h3>Uygulamayı kullananlardan okuyun !</h3>
         </div>
-      </section>
 
+        <section className={styles.products}>
+          <div className={styles.boxContainer}>
+            <div className={styles.box}>
+              <div className={styles.boxHead}>
+                <div className={styles.userInfo}>
+                  <Image alt="user" src="/navbarLogo.png" width={32} height={32}/>
+                  <span className={styles.commentUser}>Kullanıcı</span>
+                </div>
+                <p className={styles.name}>
+                  Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br />{" "}
+                  Kesinlikle bu uygulamayı tavsiye ediyorum. Hem güvenli,
+                  hem kullanışlı.
+                </p>
+              </div>
+            </div>
+            <div className={styles.box}>
+              <div className={styles.boxHead}>
+              <div className={styles.userInfo}>
+                  <Image alt="user" src="/navbarLogo.png" width={32} height={32}/>
+                  <span className={styles.commentUser}>Kullanıcı</span>
+                </div>
+                <p className={styles.name}>
+                  Bu uygulamayı kullanarak çok iyi arkadaşlar edindim.
+                  Kesinlikle bu uygulamayı tavsiye ediyorum.Hem güvenli, hem
+                  kullanışlı.
+                </p>
+              </div>
+            </div>
+            <div className={styles.box}>
+              <div className={styles.boxHead}>
+              <div className={styles.userInfo}>
+                  <Image alt="user" src="/navbarLogo.png" width={32} height={32}/>
+                  <span className={styles.commentUser}>Kullanıcı</span>
+                </div>
+                <p className={styles.name}>
+                  Bu uygulamayı kullanarak çok iyi arkadaşlar edindim. <br />{" "}
+                  Kesinlikle bu uygulamayı tavsiye ediyorum. Hem güvenli,
+                  hem kullanışlı.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
       <div className={styles.ingredient}>
         <h3>Neden Yol Arkadaşımı seçmelisin ?</h3>
       </div>
@@ -79,7 +79,9 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className={styles.ingredient}>
+
+      <div className={styles.findAdvertSection}>
+      <div className={styles.whereTitle}>
         <h3>Nereye gitmek istersiniz ?</h3>
       </div>
 
@@ -92,8 +94,10 @@ const HomePage = () => {
           <Link href="/advert" className={styles.btn}>Ara</Link>
         </div>
       </div>
+      </div>
 
-      <div className={styles.ingredient}>
+      <div className={styles.toPublish}>
+      <div className={styles.findAdvertTitle}>
         <h3>Aradığın yolculuk yok mu?</h3>
       </div>
       <div className={styles.createAdvert}>
@@ -104,6 +108,7 @@ const HomePage = () => {
         <div className={styles.button}>
           <Link href="/advertise-travel" className={styles.publish}>İlan Ver</Link>
         </div>
+      </div>
       </div>
     </div>
   );

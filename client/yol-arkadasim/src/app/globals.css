@@ -26,25 +26,24 @@ body{
 }
 
 .wrapper{
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 80px;
+  margin: 0;
+  padding: 0;
 }
 
-
+/* 
 @media screen and (max-width: 1536px) {
   .wrapper{
     max-width: 1300px;
   }
-}
+} */
 
-@media screen and (max-width: 1300px) {
+ /* @media screen and (max-width: 1200px) {
   .wrapper{
     max-width: 1150px;
   }
-}
+}  */
 
-@media screen and (max-width: 1150px) {
+/* @media screen and (max-width: 1150px) {
   .wrapper{
     max-width: 960px;
   }
@@ -75,4 +74,4 @@ body{
     max-width: 360px;
     padding: 0 20px;
   }
-}
+} */
