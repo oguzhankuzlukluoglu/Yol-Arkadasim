@@ -19,7 +19,7 @@ const Register = () => {
         <div className={styles.registerForm}>
           <div className={styles.FormInfo}>
             <label htmlFor="isim">İsim</label>
-            <input type="text" name="" id="isim" />
+            <input type="text" name="" id="isim" autoFocus/>
           </div>
           <div className={styles.FormInfo}>
             <label htmlFor="soyisim">Soyisim</label>
@@ -53,11 +53,13 @@ const Register = () => {
           <span> - ya da -</span>
         </div>
         <div className={styles.GoogleSection}>
-          <Link href="/" className={styles.GoogleLink}>
-            <Image alt="google" src="/google.png" width={32} height={32} />
-            <span>GOOGLE</span>
+          <Link href="/" className={styles.googleWrap}>
+            <div className={styles.GoogleLink}>
+              <Image alt="google" src="/google.png" width={32} height={32} />
+              <span>Google</span>
+            </div>
+            <span>ile kayıt ol</span>
           </Link>
-          <span>ile kayıt ol</span>
         </div>
       </div>
     </div>
