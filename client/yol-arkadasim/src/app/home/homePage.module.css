@@ -176,14 +176,11 @@
   text-align: center;
 }
 
-.btn {
-  background: #a2cdff;
-  border-radius: 24px;
-  padding: 8px 6px;
-  min-width: 120px;
-  font-size: 24px;
-  display: inline-block;
+
+.button .advertPublish{
+  position: absolute;
 }
+
 
 .btn:hover {
   color: black;

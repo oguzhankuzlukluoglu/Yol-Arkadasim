@@ -4,6 +4,9 @@ import Slider from "@/components/slider/Slider";
 import Image from "next/image";
 import Where from "@/components/Where/Where";
 import Link from "next/link";
+import Advertise from "@/components/advertiseTravel/Advertise";
+import { Button } from "react-bootstrap";
+
 
 const HomePage = () => {
 
@@ -91,7 +94,11 @@ const HomePage = () => {
              <Where type="to"/>
         </div>
         <div className={styles.button}>
-          <Link href="/advert" className={styles.btn}>Ara</Link>
+          <Link href="/advert" className={styles.buttonLink}>
+          <Button variant="primary">
+            İlan ara
+          </Button>
+          </Link>
         </div>
       </div>
       </div>
@@ -106,7 +113,7 @@ const HomePage = () => {
           paylaş!
         </p>
         <div className={styles.button}>
-          <Link href="/advertise-travel" className={styles.publish}>İlan Ver</Link>
+          <Advertise className={styles.advertPublish}/>
         </div>
       </div>
       </div>
