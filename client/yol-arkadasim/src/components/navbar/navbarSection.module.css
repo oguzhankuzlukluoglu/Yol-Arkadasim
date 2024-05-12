@@ -1,0 +1,18 @@
+.container{
+    padding: 0 80px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logoSection span{
+    font-size: 22px;
+}
+
+.navLogo{
+    color: transparent;
+    height: 56px;
+    width: 128px;
+    position: absolute;
+    object-fit: cover;
+    left: -79px;
+    top: -2px;
+}
