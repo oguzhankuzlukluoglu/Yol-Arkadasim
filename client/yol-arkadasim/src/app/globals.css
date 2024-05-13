@@ -1,6 +1,7 @@
 :root{
   --bg: white;
   --textColor: black; 
+  --bs-dropdown-min-width: 8rem;
 }
 
 *{
@@ -20,7 +21,9 @@ body{
 }
 
 .container{
-  min-height: 100vh;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 100vw;
   background-color: var(--bg);
   color: var(--textColor);
 }
