@@ -15,6 +15,10 @@ func main() {
 >>>>>>> 9cdd729 (update)
 =======
 	fmt.Println("qwererrety")
+<<<<<<< HEAD
 >>>>>>> f7fb8f4 (aaa)
+=======
+	fmt.Println("qweredddddrrety")
+>>>>>>> a483e91 (ikinci)
 
 }
