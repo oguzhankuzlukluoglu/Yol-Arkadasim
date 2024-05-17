@@ -1,0 +1,275 @@
+.modalDialog{
+    height: 550px;
+}
+
+.advertButton{
+    min-width: 80.51px;
+}
+
+.modalContainer{
+    width: 100%;
+    height: 100%;
+}
+
+.advertContainer{
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    gap: 12px;
+    /* background-color: #ec8a8a; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 4px;
+    /* box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); */
+}
+
+.advertInfos{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.route,.time,.information{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.date , .clock, .transport, .tel{
+    display: flex;
+    height: 32px;
+    gap: 2px;
+}
+
+.date label, .clock label, .transport label, .tel label{
+    padding: 3px;
+    min-width: 92px;
+}
+
+.date input, .clock input, .transport input, .tel input{
+    outline: none;
+    padding-left: 6px;
+    min-height: 30px;
+    min-width: 225.2px;
+}
+
+.desc{
+    display: flex;
+    justify-content: space-between;
+    min-height: 100px;
+}
+
+.routeDesc{
+    display: flex;
+}
+
+.routeDesc label{
+    min-width: 92px;
+    padding: 0 3px 3px;
+}
+
+.routeDesc textarea{
+    outline: none;
+    padding: 0 2px;
+    max-width: 300px;
+    max-height: 100px;
+}
+
+@media screen and (max-width:960px) {
+    .advertContainer{
+        width: 648px;
+        height: 450px;
+        gap: 8px;
+    }
+    .advertInfos{
+        flex-direction: column;
+        gap: 8px;
+        height: auto;
+    }
+    .advertInfos label{
+        min-width: 100px;
+    }
+    .routeInfos label{
+        min-width: 100px;
+    }
+    .route, .time, .information{
+        gap: 8px;
+    }
+    .time input{
+        min-width: 171.6px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .advertContainer{
+        width: 520px;
+        height: 400px;
+        gap: 6px;
+    }
+    .advertInfos{
+        flex-direction: column;
+        gap: 6px;
+        height: auto;
+    }
+    .advertInfos label{
+        min-width: 100px;
+    }
+    .routeInfos label{
+        min-width: 100px;
+    }
+    .route, .time, .information{
+        gap: 6px;
+    }
+    .time input{
+        min-width: 171.6px;
+    }
+}
+@media screen and (max-width:640px) {
+    .advertContainer{
+        width: 395px;
+        height: 450px;
+        gap: 5px;
+    }
+    .advertInfos{
+        flex-direction: column;
+        gap: 5px;
+        height: auto;
+    }
+    .advertInfos label{
+        min-width: 100px;
+    }
+    .routeInfos label{
+        min-width: 100px;
+    }
+    .route, .time, .information{
+        gap: 5px;
+    }
+    .time input{
+        min-width: 171.6px;
+    }
+    .desc{
+        flex-direction: column;
+        gap: 8px;
+    }
+    .advertButton{
+        justify-content: center;
+    }
+}
+@media screen and (max-width:475px) {
+    .advertContainer{
+        width: 320px;
+        height: 400px;
+        gap: 4px;
+        padding: 4px;
+    }
+    .advertInfos{
+        flex-direction: column;
+        gap: 4px;
+        height: auto;
+    }
+    .advertInfos label{
+        min-width: 80px;
+        font-size: 14px;
+    }
+    .routeInfos label{
+        min-width: 80px;
+    }
+    .route, .time, .information{
+        gap: 4px;
+    }
+    .routeDesc > textarea{
+        max-width: 100px;
+    }
+    .time input{
+        min-width: 171.6px;
+    }
+}
+@media screen and (max-width:335px) {
+    .advertContainer{
+        width: 100%;
+        height: 400px;
+        gap: 4px;
+        padding: 4px;
+        min-width: 300px;
+    }
+    .advertInfos{
+        flex-direction: column;
+        gap: 4px;
+        height: auto;
+    }
+    .advertInfos label{
+        min-width: 80px;
+        font-size: 14px;
+    }
+    .routeInfos label{
+        min-width: 80px;
+    }
+    .route, .time, .information{
+        gap: 4px;
+    }
+    .routeDesc{
+        min-height: 90px;
+    }
+    .routeDesc > textarea{
+        max-width: 171.6px;
+        max-height: 75px;
+    }
+    .time input{
+        min-width: 171.6px;
+    }
+    .advertButton > button{
+        padding: 4px 6px;
+        width: 60px;
+        height: 35px;
+    }
+}
+@media screen and (max-width:300px) {
+    .advertContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 480px;
+        gap: 10px;
+        width: 240px;
+        min-width: 200px;
+    }
+    .advertInfos{
+        height: 300px;
+    }
+    
+    .from, .to{
+        height: 41px;
+    }
+    .date,.clock{
+        height: 44px;
+    }
+    .transport,.tel{
+        height: 41px;
+    }
+    .advertInfos label{
+        min-width: 60px;
+        font-size: 14px;
+    }
+    .routeInfos label{
+        min-width: 60px;
+    }
+    .date, .clock, .transport, .tel{
+        display: flex;
+        flex-direction: column;
+    }
+    .information{
+        flex-direction: column;
+    }
+    .advertContainer input{
+        width: 60%;
+    }
+
+    .routeDesc{
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
+

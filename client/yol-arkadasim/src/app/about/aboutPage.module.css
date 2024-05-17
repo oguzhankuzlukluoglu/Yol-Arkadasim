@@ -1,0 +1,171 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.contents {
+  height: calc(90vh - 3rem);
+  display: flex;
+  gap: 12px;
+  padding: 20px 0;
+}
+.teamDesc{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
+}
+
+.desc{
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.desc h1{
+  font-size: 40px;
+}
+
+.desc p{
+  font-size: 24px;
+}
+.aboutImg{
+  flex: 1;
+}
+
+.aboutImg img{
+  width: 100%;
+  height: 85%;
+}
+
+.row {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.row .column{
+  padding: 5px;
+    width: 225px;
+    height: 225px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.column img{
+  border-radius: 64px;
+  object-fit: cover;
+}
+
+.desc h1{
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+
+.image {
+  float: right;
+  padding: 0 0 10px 10px;
+  width: 300px;
+  height: 300px;
+}
+
+.text{
+  padding: 20px 0;
+}
+
+
+.text h2 {
+  text-align: center;
+  font-family: serif;
+  letter-spacing: 2px;
+}
+.text p {
+  margin-left: 15%;
+  margin-right: 15%;
+  padding: 10px 0;
+}
+
+.mailText{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.mailText p{
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.mailText img{
+  cursor: pointer;
+}
+
+@media screen and (max-width:960px) {
+  .contents{
+    height: calc(70vh - 3rem);
+  }
+  .aboutImg img{
+    height: 80%;
+  }
+  .desc h1{
+    font-size: 34px;
+  }
+  .desc p{
+    font-size: 20px;
+  }
+}
+@media screen and (max-width:768px) {
+  .contents{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 20px;
+  }
+  .teamDesc{
+    align-items: center;
+  }
+  .text p{
+    margin: 0;
+  }
+}
+
+@media screen and (max-width:640px) {
+  .desc h1{
+    font-size: 30px;
+  }
+  .desc p{
+    font-size: 18px;
+  }
+  .row .column{
+    width: 195px;
+    height: 210px;
+  }
+}
+@media screen and (max-width:474px) {
+  .row .column{
+    width: 160px;
+    height: 195px;
+  }
+  .column img{
+    width: 96px;
+    height: 96px;
+  }
+  .column h4, .column p{
+    font-size: 14px;
+  }
+  .text h2{
+    font-size: 18px;
+  }
+  .text p{
+    font-size: 14px;
+  }
+  .mailText p{
+    font-size: 14px;
+  }
+}

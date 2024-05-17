@@ -1,0 +1,380 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.userInfos{
+    display: flex;
+    flex-direction: column;
+}
+
+.coverImage{
+    position: relative;
+    width: 100%;
+    height: calc(50vh - 3rem);
+    border: solid 1px #d8c2d8;
+    cursor: pointer;
+}
+.coverImage > img{
+    object-fit: cover;
+}
+
+.coverImage > img:hover{
+    opacity: 0.95;
+}
+
+.profile{
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.profileImage{
+    position: relative;
+    height: 100px;
+    width: 210px;
+}
+.profileImage > img{
+    position: absolute;
+    cursor: pointer;
+    top: -103px;
+    left: 10px;
+    width: 206px;
+    height: 206px;
+    border-radius: 50%;
+}
+
+.profileBio{
+    padding-top: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.profileBio > span{
+    margin-left: 5px;
+}
+
+.profileBio > .userName{
+    font-weight: 500;
+}
+.profileBio > .userDesc{
+
+}
+.profileBio > .userLocation{
+    display: flex;
+    gap: 1px;
+    align-items: center;
+}
+.profileBio > .userLocation > img{
+    width: 16px;
+    height: 16px;
+}
+.profileBio > .userLocation > span{
+    font-weight: 500;
+}
+
+.interests{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 450px;
+    min-height: 140px;
+}
+
+.interests > .interestTitle{
+    font-weight: 400;
+    padding: 6px 0;
+    width: fit-content;
+    border-bottom: 1px solid #726e72;
+}
+
+.interests > .interestInfo{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.interests > .interestInfo > span{
+    font-size: 20px;
+    font-weight: 300;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background-color: #d8c2d8;
+    cursor: pointer;
+}
+
+.memorySection{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.memorySection > .memoryTitle{
+    font-weight: 400;
+    padding: 6px 0;
+    width: fit-content;
+    border-bottom: 1px solid #726e72;
+}
+
+.memorySection > .memoryImage{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.memorySection > .memoryImage > img{
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+}
+
+.adverts{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 700px;
+    padding: 20px 0;
+}
+
+.adverts > .advertsTitle{
+    font-weight: 400;
+    padding: 6px 0;
+    width: fit-content;
+    border-bottom: 1px solid #726e72;
+}
+
+.adverts > .advertSection{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #4fc582;
+    padding: 10px;
+    border-radius: 16px;
+}
+
+.adverts > .advertSection > .advertInfos{
+    display: flex;
+    gap: 20px;
+}
+
+.adverts > .advertSection > .advertInfos > .travelInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.adverts > .advertSection > .advertUser{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adverts > .advertSection > .advertUser > .advertUserInfo{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.adverts > .advertSection > .advertUser > .advertButton > a{
+    padding: 8px 10px;
+    background-color: #93ffa3;
+    border-radius: 16px;
+}
+
+.adverts > .advertSection > .advertUser > .advertButton > a:hover{
+    background-color: #4fc582;
+    border: 1px solid #fff;
+    display: flex;
+    scale: 0.9;
+}
+
+
+@media screen and (max-width:960px) {
+    .container{
+        gap: 16px;
+    }
+    .coverImage{
+        height: calc(45vh - 3rem);
+    }
+    .profileImage{
+        width: 180px;
+    }
+    .profileImage > img{
+        top: -90px;
+        left: 5px;
+        width: 180px;
+        height: 180px;
+    }
+    .interests > .interestTitle{
+        font-size: 28px;
+    }
+    .interests > .interestInfo > span{
+        padding: 6px 8px;
+    }
+    .memorySection{
+        height: 568px;
+    }
+    .memorySection > .memoryTitle{
+        font-size: 28px;
+    }
+    .memorySection > .memoryImage > img{
+        width: 220px;
+        height: 220px;
+    }
+    .adverts > .advertsTitle{
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .container{
+        gap: 8px;
+    }
+    .coverImage{
+        height: calc(40vh - 3rem);
+    }
+    .profileImage{
+        width: 150px;
+    }
+    .profileImage > img{
+        top: -75px;
+        left: 5px;
+        width: 150px;
+        height: 150px;
+    }
+    .profileBio > .userName{
+        font-size: 14px;
+    }
+    .profileBio > .userDesc{
+        font-size: 14px;
+    }
+    .profileBio > .userLocation > img{
+        width: 12px;
+        height: 12px;
+    }
+    .profileBio > .userLocation > span{
+        font-size: 14px;
+    }
+    .interests > .interestTitle{
+        font-size: 24px;
+    }
+    .interests > .interestInfo > span{
+        padding: 5px 7px;
+        font-size: 18px;
+    }
+    .memorySection{
+        height: 500px;
+    }
+    .memorySection > .memoryTitle{
+        font-size: 24px;
+    }
+    .memorySection > .memoryImage > img{
+        width: 190px;
+        height: 190px;
+    }
+    .adverts > .advertsTitle{
+        font-size: 24px;
+    }
+}
+@media screen and (max-width:640px) {
+    .container{
+        gap: 0;
+    }
+    .coverImage{
+        height: calc(35vh - 3rem);
+    }
+    .profileImage{
+        width: 100px;
+        height: 80px;
+    }
+    .profileImage > img{
+        top: -50px;
+        left: 5px;
+        width: 100px;
+        height: 100px;
+    }
+    .profileBio{
+        gap: 2px;
+    }
+    .profileBio > .userName{
+        font-size: 10px;
+    }
+    .profileBio > .userDesc{
+        font-size: 10px;
+    }
+    .profileBio > .userLocation > img{
+        width: 12px;
+        height: 12px;
+    }
+    .profileBio > .userLocation > span{
+        font-size: 10px;
+    }
+    .interests > .interestTitle{
+        font-size: 20px;
+    }
+    .interests > .interestInfo > span{
+        padding: 4px 6px;
+        font-size: 16px;
+    }
+    .memorySection{
+        height: 400px;
+    }
+    .memorySection > .memoryTitle{
+        font-size: 20px;
+    }
+    .memorySection > .memoryImage > img{
+        width: 150px;
+        height: 150px;
+    }
+    .adverts > .advertsTitle{
+        font-size: 20px;
+    }
+    .adverts > .advertSection > .advertInfos > .travelInfo > span{
+    font-size: 10px;
+    }
+    .adverts > .advertSection > .advertUser > .advertUserInfo > img{
+        width: 32px;
+        height: 32px;
+    }
+    .adverts > .advertSection > .advertUser > .advertUserInfo > span{
+        font-size: 12px;
+    }
+    .adverts > .advertSection > .advertUser > .advertButton > a{
+        padding: 5px 8px;
+        border-radius: 16px;
+        font-size: 12px;
+    }
+}
+@media screen and (max-width:367px) {
+    .coverImage{
+        height: calc(30vh - 3rem);
+    }
+    .profileImage{
+        width: 80px;
+    }
+    .profileImage > img{
+        top: -40px;
+        left: 5px;
+        width: 80px;
+        height: 80px;
+    }
+    .profileBio{
+        gap: 1px;
+    }
+    .profileBio > .userName{
+        font-size: 8px;
+    }
+    .profileBio > .userDesc{
+        font-size: 8px;
+    }
+    .profileBio > .userLocation > img{
+        width: 12px;
+        height: 12px;
+    }
+    .profileBio > .userLocation > span{
+        font-size: 8px;
+    }
+    .memorySection{
+        height: auto;
+    }
+}

@@ -1,6 +1,10 @@
 :root{
   --bg: white;
   --textColor: black; 
+<<<<<<< HEAD
+=======
+  --bs-dropdown-min-width: 8rem;
+>>>>>>> da265e4 (Merge pull request #39 from oguzhankuzlukluoglu/oguzhan)
 }
 
 *{
@@ -20,22 +24,37 @@ body{
 }
 
 .container{
+<<<<<<< HEAD
   min-height: 100vh;
+=======
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 100vw;
+>>>>>>> da265e4 (Merge pull request #39 from oguzhankuzlukluoglu/oguzhan)
   background-color: var(--bg);
   color: var(--textColor);
 }
 
 .wrapper{
+<<<<<<< HEAD
   max-width: 1320px;
   margin: 0 auto;
   padding: 0 80px;
 }
 
 
+=======
+  margin: 0;
+  padding: 0;
+}
+
+/* 
+>>>>>>> da265e4 (Merge pull request #39 from oguzhankuzlukluoglu/oguzhan)
 @media screen and (max-width: 1536px) {
   .wrapper{
     max-width: 1300px;
   }
+<<<<<<< HEAD
 }
 
 @media screen and (max-width: 1300px) {
@@ -45,6 +64,17 @@ body{
 }
 
 @media screen and (max-width: 1150px) {
+=======
+} */
+
+ /* @media screen and (max-width: 1200px) {
+  .wrapper{
+    max-width: 1150px;
+  }
+}  */
+
+/* @media screen and (max-width: 1150px) {
+>>>>>>> da265e4 (Merge pull request #39 from oguzhankuzlukluoglu/oguzhan)
   .wrapper{
     max-width: 960px;
   }
@@ -75,4 +105,8 @@ body{
     max-width: 360px;
     padding: 0 20px;
   }
+<<<<<<< HEAD
 }
+=======
+} */
+>>>>>>> da265e4 (Merge pull request #39 from oguzhankuzlukluoglu/oguzhan)
