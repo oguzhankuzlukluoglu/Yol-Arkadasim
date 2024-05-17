@@ -2,9 +2,10 @@ package models
 
 import (
 	"context"
+	"time"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"time"
 )
 
 type User struct {
@@ -19,17 +20,17 @@ type User struct {
 	Phone            *string            `json:"phone"`
 }
 
-<<<<<<< HEAD
-=======
+// UpdateableUser struct contains fields that can be updated by the user after login
 // UpdateableUser struct contains fields that can be updated by the user after login
 type UpdateableUser struct {
-	DateOfBirth *time.Time `json:"date_of_birth"`
+	Name        *string    `json:"name"`
+	Surname     *string    `json:"surname"`
 	Username    *string    `json:"username"`
 	Password    *string    `json:"password"`
+	DateOfBirth *time.Time `json:"date_of_birth"`
 	Phone       *string    `json:"phone"`
 }
 
->>>>>>> main
 func (user *User) SaveToMongoDB(client *mongo.Client, dbName, collectionName string) error {
 	// Veritabanı koleksiyonu referansını al
 	collection := client.Database(dbName).Collection(collectionName)
@@ -37,11 +38,6 @@ func (user *User) SaveToMongoDB(client *mongo.Client, dbName, collectionName str
 	// Kullanıcıya benzersiz bir _id atanması için MongoDB'ye belge ekle
 	_, err := collection.InsertOne(context.Background(), user)
 	if err != nil {
-<<<<<<< HEAD
-		// Eğer _id çakışması hatası varsa ve _id'yi kendiniz atanmak istemiyorsanız,
-		// yeni bir _id oluşturarak tekrar deneyin
-=======
->>>>>>> main
 		if mongo.IsDuplicateKeyError(err) {
 			user.ID = primitive.NewObjectID()                         // Yeni bir _id oluştur
 			_, err = collection.InsertOne(context.Background(), user) // Yeniden deneyin
