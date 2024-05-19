@@ -20,5 +20,5 @@ func main() {
 =======
 	fmt.Println("qweredddddrrety")
 >>>>>>> a483e91 (ikinci)
-
+	fmt.Println("aaa")
 }
