@@ -2,12 +2,13 @@ package controllers
 
 import (
 	"context"
-	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
 	"net/http"
 	"yol-arkadasim/database"
 	"yol-arkadasim/models"
+
+	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func UpdateUserProfileHandler(c *gin.Context) {
@@ -73,4 +74,35 @@ func findUserByID(userID string) (*models.User, error) {
 	}
 
 	return &user, nil
+}
+func GetAllUsersHandler(c *gin.Context) {
+	// Veritabanı bağlantısını al
+	client := database.GetMongoClient()
+
+	// Collection belirle
+	collection := client.Database("mydatabase").Collection("users")
+
+	// Tüm kullanıcıları bul
+	cursor, err := collection.Find(context.Background(), bson.M{})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	defer cursor.Close(context.Background())
+
+	// Kullanıcıları bir dilimde depolamak için boş bir dilim oluştur
+	var users []models.User
+
+	// Tüm kullanıcıları döngü ile al
+	for cursor.Next(context.Background()) {
+		var user models.User
+		if err := cursor.Decode(&user); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+			return
+		}
+		users = append(users, user)
+	}
+
+	// Kullanıcıları başarıyla aldıktan sonra, JSON olarak yanıt ver
+	c.JSON(http.StatusOK, gin.H{"users": users})
 }
