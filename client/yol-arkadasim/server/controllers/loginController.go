@@ -30,7 +30,7 @@ func LoginHandler(c *gin.Context) {
 		return
 	}
 
-	token, err := utils.GenerateJWT(user.UserIDHex())
+	token, err := utils.GenerateToken(user.UserIDHex())
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
 		return
