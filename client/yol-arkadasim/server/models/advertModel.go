@@ -1,3 +1,5 @@
+// models/advermodel.go
+
 package models
 
 import (
@@ -7,15 +9,11 @@ import (
 )
 
 type AdvertModel struct {
-	AdvertID           primitive.ObjectID `bson:"advert_id"`
-	AdvertDate         *time.Time         `json:"advert_date"`
-	From               *string            `json:"from"`
-	To                 *string            `json:"to"`
-	TransportChoice    *string            `json:"transport_choice"`
-	PostedByID         primitive.ObjectID `bson:"posted_by_id"`
-	JourneyDescription *string            `json:"journey_description"`
-}
-
-func SaveToMongoDB() {
-
+	AdvertID           primitive.ObjectID `bson:"advert_id" json:"advert_id,omitempty"`
+	AdvertDate         *time.Time         `bson:"advert_date" json:"advert_date"`
+	From               *string            `bson:"from" json:"from"`
+	To                 *string            `bson:"to" json:"to"`
+	TransportChoice    *string            `bson:"transport_choice" json:"transport_choice"`
+	PostedByID         primitive.ObjectID `bson:"posted_by_id" json:"posted_by_id"`
+	JourneyDescription *string            `bson:"journey_description" json:"journey_description"`
 }

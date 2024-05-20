@@ -28,6 +28,8 @@ func main() {
 	router.POST("/login", controllers.LoginHandler)
 	userGroup.POST("/update_profile", controllers.UpdateUserProfileHandler)
 	router.POST("/advert", controllers.CreateAdvertHandler)
+	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)
+	router.GET("get-all-users", controllers.GetAllUsersHandler)
 
 	err = router.Run(":8080")
 	if err != nil {
