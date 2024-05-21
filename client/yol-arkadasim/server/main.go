@@ -16,7 +16,7 @@ func main() {
 	}
 
 	router := gin.Default()
-	// Kullanıcılarla ilgili HTTP işleyicileri
+	// Kullanıcılarla ilgili HTTP işleyicileria
 	userGroup := router.Group("/user")
 	{
 		userGroup.Use(controllers.AuthMiddleware)
@@ -26,7 +26,7 @@ func main() {
 
 	router.POST("/register", controllers.RegisterHandler)
 	router.POST("/login", controllers.LoginHandler)
-	userGroup.POST("/update_profile", controllers.UpdateUserProfileHandler)
+	userGroup.PUT("/update_profile", controllers.UpdateUserProfileHandler)
 	router.POST("/advert", controllers.CreateAdvertHandler)
 	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)
 	router.GET("get-all-users", controllers.GetAllUsersHandler)
