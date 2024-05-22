@@ -8,28 +8,29 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func UpdateUserProfileHandler(c *gin.Context) {
-	// Kullanıcı bilgilerini al
 	var updateUser models.UpdateableUser
 	if err := c.ShouldBindJSON(&updateUser); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload"})
 		return
 	}
 
-	// Kullanıcıya erişimi doğrula
-	userID := c.GetString("userID") // Örnek: Kullanıcı kimliğini JWT token'dan al
+	userID := c.GetString("userID")
 
-	// Kullanıcıyı veritabanından bul
 	existingUser, err := findUserByID(userID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
 		return
 	}
+	if existingUser == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+		return
+	}
 
-	// Güncellenebilir alanları güncelle
 	if updateUser.Name != nil {
 		existingUser.Name = updateUser.Name
 	}
@@ -42,39 +43,43 @@ func UpdateUserProfileHandler(c *gin.Context) {
 	if updateUser.Password != nil {
 		existingUser.Password = updateUser.Password
 	}
+	if updateUser.DateOfBirth != nil {
+		existingUser.DateOfBirth = updateUser.DateOfBirth
+	}
+	if updateUser.Phone != nil {
+		existingUser.Phone = updateUser.Phone
+		//konum bilgisi ekle -- biyografi eklenecek--ilgi alanları ekle--
+	}
 
-	// Kullanıcıyı kaydet
 	err = existingUser.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "users")
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
 		return
 	}
 
-	// Başarı durumunda, kullanıcıya yanıt gönderin veya başka bir işlem yapın
-	c.JSON(http.StatusOK, gin.H{"message": "Profil bilgileri başarıyla güncellendi"})
+	c.JSON(http.StatusOK, gin.H{"message": "Profile updated successfully"})
 }
 
 func findUserByID(userID string) (*models.User, error) {
-	// MongoDB bağlantısını al
 	client := database.GetMongoClient()
+	objID, err := primitive.ObjectIDFromHex(userID)
+	if err != nil {
+		return nil, err
+	}
 
-	// Kullanıcıyı bulmak için filtre oluştur
-	filter := bson.M{"_id": userID}
-
-	// Kullanıcıyı veritabanından bul
+	filter := bson.M{"_id": objID}
 	var user models.User
-	err := client.Database("mydatabase").Collection("users").FindOne(context.Background(), filter).Decode(&user)
+	err = client.Database("mydatabase").Collection("users").FindOne(context.Background(), filter).Decode(&user)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			// Kullanıcı bulunamadı
 			return nil, nil
 		}
-		// Diğer hatalar için
 		return nil, err
 	}
 
 	return &user, nil
 }
+
 func GetAllUsersHandler(c *gin.Context) {
 	// Veritabanı bağlantısını al
 	client := database.GetMongoClient()

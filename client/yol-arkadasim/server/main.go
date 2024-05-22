@@ -29,7 +29,9 @@ func main() {
 	userGroup.PUT("/update_profile", controllers.UpdateUserProfileHandler)
 	router.POST("/advert", controllers.CreateAdvertHandler)
 	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)
-	router.GET("get-all-users", controllers.GetAllUsersHandler)
+	router.GET("/get-all-users", controllers.GetAllUsersHandler)
+	router.DELETE("/advert/:id", controllers.DeleteAdvertHandler)
+	router.PUT("/advert/update/:id", controllers.UpdateAdvertHandler)
 
 	err = router.Run(":8080")
 	if err != nil {
