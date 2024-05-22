@@ -2,12 +2,13 @@ package controllers
 
 import (
 	"context"
-	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
 	"net/http"
 	"yol-arkadasim/database"
 	"yol-arkadasim/models"
+
+	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func IsUsernameTaken(username string) bool {
