@@ -8,6 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//var store *sessions.CookieStore
+
 func main() {
 	// MongoDB'ye bağlanmak için bağlantı oluştur
 	err := database.ConnectToMongoDB()
@@ -20,18 +22,26 @@ func main() {
 	userGroup := router.Group("/user")
 	{
 		userGroup.Use(controllers.AuthMiddleware)
-
-		userGroup.POST("/update", controllers.UpdateUserProfileHandler)
+		userGroup.PUT("/update_profile", controllers.UpdateUserProfileHandler)
 	}
-
+	advertGroup := router.Group("/create")
+	{
+		advertGroup.Use(controllers.AuthMiddleware)
+		advertGroup.POST("/advert", controllers.CreateAdvertHandler)
+		router.PUT("/advert/update/:id", controllers.UpdateAdvertHandler)
+	}
+	advertGroupD := router.Group("/delete")
+	{
+		advertGroupD.Use(controllers.AuthMiddleware)
+		advertGroupD.DELETE("/advert/:id", controllers.DeleteAdvertHandler)
+	}
 	router.POST("/register", controllers.RegisterHandler)
 	router.POST("/login", controllers.LoginHandler)
-	userGroup.PUT("/update_profile", controllers.UpdateUserProfileHandler)
-	router.POST("/advert", controllers.CreateAdvertHandler)
+	router.POST("/logout", controllers.LogoutHandler)
+
 	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)
 	router.GET("/get-all-users", controllers.GetAllUsersHandler)
-	router.DELETE("/advert/:id", controllers.DeleteAdvertHandler)
-	router.PUT("/advert/update/:id", controllers.UpdateAdvertHandler)
+	router.GET("/profile/:username", controllers.GetUserProfileByUsernameHandler)
 
 	err = router.Run(":8080")
 	if err != nil {

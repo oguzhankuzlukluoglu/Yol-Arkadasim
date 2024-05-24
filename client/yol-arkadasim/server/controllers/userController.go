@@ -7,10 +7,56 @@ import (
 	"yol-arkadasim/models"
 
 	"github.com/gin-gonic/gin"
+	//"github.com/gorilla/sessions"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
+
+//var store *sessions.CookieStore
+
+func GetUserProfileByUsernameHandler(c *gin.Context) {
+
+	username := c.Param("username")
+
+	user, err := findUserByUsername(username)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	if user == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+		return
+	}
+
+	profile, err := findProfileByUserID(user.ID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	if profile == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Profile not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"profile": profile})
+}
+
+func findProfileByUserID(userID primitive.ObjectID) (*models.Profile, error) {
+	client := database.GetMongoClient()
+
+	filter := bson.M{"user_id": userID}
+	var profile models.Profile
+	err := client.Database("mydatabase").Collection("profiles").FindOne(context.Background(), filter).Decode(&profile)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+		return nil, err
+	}
+
+	return &profile, nil
+}
 
 func UpdateUserProfileHandler(c *gin.Context) {
 	var updateUser models.UpdateableUser
