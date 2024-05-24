@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+    padding: 0 80px;
 }
 
 .userInfos{
@@ -9,33 +10,16 @@
     flex-direction: column;
 }
 
-.coverImage{
-    position: relative;
-    width: 100%;
-    height: calc(50vh - 3rem);
-    border: solid 1px #d8c2d8;
-    cursor: pointer;
-}
-.coverImage > img{
-    object-fit: cover;
-}
-
-.coverImage > img:hover{
-    opacity: 0.95;
-}
-
 .profile{
     display: grid;
     grid-template-columns: auto 1fr;
+    padding: 20px 0;
 }
 
 .profileImage{
-    position: relative;
-    height: 100px;
-    width: 210px;
+
 }
 .profileImage > img{
-    position: absolute;
     cursor: pointer;
     top: -103px;
     left: 10px;
@@ -45,17 +29,30 @@
 }
 
 .profileBio{
-    padding-top: 2px;
     display: flex;
     flex-direction: column;
     gap: 4px;
+    padding: 20px;
 }
 .profileBio > span{
     margin-left: 5px;
 }
 
+.profileBio > .settings{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 20px;
+    padding: 7px 0 0 0;
+    margin-left: 5px;
+}
+.settings > span{
+    font-weight: 500;
+}
+
 .profileBio > .userName{
     font-weight: 500;
+    height: 18px;
 }
 .profileBio > .userDesc{
 
@@ -64,6 +61,7 @@
     display: flex;
     gap: 1px;
     align-items: center;
+    height: 18px;
 }
 .profileBio > .userLocation > img{
     width: 16px;
@@ -77,29 +75,49 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-width: 450px;
     min-height: 140px;
 }
 
 .interests > .interestTitle{
-    font-weight: 400;
+    font-weight: 300;
     padding: 6px 0;
     width: fit-content;
-    border-bottom: 1px solid #726e72;
 }
+
+
 
 .interests > .interestInfo{
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.interests > .interestInfo span {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: calc(var(--index) * 0.2s);
 }
 
 .interests > .interestInfo > span{
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 400;
     border-radius: 8px;
     padding: 8px 10px;
-    background-color: #d8c2d8;
+    border: 1px solid black;
     cursor: pointer;
 }
 
@@ -110,22 +128,29 @@
 }
 
 .memorySection > .memoryTitle{
-    font-weight: 400;
+    font-weight: 300;
     padding: 6px 0;
     width: fit-content;
-    border-bottom: 1px solid #726e72;
 }
 
-.memorySection > .memoryImage{
+.memorySection > .memoryDesc{
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: calc(var(--index) * 0.2s);
+}
+.memorySection > .memoryDesc > .desc{
+    border: 1px solid black;
+    padding: 10px;
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
-.memorySection > .memoryImage > img{
+.memorySection > .memoryDesc > .desc> p{
     width: 250px;
     height: 250px;
-    cursor: pointer;
+    text-align: left;
 }
 
 .adverts{
@@ -137,10 +162,9 @@
 }
 
 .adverts > .advertsTitle{
-    font-weight: 400;
+    font-weight: 300;
     padding: 6px 0;
     width: fit-content;
-    border-bottom: 1px solid #726e72;
 }
 
 .adverts > .advertSection{
@@ -187,7 +211,6 @@
     display: flex;
     scale: 0.9;
 }
-
 
 @media screen and (max-width:960px) {
     .container{

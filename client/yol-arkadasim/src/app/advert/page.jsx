@@ -8,6 +8,7 @@ import { Button } from "react-bootstrap";
 import DatePicker from "@/components/datepicker/DatePicker";
 import Writer from "@/components/typeWriter/Writer";
 import Pagination from "@/components/pagination/Pagination";
+import AdvertSection from "@/components/advertSection/AdvertSection";
 
 const advertPage = () => {
   
@@ -49,123 +50,10 @@ const advertPage = () => {
         <div className={styles.advertPage}>
           <div className={styles.adverts}>
             <h1>Aktif İlanlar</h1>
-            <div className={styles.advertSection}>
-              <div className={styles.advertInfos}>
-                <div className={styles.infoSection}>
-                  <div className={styles.travelInfo}>
-                    <div className={styles.cities}>
-                      <span>Ankara</span>
-                      <Image
-                        alt="arrow"
-                        src="/arrowright.gif"
-                        width={20}
-                        height={20}
-                      />
-                      <span>İstanbul</span>
-                    </div>
-                    <span>Ulaşım Tercihi: Araba</span>
-                  </div>
-                  <div className={styles.travelInfo}>
-                    <span>08.04.2024 14:00</span>
-                  </div>
-                </div>
-                <div>
-                  <Image alt="menu" src="/dots.png" width={20} height={20} />
-                </div>
-              </div>
-              <div className={styles.advertUser}>
-                <div className={styles.advertUserInfo}>
-                  <Image
-                    alt="profile-photo"
-                    src="/navbarLogo.png"
-                    width={48}
-                    height={48}
-                  />
-                  <span>Deniz Ök</span>
-                </div>
-                <div className={styles.advertButton}>
-                  <Link href={`/`}>İlana Göz At</Link>
-                </div>
-              </div>
-            </div>
-            <div className={styles.advertSection}>
-              <div className={styles.advertInfos}>
-                <div className={styles.infoSection}>
-                  <div className={styles.travelInfo}>
-                    <div className={styles.cities}>
-                      <span>Ankara</span>
-                      <Image
-                        alt="arrow"
-                        src="/arrowright.gif"
-                        width={20}
-                        height={20}
-                      />
-                      <span>İstanbul</span>
-                    </div>
-                    <span>Ulaşım Tercihi: Araba</span>
-                  </div>
-                  <div className={styles.travelInfo}>
-                    <span>08.04.2024 14:00</span>
-                  </div>
-                </div>
-                <div>
-                  <Image alt="menu" src="/dots.png" width={20} height={20} />
-                </div>
-              </div>
-              <div className={styles.advertUser}>
-                <div className={styles.advertUserInfo}>
-                  <Image
-                    alt="profile-photo"
-                    src="/navbarLogo.png"
-                    width={48}
-                    height={48}
-                  />
-                  <span>Deniz Ök</span>
-                </div>
-                <div className={styles.advertButton}>
-                  <Link href={`/`}>İlana Göz At</Link>
-                </div>
-              </div>
-            </div>
-            <div className={styles.advertSection}>
-              <div className={styles.advertInfos}>
-                <div className={styles.infoSection}>
-                  <div className={styles.travelInfo}>
-                    <div className={styles.cities}>
-                      <span>Ankara</span>
-                      <Image
-                        alt="arrow"
-                        src="/arrowright.gif"
-                        width={20}
-                        height={20}
-                      />
-                      <span>İstanbul</span>
-                    </div>
-                    <span>Ulaşım Tercihi: Araba</span>
-                  </div>
-                  <div className={styles.travelInfo}>
-                    <span>08.04.2024 14:00</span>
-                  </div>
-                </div>
-                <div>
-                  <Image alt="menu" src="/dots.png" width={20} height={20} />
-                </div>
-              </div>
-              <div className={styles.advertUser}>
-                <div className={styles.advertUserInfo}>
-                  <Image
-                    alt="profile-photo"
-                    src="/navbarLogo.png"
-                    width={48}
-                    height={48}
-                  />
-                  <span>Deniz Ök</span>
-                </div>
-                <div className={styles.advertButton}>
-                  <Link href={`/`}>İlana Göz At</Link>
-                </div>
-              </div>
-            </div>
+            <AdvertSection/>
+            <AdvertSection/>
+            <AdvertSection/>
+            
             <Pagination/>
           </div>
 

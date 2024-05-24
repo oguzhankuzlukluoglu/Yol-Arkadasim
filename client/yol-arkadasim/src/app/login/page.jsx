@@ -26,7 +26,7 @@ const Login = () => {
         </div>
         <div className={styles.checkAccount}>
           <span>bir hesabın yok mu ?</span>
-          <Link href="/login">Kayıt Ol</Link>
+          <Link href="/register">Kayıt Ol</Link>
         </div>
         <div className={styles.or}>
           <span> - ya da -</span>
