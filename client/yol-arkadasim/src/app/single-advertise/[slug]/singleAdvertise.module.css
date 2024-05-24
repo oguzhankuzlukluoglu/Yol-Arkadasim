@@ -4,13 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 80px;
 }
 .containerElements{
     justify-content: center;
-    height: calc(100vh - 3rem);
+    height: calc(100vh - 59px);
     display: flex;
     align-items: center;
-    background-color: azure;
     width: 100%;
 }
 .advertContainer{
@@ -19,18 +19,17 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
-    gap: 20px;
+    padding: 20px 0;
 }
 .advertTitle{
     margin: 0;
     font-weight: 300;
-    font-family: monospace;
+    padding: 20px 0;
 }
 .advertInfos{
     display: flex;
     justify-content: flex-start;
-    padding: 8px;
+    padding: 20px 0;
     gap: 10px;
     min-height: 300px;
 }
@@ -50,23 +49,26 @@
     align-items: center;
     gap: 4px;
     padding: 4px;
+    justify-content: center;
+    min-width: 200px;
 }
 .user > img{
     width: 48px;
     height: 48px; 
 }
 .user > span{
-    font-family: ui-monospace;
     font-weight: 500;
 }
 .roadInfos{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 8px;
     padding: 4px;
 }
 .roadInfos > span {
-    font-family: 'Oswald';
+    min-width: 200px;
+    padding-left: 20px;
 }
 
 .advertDesc{
@@ -82,7 +84,7 @@
     padding: 4px 0;
 }
 .descContent > span{
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 300;
 }
 
@@ -101,7 +103,6 @@
 }
 .communicateDesc > span {
     font-size: 24px;
-    font-family: cursive;
     font-weight: 500;
 }
 .communicateSection{
@@ -110,7 +111,6 @@
 .whatsapp{
     display: flex;
     align-items: center;
-    justify-content: space-between;
     background-color: rgb(36, 210, 98);
     padding: 4px 4px 4px 0;
     border-radius: 32px;
@@ -130,7 +130,6 @@
     font-size: 24px;
     color: #fff;
     padding: 4px;
-
 }
 
 .contactSection{
@@ -141,7 +140,8 @@
     padding: 16px 8px;
 }
 .contact{
-    width: 30%;
+    width: 281px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;

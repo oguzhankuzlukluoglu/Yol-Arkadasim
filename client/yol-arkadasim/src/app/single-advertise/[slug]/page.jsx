@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import styles from "./singleAdvertise.module.css";
+import Link from "next/link";
 
 const singleAdvertise = () => {
   return (
@@ -17,12 +18,11 @@ const singleAdvertise = () => {
                 </div>
                 <div className={styles.roadInfos}>
                   <span>Tarih: 21.03.2024 14:00</span>
-                  <span>Güzergah: Ankara &rarr; İstanbul</span>
+                  <span>Ankara &rarr; İstanbul</span>
                   <span>Ulaşım Tercihi: Araba</span>
                 </div>
               </div>
               <div className={styles.advertDesc}>
-                <h1 className={styles.descTitle}>İlan Açıklaması</h1>
                 <div className={styles.descContent}>
                   <span>
                     Yolculukta çok mola veren insanım. Başvuranların dikkat
@@ -37,22 +37,25 @@ const singleAdvertise = () => {
               <span>Hemen İlan sahibiyle iletişime geçin!</span>
             </div>
             <div className={styles.communicateSection}>
-              <div className={styles.whatsapp}>
+                <Link href="https://wa.me/" >
+
+                <div className={styles.whatsapp}>
                 <Image
                   alt="whatsapp"
                   src="/whatsapp.png"
                   width={64}
                   height={64}
-                />
+                  />
                 <span>Whatsapp</span>
               </div>
+              </Link>
             </div>
           </div>
         </div>
       </div>
       <div className={styles.contactSection}>
             <div className={styles.contact}>
-              <Image alt="mail" src="/mail.png" width={64} height={64} />
+              <Image alt="mail" src="/mail.png" width={36} height={36} />
               <span>Soru ve Şikayetler</span>
             </div>
           </div>
