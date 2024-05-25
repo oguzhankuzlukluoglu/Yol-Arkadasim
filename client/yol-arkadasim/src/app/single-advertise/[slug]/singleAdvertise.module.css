@@ -66,6 +66,11 @@
     gap: 8px;
     padding: 4px;
 }
+.cities{
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
 .roadInfos > span {
     min-width: 200px;
     padding-left: 20px;

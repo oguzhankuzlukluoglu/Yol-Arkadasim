@@ -18,7 +18,16 @@ const singleAdvertise = () => {
                 </div>
                 <div className={styles.roadInfos}>
                   <span>Tarih: 21.03.2024 14:00</span>
-                  <span>Ankara &rarr; İstanbul</span>
+                  <div className={styles.cities}>
+                    <span>Ankara</span>
+                    <Image
+                          alt="arrow"
+                          src="/arrowright.gif"
+                          width={20}
+                          height={20}
+                    />
+                    <span>İstanbul</span>
+                  </div>
                   <span>Ulaşım Tercihi: Araba</span>
                 </div>
               </div>
