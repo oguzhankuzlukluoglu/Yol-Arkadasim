@@ -32,11 +32,16 @@ type UpdateableUser struct {
 	Phone       *string    `json:"phone"`
 	Location    *string    `json:"location"`
 	Interests   []string   `json:"interests"`
+	About       *string    `json:"about"`
 }
 
 // SaveToMongoDB saves the user to the MongoDB database
 func (user *User) SaveToMongoDB(client *mongo.Client, dbName, collectionName string) error {
 	collection := client.Database(dbName).Collection(collectionName)
+
+	if user.ID.IsZero() {
+		user.ID = primitive.NewObjectID() // Generate a new ObjectID if it's not set
+	}
 
 	// Eğer kullanıcı zaten mevcutsa, onu güncelle
 	filter := primitive.M{"_id": user.ID}
