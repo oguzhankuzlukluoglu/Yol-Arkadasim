@@ -3,11 +3,14 @@ package controllers
 import (
 	"context"
 	"net/http"
+	"time"
 	"yol-arkadasim/database"
 	"yol-arkadasim/models"
+	"yol-arkadasim/utils"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -64,7 +67,17 @@ func IsPhoneTaken(phone string) bool {
 	return count > 0
 }
 
+type RegisterResponse struct {
+	Name        *string    `json:"name" bson:"name"`
+	Surname     *string    `json:"surname" bson:"surname"`
+	Username    *string    `json:"username" bson:"username"`
+	DateOfBirth *time.Time `json:"date_of_birth" bson:"date_of_birth"`
+	Phone       *string    `json:"phone" bson:"phone"`
+	Email       *string    `json:"email" bson:"email"`
+}
+
 func RegisterHandler(c *gin.Context) {
+
 	// POST isteği olup olmadığını kontrol et
 	if c.Request.Method != http.MethodPost {
 		c.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Method Not Allowed"})
@@ -72,30 +85,36 @@ func RegisterHandler(c *gin.Context) {
 	}
 
 	// Kullanıcı bilgilerini al
-	var user models.User
-	if err := c.ShouldBindJSON(&user); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	var register models.Register
+	if err := c.ShouldBindJSON(&register); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error() + "mmmm"})
 		return
 	}
 
 	// Kullanıcı adının daha önce alınıp alınmadığını kontrol et
-	if IsUsernameTaken(*user.Username) {
+	if IsUsernameTaken(*register.Username) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Bu kullanıcı adı daha önce alınmış"})
 		return
 	}
-	if IsEmailTaken(*user.Email) {
+	if IsEmailTaken(*register.Email) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Bu e-posta adresi daha önce alınmış"})
 		return
 	}
-	if IsPhoneTaken(*user.Phone) {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "bu telefon daha önce alınmış."})
-		return
-	}
+	var user models.User
+	user.ID = primitive.NewObjectID() // Yeni ObjectID oluştur
+	user.Name = register.Name
+	user.Surname = register.Surname
+	user.Email = register.Email
+	user.Password = register.Password
+	user.RegistrationDate = time.Now()
+	user.Username = register.Username
+	token, err := utils.GenerateToken(user.ID.Hex())
+	user.Token = &token
 
 	// Kullanıcıyı kaydet
-	err := user.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "users")
+	err = user.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "users")
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "there is a problem occured in database"})
 		return
 	}
 	err = CreateProfileForUser(&user)
@@ -112,7 +131,6 @@ func CreateProfileForUser(user *models.User) error {
 		UserID:            user.ID,
 		Name:              user.Name,
 		Surname:           user.Surname,
-		Phone:             user.Phone,
 		Comments:          []string{},
 		Interests:         []string{},
 		About:             new(string),

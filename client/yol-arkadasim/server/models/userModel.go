@@ -11,28 +11,39 @@ import (
 
 // User struct represents the user model
 type User struct {
-	ID               primitive.ObjectID `bson:"_id,omitempty"`
-	Name             *string            `json:"name" validate:"required,min=2,max=100"`
-	Surname          *string            `json:"surname" validate:"required,min=2,max=100"`
-	Email            *string            `json:"email"`
-	DateOfBirth      *time.Time         `json:"date_of_birth"`
-	RegistrationDate *time.Time         `json:"registration_date"`
-	Username         *string            `json:"username"`
-	Password         *string            `json:"password"`
-	Phone            *string            `json:"phone"`
+	ID                primitive.ObjectID `bson:"_id,omitempty"`
+	Name              *string            `json:"name" validate:"required,min=2,max=100"`
+	Surname           *string            `json:"surname" validate:"required,min=2,max=100"`
+	Email             *string            `json:"email"`
+	RegistrationDate  time.Time          `json:"registration_date"`
+	Username          *string            `json:"username"`
+	Password          *string            `json:"password"`
+	Token             *string            `json:"token"`
+	DateOfBirth       *time.Time         `json:"date_of_birth"`
+	Phone             *string            `json:"phone"`
+	Location          *string            `json:"location"`
+	Interests         []string           `json:"interests"`
+	About             *string            `json:"about"`
+	Comments          []string           `json:"comments"`
+	TravelPreferences []string           `json:"travel_preferences"`
+	ProfilePicture    *string            `json:"profile_picture"`
+	TravelPhotos      []string           `json:"travel_photos"`
 }
 
 // UpdateableUser struct contains fields that can be updated by the user after login
 type UpdateableUser struct {
-	Name        *string    `json:"name"`
-	Surname     *string    `json:"surname"`
-	Username    *string    `json:"username"`
-	Password    *string    `json:"password"`
-	DateOfBirth *time.Time `json:"date_of_birth"`
-	Phone       *string    `json:"phone"`
-	Location    *string    `json:"location"`
-	Interests   []string   `json:"interests"`
-	About       *string    `json:"about"`
+	Name              *string    `json:"name"`
+	Surname           *string    `json:"surname"`
+	Username          *string    `json:"username"`
+	DateOfBirth       *time.Time `json:"date_of_birth"`
+	Phone             *string    `json:"phone"`
+	Location          *string    `json:"location"`
+	Interests         []string   `json:"interests"`
+	About             *string    `json:"about"`
+	Comments          []string   `json:"comments"`
+	TravelPreferences []string   `json:"travel_preferences"`
+	ProfilePicture    *string    `json:"profile_picture"`
+	TravelPhotos      []string   `json:"travel_photos"`
 }
 
 // SaveToMongoDB saves the user to the MongoDB database

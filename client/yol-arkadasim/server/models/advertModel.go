@@ -14,7 +14,7 @@ type AdvertModel struct {
 	From               *string            `bson:"from" json:"from"`
 	To                 *string            `bson:"to" json:"to"`
 	TransportChoice    *string            `bson:"transport_choice" json:"transport_choice"`
-	PostedByID         primitive.ObjectID `bson:"posted_by_id" json:"posted_by_id"`
+	PostedByID         string             `bson:"posted_by_id" json:"posted_by_id"`
 	JourneyDate        *time.Time         `bson:"journey_date" json:"journey_date"`
 	JourneyTime        *string            `bson:"journey_time" json:"journey_time"`
 	PhoneNumber        *string            `bson:"phone_number" json:"phone_number"`
