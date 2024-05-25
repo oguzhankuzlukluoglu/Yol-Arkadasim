@@ -51,6 +51,18 @@ func IsEmailTaken(email string) bool {
 	// Eğer e-posta adresine sahip kullanıcı varsa, alınmıştır
 	return count > 0
 }
+func IsPhoneTaken(phone string) bool {
+	client := database.GetMongoClient()
+
+	collection := client.Database("mydatabase").Collection("users")
+	filter := bson.M{"phone": phone}
+
+	count, err := collection.CountDocuments(context.Background(), filter)
+	if err != nil {
+		return false
+	}
+	return count > 0
+}
 
 func RegisterHandler(c *gin.Context) {
 	// POST isteği olup olmadığını kontrol et
@@ -73,6 +85,10 @@ func RegisterHandler(c *gin.Context) {
 	}
 	if IsEmailTaken(*user.Email) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Bu e-posta adresi daha önce alınmış"})
+		return
+	}
+	if IsPhoneTaken(*user.Phone) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "bu telefon daha önce alınmış."})
 		return
 	}
 
