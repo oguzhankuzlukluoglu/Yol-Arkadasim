@@ -32,13 +32,14 @@ func main() {
 	router.POST("/logout", controllers.LogoutHandler)                                                     //aktif
 	router.POST("/create/advert", controllers.AuthMiddleware, controllers.CreateAdvertHandler)            //aktif
 
+	//router.GET("/", controllers.HelloMethod())
 	router.PUT("advert/update/:id", controllers.AuthMiddleware, controllers.UpdateAdvertHandler) //silinebilir
 
 	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)              //aktif
 	router.GET("/get-all-users", controllers.GetAllUsersHandler)                  //aktif
 	router.GET("/profile/:username", controllers.GetUserProfileByUsernameHandler) //aktif bakılmalı
 
-	router.DELETE("/users/:userID", controllers.AuthMiddleware, controllers.DeleteAdvertHandler)     //aktif
+	router.DELETE("/users/:userID", controllers.AuthMiddleware, controllers.DeleteUserHandler)       //aktif
 	router.DELETE("/advert/:advert_id", controllers.AuthMiddleware, controllers.DeleteAdvertHandler) //aktif
 
 	err = router.Run(":8080")

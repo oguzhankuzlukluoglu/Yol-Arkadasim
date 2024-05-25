@@ -15,11 +15,10 @@ type User struct {
 	Name             *string            `json:"name" validate:"required,min=2,max=100"`
 	Surname          *string            `json:"surname" validate:"required,min=2,max=100"`
 	Email            *string            `json:"email"`
-	DateOfBirth      *time.Time         `json:"date_of_birth"`
-	RegistrationDate *time.Time         `json:"registration_date"`
+	RegistrationDate time.Time          `json:"registration_date"`
 	Username         *string            `json:"username"`
 	Password         *string            `json:"password"`
-	Phone            *string            `json:"phone"`
+	Token            *string            `json:"token"`
 }
 
 // UpdateableUser struct contains fields that can be updated by the user after login

@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"net/http"
+	"time"
 	"yol-arkadasim/database"
 	"yol-arkadasim/models"
 
@@ -86,12 +87,6 @@ func UpdateUserProfileHandler(c *gin.Context) {
 	if updateUser.Password != nil {
 		existingUser.Password = updateUser.Password
 	}
-	if updateUser.DateOfBirth != nil {
-		existingUser.DateOfBirth = updateUser.DateOfBirth
-	}
-	if updateUser.Phone != nil {
-		existingUser.Phone = updateUser.Phone
-	}
 
 	// Save updated user to MongoDB
 	err = existingUser.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "users")
@@ -160,6 +155,18 @@ func findUserByID(userID string) (*models.User, error) {
 	return &user, nil
 }
 
+// UserResponse, parolanın dahil edilmediği kullanıcı bilgilerini temsil eder
+type UserResponse struct {
+	ID               primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	Name             *string            `json:"name" bson:"name"`
+	Surname          *string            `json:"surname" bson:"surname"`
+	Username         *string            `json:"username" bson:"username"`
+	DateOfBirth      *time.Time         `json:"date_of_birth" bson:"date_of_birth"`
+	Phone            *string            `json:"phone" bson:"phone"`
+	Email            *string            `json:"email" bson:"email"`
+	RegistrationDate time.Time          `json:"registration_date" bson:"registration_date"`
+}
+
 func GetAllUsersHandler(c *gin.Context) {
 	client := database.GetMongoClient()
 	collection := client.Database("mydatabase").Collection("users")
@@ -171,14 +178,30 @@ func GetAllUsersHandler(c *gin.Context) {
 	}
 	defer cursor.Close(context.Background())
 
-	var users []models.User
+	var users []UserResponse
 	for cursor.Next(context.Background()) {
 		var user models.User
 		if err := cursor.Decode(&user); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
 			return
 		}
-		users = append(users, user)
+
+		// Parola alanı hariç tutularak kullanıcıyı UserResponse'a dönüştür
+		userResponse := UserResponse{
+			ID:               user.ID,
+			Name:             user.Name,
+			Surname:          user.Surname,
+			Username:         user.Username,
+			Email:            user.Email,
+			RegistrationDate: user.RegistrationDate,
+		}
+
+		users = append(users, userResponse)
+	}
+
+	if err := cursor.Err(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{"users": users})

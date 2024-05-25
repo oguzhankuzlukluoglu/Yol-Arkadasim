@@ -21,7 +21,7 @@ func LoginHandler(c *gin.Context) {
 
 	user, err := findUserByUsername(login.Username)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 		return
 	}
 
@@ -33,6 +33,14 @@ func LoginHandler(c *gin.Context) {
 	token, err := utils.GenerateToken(user.UserIDHex())
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		return
+	}
+
+	user.Token = &token
+
+	err = user.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "users")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "there is a problem occured in database"})
 		return
 	}
 
