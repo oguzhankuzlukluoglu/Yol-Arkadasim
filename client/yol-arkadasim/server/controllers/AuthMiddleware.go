@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"log"
 	"net/http"
 	"strings"
 	"yol-arkadasim/utils"
@@ -9,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// AuthMiddleware, gelen isteklerin yetkilendirilmesini sağlar.
 func AuthMiddleware(c *gin.Context) {
 	authHeader := c.GetHeader("Authorization")
 	if authHeader == "" {
@@ -33,7 +35,7 @@ func AuthMiddleware(c *gin.Context) {
 	}
 
 	token, err := jwt.ParseWithClaims(tokenString, &utils.Claims{}, func(token *jwt.Token) (interface{}, error) {
-		return []byte("gizli_anahtar"), nil // JWT'yi imzalayan gizli anahtarınızı buraya yerleştirin
+		return utils.JWTKey, nil // Token anahtarını utils paketinden al
 	})
 	if err != nil || !token.Valid {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Geçersiz token"})
@@ -47,6 +49,8 @@ func AuthMiddleware(c *gin.Context) {
 		c.Abort()
 		return
 	}
+
+	log.Println("Authenticated userID:", claims.UserID) // Kullanıcı ID'sini logla
 
 	c.Set("userID", claims.UserID)
 	c.Next()

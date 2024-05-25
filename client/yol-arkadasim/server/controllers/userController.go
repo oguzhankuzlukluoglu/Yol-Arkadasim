@@ -7,13 +7,10 @@ import (
 	"yol-arkadasim/models"
 
 	"github.com/gin-gonic/gin"
-	//"github.com/gorilla/sessions"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
-
-//var store *sessions.CookieStore
 
 func GetUserProfileByUsernameHandler(c *gin.Context) {
 	username := c.Param("username")
@@ -114,6 +111,15 @@ func UpdateUserProfileHandler(c *gin.Context) {
 		return
 	}
 
+	if updateUser.Name != nil {
+		profile.Name = updateUser.Name
+	}
+	if updateUser.Surname != nil {
+		profile.Surname = updateUser.Surname
+	}
+	if updateUser.Phone != nil {
+		profile.Phone = updateUser.Phone
+	}
 	if updateUser.Location != nil {
 		profile.Location = updateUser.Location
 	}
@@ -155,13 +161,9 @@ func findUserByID(userID string) (*models.User, error) {
 }
 
 func GetAllUsersHandler(c *gin.Context) {
-	// Veritabanı bağlantısını al
 	client := database.GetMongoClient()
-
-	// Collection belirle
 	collection := client.Database("mydatabase").Collection("users")
 
-	// Tüm kullanıcıları bul
 	cursor, err := collection.Find(context.Background(), bson.M{})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
@@ -169,10 +171,7 @@ func GetAllUsersHandler(c *gin.Context) {
 	}
 	defer cursor.Close(context.Background())
 
-	// Kullanıcıları bir dilimde depolamak için boş bir dilim oluştur
 	var users []models.User
-
-	// Tüm kullanıcıları döngü ile al
 	for cursor.Next(context.Background()) {
 		var user models.User
 		if err := cursor.Decode(&user); err != nil {
@@ -182,6 +181,52 @@ func GetAllUsersHandler(c *gin.Context) {
 		users = append(users, user)
 	}
 
-	// Kullanıcıları başarıyla aldıktan sonra, JSON olarak yanıt ver
 	c.JSON(http.StatusOK, gin.H{"users": users})
+}
+
+func DeleteUserHandler(c *gin.Context) {
+	userID := c.Param("userID")
+
+	// Silinecek kullanıcıyı bul
+	user, err := findUserByID(userID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	if user == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+		return
+	}
+
+	// Kullanıcıyı veritabanından sil
+	err = deleteUserByID(user.ID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+
+	// Kullanıcıya ait profili veritabanından sil
+	err = deleteProfileByUserID(user.ID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "User and profile deleted successfully"})
+}
+
+func deleteUserByID(userID primitive.ObjectID) error {
+	client := database.GetMongoClient()
+
+	filter := bson.M{"_id": userID}
+	_, err := client.Database("mydatabase").Collection("users").DeleteOne(context.Background(), filter)
+	return err
+}
+
+func deleteProfileByUserID(userID primitive.ObjectID) error {
+	client := database.GetMongoClient()
+
+	filter := bson.M{"user_id": userID}
+	_, err := client.Database("mydatabase").Collection("profiles").DeleteOne(context.Background(), filter)
+	return err
 }

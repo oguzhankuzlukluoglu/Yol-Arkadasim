@@ -17,7 +17,7 @@ type Profile struct {
 	Phone             *string            `json:"phone"`
 	Comments          []string           `json:"comments"`
 	Interests         []string           `json:"interests"`
-	About             *string            `json:"about"` //biyografi aynı zamanda
+	About             *string            `json:"about"`
 	Location          *string            `json:"location"`
 	TravelPreferences []string           `json:"travel_preferences"`
 	ProfilePicture    *string            `json:"profile_picture"`
