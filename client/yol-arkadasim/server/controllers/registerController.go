@@ -109,11 +109,20 @@ func RegisterHandler(c *gin.Context) {
 }
 func CreateProfileForUser(user *models.User) error {
 	profile := models.Profile{
-		UserID: user.ID,
-		// Diğer özelliklerin başlangıç değerlerini belirle
+		UserID:            user.ID,
+		Name:              user.Name,
+		Surname:           user.Surname,
+		Phone:             user.Phone,
+		Comments:          []string{},
+		Interests:         []string{},
+		About:             new(string),
+		Location:          new(string),
+		TravelPreferences: []string{},
+		ProfilePicture:    new(string),
+		TravelPhotos:      []string{},
 	}
 
-	// Veritabanına profil kaydet
+	// Save the profile to the database
 	err := profile.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "profiles")
 	if err != nil {
 		return err
