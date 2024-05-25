@@ -7,8 +7,21 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import styles from "./navbarSection.module.css"
 import Image from 'next/image';
+import axios from 'axios';
+import Link from 'next/link';
 
 const NavbarSection = () => {
+
+  const handleLogout = async(e) => {
+    try{
+      const response = await axios.post("http://localhost:8080/logout")
+      console.log(response.data)
+    }
+    catch(err){
+      console.error(err)
+    }
+  }
+
   return (
     <div className={styles.container}>
         <Navbar sticky='top' expand="xl">
@@ -38,8 +51,8 @@ const NavbarSection = () => {
                     title="Profil"
                   >
                     <NavDropdown.Item className={styles.dropItem} href="/profile">Bilgilerim</NavDropdown.Item>
-                    <NavDropdown.Item className={styles.dropItem} href="#action4">
-                      Çıkış Yap
+                    <NavDropdown.Item className={styles.dropItem} href="/">
+                      <Link onClick={handleLogout} href="">Çıkış Yap</Link>
                     </NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
