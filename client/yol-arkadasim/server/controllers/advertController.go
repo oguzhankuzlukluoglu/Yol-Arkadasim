@@ -2,12 +2,11 @@ package controllers
 
 import (
 	"context"
+	"fmt"
 	"net/http"
-	"strings"
 	"time"
 	"yol-arkadasim/database"
 	"yol-arkadasim/models"
-	"yol-arkadasim/utils"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
@@ -16,15 +15,22 @@ import (
 
 // CreateAdvertHandler HTTP POST isteği ile yeni bir ilan oluşturur.
 func CreateAdvertHandler(c *gin.Context) {
-	tokenString := c.GetHeader("Authorization")
-	userID, _, err := utils.ExtractUserIDAndExpirationFromToken(tokenString)
-	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+	var userID any
+	var ok bool
+
+	if userID, ok = c.Get("userID"); !ok {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "User ID not found"})
 		return
 	}
-	//userID := c.GetString("userID") // Kullanıcı kimliğini middleware'den al
 
-	if c.Request.Method != http.MethodPost {
+	// userID'yi string türüne dönüştürün
+	userIDStr, ok := userID.(string)
+	if !ok {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Invalid user ID"})
+		return
+	}
+
+	if c.Request.Method != http.MethodPost { // Yöntemi HTTP POST olarak kontrol edin
 		c.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Method Not Allowed"})
 		return
 	}
@@ -39,7 +45,7 @@ func CreateAdvertHandler(c *gin.Context) {
 	now := time.Now()
 	advert.AdvertDate = &now
 	advert.AdvertID = primitive.NewObjectID() // Yeni ilan ID'si oluştur
-	advert.PostedByID = userID                // Kullanıcı kimliğini ata
+	advert.PostedByID = userIDStr             // Kullanıcı kimliğini ata
 
 	// İlanı veritabanına kaydet
 	if err := SaveAdvertToDB(&advert); err != nil {
@@ -65,10 +71,7 @@ func SaveAdvertToDB(advert *models.AdvertModel) error {
 
 // UpdateAdvertHandler HTTP PUT isteği ile var olan bir ilanı günceller.
 func UpdateAdvertHandler(c *gin.Context) {
-	if c.Request.Method != http.MethodPut {
-		c.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Method Not Allowed"})
-		return
-	}
+	var userID, _ = c.Get("userID")
 
 	// İlan ID'sini URL parametrelerinden al
 	advertIDParam := c.Param("id")
@@ -95,6 +98,17 @@ func UpdateAdvertHandler(c *gin.Context) {
 	client := database.GetMongoClient()
 	collection := client.Database("mydatabase").Collection("adverts")
 
+	var advert models.AdvertModel
+	err = collection.FindOne(context.Background(), bson.M{"advert_id": advertID}).Decode(&advert)
+
+	fmt.Println(userID, advert.PostedByID)
+
+	if userID != advert.PostedByID {
+
+		c.JSON(http.StatusForbidden, gin.H{"error": "bu ilana erişiminiz yok"})
+		return
+	}
+
 	// İlanı güncelle
 	filter := bson.M{"advert_id": advertID}
 	update := bson.M{
@@ -111,7 +125,7 @@ func UpdateAdvertHandler(c *gin.Context) {
 
 	_, err = collection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "veritabanına bağlanılamıyor"})
 		return
 	}
 
@@ -151,26 +165,8 @@ func GetAllAdvertsHandler(c *gin.Context) {
 
 // DeleteAdvertHandler HTTP DELETE isteği ile bir ilanı siler.
 func DeleteAdvertHandler(c *gin.Context) {
-	authHeader := c.GetHeader("Authorization")
-	if authHeader == "" {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Yetkisiz erişim"})
-		c.Abort()
-		return
-	}
 
-	authHeaderParts := strings.Split(authHeader, " ")
-	if len(authHeaderParts) != 2 || authHeaderParts[0] != "Bearer" {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Yetkisiz erişim"})
-		c.Abort()
-		return
-	}
-
-	//tokenString := authHeaderParts[1]
-
-	if c.Request.Method != http.MethodDelete {
-		c.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Method Not Allowed"})
-		return
-	}
+	var userID, _ = c.Get("userID")
 
 	// İlan ID'sini URL parametrelerinden al
 	advertIDParam := c.Param("advert_id")
@@ -190,11 +186,21 @@ func DeleteAdvertHandler(c *gin.Context) {
 	client := database.GetMongoClient()
 	collection := client.Database("mydatabase").Collection("adverts")
 
+	var advert models.AdvertModel
+	err = collection.FindOne(context.Background(), bson.M{"advert_id": advertID}).Decode(&advert)
+
+	fmt.Println(advert.PostedByID, userID)
+	if advert.PostedByID != userID {
+		c.JSON(http.StatusForbidden, gin.H{"error": "You can't access this source!"})
+		return
+	}
+
 	// İlanı sil
 	filter := bson.M{"advert_id": advertID}
 	_, err = collection.DeleteOne(context.Background(), filter)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "777777777777Internal Server Error"})
+		fmt.Println(err.Error())
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Advert silinirken bir hata oluştu."})
 		return
 	}
 

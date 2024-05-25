@@ -14,6 +14,7 @@ import (
 
 func LoginHandler(c *gin.Context) {
 	var login models.Login
+
 	if err := c.ShouldBindJSON(&login); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload"})
 		return

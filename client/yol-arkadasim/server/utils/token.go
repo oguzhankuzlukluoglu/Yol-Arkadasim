@@ -2,6 +2,7 @@ package utils
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 	"time"
 
@@ -38,9 +39,13 @@ func GenerateToken(userID string) (string, error) {
 
 // VerifyToken, verilen JWT token'ı doğrular ve talepleri döner.
 func VerifyToken(tokenString string) (*Claims, error) {
+
+	fmt.Println(tokenString)
+	token1, err := ExtractTokenFromHeader(tokenString)
+
 	claims := &Claims{}
 
-	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(token1, claims, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("invalid signing method")
 		}
@@ -68,12 +73,11 @@ func ExtractTokenFromHeader(authHeader string) (string, error) {
 	return parts[1], nil
 }
 
-func ExtractUserIDAndExpirationFromToken(tokenString string) (string, time.Time, error) {
+func ExtractUserIDAndExpirationFromToken(tokenString string) (string, int64, error) {
 	claims, err := VerifyToken(tokenString)
 	if err != nil {
-		return "", time.Time{}, err
+		return "", 5, err
 	}
 
-	expirationTime := time.Unix(claims.ExpiresAt, 0)
-	return claims.UserID, expirationTime, nil
+	return claims.UserID, claims.ExpiresAt, nil
 }

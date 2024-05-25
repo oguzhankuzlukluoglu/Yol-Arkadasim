@@ -26,17 +26,25 @@ func GetUserProfileByUsernameHandler(c *gin.Context) {
 		return
 	}
 
-	profile, err := findProfileByUserID(user.ID)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
-		return
-	}
-	if profile == nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Profile not found"})
-		return
+	userResponse := UserResponse{
+		ID:                user.ID,
+		Name:              user.Name,
+		Surname:           user.Surname,
+		Username:          user.Username,
+		Phone:             user.Phone,
+		Email:             user.Email,
+		RegistrationDate:  user.RegistrationDate,
+		DateOfBirth:       user.DateOfBirth,
+		Location:          user.Location,
+		Interests:         user.Interests,
+		About:             user.About,
+		Comments:          user.Comments,
+		TravelPreferences: user.TravelPreferences,
+		ProfilePicture:    user.ProfilePicture,
+		TravelPhotos:      user.TravelPhotos,
 	}
 
-	c.JSON(http.StatusOK, gin.H{"profile": profile})
+	c.JSON(http.StatusOK, gin.H{"profile": userResponse})
 }
 
 func findProfileByUserID(userID primitive.ObjectID) (*models.Profile, error) {
@@ -74,18 +82,32 @@ func UpdateUserProfileHandler(c *gin.Context) {
 		return
 	}
 
-	// Update user fields
-	if updateUser.Name != nil {
-		existingUser.Name = updateUser.Name
+	if updateUser.DateOfBirth != nil {
+		existingUser.DateOfBirth = updateUser.DateOfBirth
 	}
-	if updateUser.Surname != nil {
-		existingUser.Surname = updateUser.Surname
+	if updateUser.Phone != nil {
+		existingUser.Phone = updateUser.Phone
 	}
-	if updateUser.Username != nil {
-		existingUser.Username = updateUser.Username
+	if updateUser.Location != nil {
+		existingUser.Location = updateUser.Location
 	}
-	if updateUser.Password != nil {
-		existingUser.Password = updateUser.Password
+	if updateUser.Interests != nil {
+		existingUser.Interests = updateUser.Interests
+	}
+	if updateUser.About != nil {
+		existingUser.About = updateUser.About
+	}
+	if updateUser.TravelPreferences != nil {
+		existingUser.TravelPreferences = updateUser.TravelPreferences
+	}
+	if updateUser.ProfilePicture != nil {
+		existingUser.ProfilePicture = updateUser.ProfilePicture
+	}
+	if updateUser.TravelPhotos != nil {
+		existingUser.TravelPhotos = updateUser.TravelPhotos
+	}
+	if updateUser.Comments != nil {
+		existingUser.Comments = updateUser.Comments
 	}
 
 	// Save updated user to MongoDB
@@ -94,45 +116,25 @@ func UpdateUserProfileHandler(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
 		return
 	}
-
-	// Update profile
-	profile, err := findProfileByUserID(existingUser.ID)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
-		return
-	}
-	if profile == nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Profile not found"})
-		return
-	}
-
-	if updateUser.Name != nil {
-		profile.Name = updateUser.Name
-	}
-	if updateUser.Surname != nil {
-		profile.Surname = updateUser.Surname
-	}
-	if updateUser.Phone != nil {
-		profile.Phone = updateUser.Phone
-	}
-	if updateUser.Location != nil {
-		profile.Location = updateUser.Location
-	}
-	if updateUser.Interests != nil {
-		profile.Interests = updateUser.Interests
-	}
-	if updateUser.About != nil {
-		profile.About = updateUser.About
+	userResponse := UserResponse{
+		ID:                existingUser.ID,
+		Name:              existingUser.Name,
+		Surname:           existingUser.Surname,
+		Username:          existingUser.Username,
+		Phone:             existingUser.Phone,
+		Email:             existingUser.Email,
+		RegistrationDate:  existingUser.RegistrationDate,
+		DateOfBirth:       existingUser.DateOfBirth,
+		Location:          existingUser.Location,
+		Interests:         existingUser.Interests,
+		About:             existingUser.About,
+		Comments:          existingUser.Comments,
+		TravelPreferences: existingUser.TravelPreferences,
+		ProfilePicture:    existingUser.ProfilePicture,
+		TravelPhotos:      existingUser.TravelPhotos,
 	}
 
-	// Save updated profile to MongoDB
-	err = profile.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "profiles")
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"message": "Profile updated successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": "Profile updated successfully", "updated_user": userResponse})
 }
 
 func findUserByID(userID string) (*models.User, error) {
@@ -157,14 +159,21 @@ func findUserByID(userID string) (*models.User, error) {
 
 // UserResponse, parolanın dahil edilmediği kullanıcı bilgilerini temsil eder
 type UserResponse struct {
-	ID               primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	Name             *string            `json:"name" bson:"name"`
-	Surname          *string            `json:"surname" bson:"surname"`
-	Username         *string            `json:"username" bson:"username"`
-	DateOfBirth      *time.Time         `json:"date_of_birth" bson:"date_of_birth"`
-	Phone            *string            `json:"phone" bson:"phone"`
-	Email            *string            `json:"email" bson:"email"`
-	RegistrationDate time.Time          `json:"registration_date" bson:"registration_date"`
+	ID                primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	Name              *string            `json:"name" bson:"name"`
+	Surname           *string            `json:"surname" bson:"surname"`
+	Username          *string            `json:"username" bson:"username"`
+	Phone             *string            `json:"phone" bson:"phone"`
+	Email             *string            `json:"email" bson:"email"`
+	RegistrationDate  time.Time          `json:"registration_date" bson:"registration_date"`
+	DateOfBirth       *time.Time         `json:"date_of_birth"`
+	Location          *string            `json:"location"`
+	Interests         []string           `json:"interests"`
+	About             *string            `json:"about"`
+	Comments          []string           `json:"comments"`
+	TravelPreferences []string           `json:"travel_preferences"`
+	ProfilePicture    *string            `json:"profile_picture"`
+	TravelPhotos      []string           `json:"travel_photos"`
 }
 
 func GetAllUsersHandler(c *gin.Context) {
