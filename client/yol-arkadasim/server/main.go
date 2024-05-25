@@ -5,6 +5,7 @@ import (
 	"yol-arkadasim/controllers"
 	"yol-arkadasim/database"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,30 +19,27 @@ func main() {
 	}
 
 	router := gin.Default()
-	// Kullanıcılarla ilgili HTTP işleyicileria
-	userGroup := router.Group("/user")
-	{
-		userGroup.Use(controllers.AuthMiddleware)
-		userGroup.PUT("/update_profile", controllers.UpdateUserProfileHandler)
-	}
-	advertGroup := router.Group("/create")
-	{
-		advertGroup.Use(controllers.AuthMiddleware)
-		advertGroup.POST("/advert", controllers.CreateAdvertHandler)
-		router.PUT("/advert/update/:id", controllers.UpdateAdvertHandler)
-	}
-	advertGroupD := router.Group("/delete")
-	{
-		advertGroupD.Use(controllers.AuthMiddleware)
-		advertGroupD.DELETE("/advert/:id", controllers.DeleteAdvertHandler)
-	}
-	router.POST("/register", controllers.RegisterHandler)
-	router.POST("/login", controllers.LoginHandler)
-	router.POST("/logout", controllers.LogoutHandler)
 
-	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)
-	router.GET("/get-all-users", controllers.GetAllUsersHandler)
-	router.GET("/profile/:username", controllers.GetUserProfileByUsernameHandler)
+	// CORS ayarları
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"}
+	config.AllowCredentials = true
+	router.Use(cors.New(config))
+
+	router.POST("/register", controllers.RegisterHandler)                                                 //aktif
+	router.POST("/login", controllers.LoginHandler)                                                       //aktif
+	router.POST("/user/update_profile", controllers.AuthMiddleware, controllers.UpdateUserProfileHandler) //bakılmalı
+	router.POST("/logout", controllers.LogoutHandler)                                                     //aktif
+	router.POST("/create/advert", controllers.AuthMiddleware, controllers.CreateAdvertHandler)            //aktif
+
+	router.PUT("advert/update/:id", controllers.AuthMiddleware, controllers.UpdateAdvertHandler) //silinebilir
+
+	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)              //aktif
+	router.GET("/get-all-users", controllers.GetAllUsersHandler)                  //aktif
+	router.GET("/profile/:username", controllers.GetUserProfileByUsernameHandler) //aktif bakılmalı
+
+	router.DELETE("/users/:userID", controllers.AuthMiddleware, controllers.DeleteUserHandler)       //aktif
+	router.DELETE("/advert/:advert_id", controllers.AuthMiddleware, controllers.DeleteAdvertHandler) //aktif
 
 	err = router.Run(":8080")
 	if err != nil {

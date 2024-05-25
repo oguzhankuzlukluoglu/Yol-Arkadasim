@@ -16,7 +16,6 @@ import (
 //var store *sessions.CookieStore
 
 func GetUserProfileByUsernameHandler(c *gin.Context) {
-
 	username := c.Param("username")
 
 	user, err := findUserByUsername(username)
@@ -77,6 +76,7 @@ func UpdateUserProfileHandler(c *gin.Context) {
 		return
 	}
 
+	// Update user fields
 	if updateUser.Name != nil {
 		existingUser.Name = updateUser.Name
 	}
@@ -94,10 +94,38 @@ func UpdateUserProfileHandler(c *gin.Context) {
 	}
 	if updateUser.Phone != nil {
 		existingUser.Phone = updateUser.Phone
-		//konum bilgisi ekle -- biyografi eklenecek--ilgi alanları ekle--
 	}
 
+	// Save updated user to MongoDB
 	err = existingUser.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "users")
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+
+	// Update profile
+	profile, err := findProfileByUserID(existingUser.ID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	if profile == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Profile not found"})
+		return
+	}
+
+	if updateUser.Location != nil {
+		profile.Location = updateUser.Location
+	}
+	if updateUser.Interests != nil {
+		profile.Interests = updateUser.Interests
+	}
+	if updateUser.About != nil {
+		profile.About = updateUser.About
+	}
+
+	// Save updated profile to MongoDB
+	err = profile.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "profiles")
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
 		return
