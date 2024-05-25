@@ -82,7 +82,26 @@ func RegisterHandler(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
 		return
 	}
+	err = CreateProfileForUser(&user)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create profile"})
+		return
+	}
 
 	// Başarı durumunda, kullanıcıya yanıt gönderin veya başka bir işlem yapın
 	c.JSON(http.StatusOK, gin.H{"message": "Kayıt başarıyla tamamlandı!", "user": user})
+}
+func CreateProfileForUser(user *models.User) error {
+	profile := models.Profile{
+		UserID: user.ID,
+		// Diğer özelliklerin başlangıç değerlerini belirle
+	}
+
+	// Veritabanına profil kaydet
+	err := profile.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "profiles")
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

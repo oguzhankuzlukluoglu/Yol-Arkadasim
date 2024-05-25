@@ -26,6 +26,12 @@ func AuthMiddleware(c *gin.Context) {
 
 	tokenString := authHeaderParts[1]
 
+	if utils.IsTokenBlacklisted(tokenString) {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Geçersiz token"})
+		c.Abort()
+		return
+	}
+
 	token, err := jwt.ParseWithClaims(tokenString, &utils.Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte("gizli_anahtar"), nil // JWT'yi imzalayan gizli anahtarınızı buraya yerleştirin
 	})

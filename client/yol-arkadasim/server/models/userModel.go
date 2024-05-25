@@ -30,6 +30,8 @@ type UpdateableUser struct {
 	Password    *string    `json:"password"`
 	DateOfBirth *time.Time `json:"date_of_birth"`
 	Phone       *string    `json:"phone"`
+	Location    *string    `json:"location"`
+	Interests   []string   `json:"interests"`
 }
 
 // SaveToMongoDB saves the user to the MongoDB database

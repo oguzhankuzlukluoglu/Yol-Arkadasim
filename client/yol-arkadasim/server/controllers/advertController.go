@@ -14,6 +14,8 @@ import (
 
 // CreateAdvertHandler HTTP POST isteği ile yeni bir ilan oluşturur.
 func CreateAdvertHandler(c *gin.Context) {
+	userID := c.GetString("userID") // Kullanıcı kimliğini middleware'den al
+
 	if c.Request.Method != http.MethodPost {
 		c.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Method Not Allowed"})
 		return
@@ -28,7 +30,8 @@ func CreateAdvertHandler(c *gin.Context) {
 	// İlan tarihini ayarla
 	now := time.Now()
 	advert.AdvertDate = &now
-	advert.AdvertID = primitive.NewObjectID() // Yeni ilan ID'si oluştur
+	advert.AdvertID = primitive.NewObjectID()                // Yeni ilan ID'si oluştur
+	advert.PostedByID, _ = primitive.ObjectIDFromHex(userID) // Kullanıcı kimliğini ata
 
 	// İlanı veritabanına kaydet
 	if err := SaveAdvertToDB(&advert); err != nil {
