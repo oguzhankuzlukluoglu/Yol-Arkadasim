@@ -101,6 +101,7 @@
   font-size: 18px;
   font-weight: 400;
 }
+}
 
 .mailText img{
   cursor: pointer;
@@ -166,6 +167,6 @@
     font-size: 14px;
   }
   .mailText p{
-    font-size:14px;
-}
+    font-size: 14px;
+  }
 }

@@ -1,0 +1,22 @@
+.timeAdvert{
+    height: 40px;
+}
+.timeContainer input{
+    min-height: 30px;
+    padding: 0 4px;
+    width: 100px;
+}
+
+.timeAdvert input{
+    width: 140px;
+    border-radius: 20px;
+    height: 40px;
+    border: none;
+    padding-left: 20px;
+}
+
+
+.container{
+    width: 92px;
+}
+

@@ -1,6 +1,7 @@
 :root{
   --bg: white;
   --textColor: black; 
+  --bs-dropdown-min-width: 8rem;
 }
 
 *{
@@ -9,7 +10,7 @@
   box-sizing: border-box;
 }
 
-a{
+ body a{
   text-decoration: none;
   color: inherit;
 }
@@ -20,31 +21,32 @@ body{
 }
 
 .container{
-  min-height: 100vh;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 100vw;
   background-color: var(--bg);
   color: var(--textColor);
 }
 
 .wrapper{
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 80px;
+  margin: 0;
+  padding: 0;
 }
 
-
+/* 
 @media screen and (max-width: 1536px) {
   .wrapper{
     max-width: 1300px;
   }
-}
+} */
 
-@media screen and (max-width: 1300px) {
+ /* @media screen and (max-width: 1200px) {
   .wrapper{
     max-width: 1150px;
   }
-}
+}  */
 
-@media screen and (max-width: 1150px) {
+/* @media screen and (max-width: 1150px) {
   .wrapper{
     max-width: 960px;
   }
@@ -75,4 +77,4 @@ body{
     max-width: 360px;
     padding: 0 20px;
   }
-}
+} */

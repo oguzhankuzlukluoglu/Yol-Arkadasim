@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./where.module.css";
 import { iller } from "@/datas/İller";
 
-const Where = ({ type }) => {
+const Where = ({ type ,width}) => {
 
   const [il, setIl] = useState("");
   const [goster, setGoster] = useState(false);
@@ -81,10 +81,10 @@ const Where = ({ type }) => {
   };
 
   return (
-    <div className={styles.whereContainer}>
+    <div className={width === "advert" ? styles.advertContainer : styles.whereContainer}>
       <div className={styles.whereInput}>
-        <label htmlFor={type}>{type === "from" ? "Nereden" : "Nereye"}</label>
-        <input type="text" name="" id={type} value={il} onChange={handleChange} />
+        <label className={width==="advert" ? styles.advertLabel : styles.whereLabel} htmlFor={type}>{type === "from" ? "Nereden" : "Nereye"}</label>
+        <input className={width==="advert" ? styles.advertInput : styles.whereInputSelect} type="text" name="" id={type} value={il} onChange={handleChange} />
       </div>
       <div className={styles.scrollContainer} ref={scrollRef}>
         {goster &&

@@ -5,18 +5,43 @@
     gap: 2px;
     position: relative;
 }
+.advertContainer{
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    gap: 2px;
+    position: relative;
+}
 
 .whereInput{
     display: flex;
 }
 
-.whereInput > label{
+.whereInput > .whereLabel{
     padding: 3px;
-    min-width: 75px;
+    min-width: 92px;
 }
-.whereInput > input {
+
+.whereInput > .advertLabel{
+    padding: 8px 2px;
+    min-width: 85px;
+}
+
+.whereInput > .advertInput{
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 140px;
+    padding-left: 10px;
+}
+
+.whereInput > .whereInputSelect {
     outline: none;
     padding-left: 6px;
+    border-radius: 0;
+    border: 1px solid black;
+    
 }
 
 .scrollContainer {
