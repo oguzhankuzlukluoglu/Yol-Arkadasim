@@ -25,23 +25,26 @@ func main() {
 	// CORS ayarları
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:3000"}
+	config.AllowHeaders = []string{"Authorization", "Content-Type"} // "Content-Type" başlığını ekleyin
 	config.AllowCredentials = true
 	router.Use(cors.New(config))
 
-	router.POST("/register", controllers.RegisterHandler)
-	router.POST("/login", controllers.LoginHandler)
-	router.POST("/logout", controllers.LogoutHandler)
+	router.POST("/register", controllers.RegisterHandler) //aktif
+	router.POST("/login", controllers.LoginHandler)       //aktif
+	router.POST("/logout", controllers.LogoutHandler)     //aktif
 
-	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)
-	router.POST("/create/advert", controllers.AuthMiddleware, controllers.CreateAdvertHandler)
-	router.PUT("advert/update/:id", controllers.AuthMiddleware, controllers.UpdateAdvertHandler)
-	router.DELETE("/advert/:advert_id", controllers.AuthMiddleware, controllers.DeleteAdvertHandler)
+	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)                                 //aktif
+	router.POST("/create/advert", controllers.AuthMiddleware, controllers.CreateAdvertHandler)       //aktif
+	router.PUT("advert/update/:id", controllers.AuthMiddleware, controllers.UpdateAdvertHandler)     //silinebilir
+	router.DELETE("/advert/:advert_id", controllers.AuthMiddleware, controllers.DeleteAdvertHandler) //aktif
 
-	router.GET("/get-all-users", controllers.GetAllUsersHandler)
-	router.DELETE("/users/:userID", controllers.AuthMiddleware, controllers.DeleteUserHandler)
-	router.PUT("/user/update_profile", controllers.AuthMiddleware, controllers.UpdateUserProfileHandler)
+	//router.GET("/", controllers.HelloMethod())
 
-	router.GET("/profile/:username", controllers.GetUserProfileByUsernameHandler)
+	router.GET("/get-all-users", controllers.GetAllUsersHandler)                                          //aktif
+	router.DELETE("/users/:userID", controllers.AuthMiddleware, controllers.DeleteUserHandler)            //aktif
+	router.POST("/user/update_profile", controllers.AuthMiddleware, controllers.UpdateUserProfileHandler) //bakılmalı
+
+	router.GET("/profile/:username", controllers.GetUserProfileByUsernameHandler) //aktif bakılmalı
 
 	err = router.Run(":8080")
 	if err != nil {

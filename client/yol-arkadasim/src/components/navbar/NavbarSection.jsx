@@ -12,15 +12,18 @@ import Link from 'next/link';
 
 const NavbarSection = () => {
 
-  const handleLogout = async(e) => {
-    try{
-      const response = await axios.post("http://localhost:8080/logout")
-      console.log(response.data)
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const headers = token ? { "Authorization": `Bearer ${token}` } : {}; 
+      await axios.post("http://localhost:8080/logout", {}, { headers });
+      localStorage.removeItem("token");
+
+      console.log("Logout successful");
+    } catch (error) {
+      console.error("Logout error:", error);
     }
-    catch(err){
-      console.error(err)
-    }
-  }
+  };
 
   return (
     <div className={styles.container}>
