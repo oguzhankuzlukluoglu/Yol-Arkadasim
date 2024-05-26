@@ -30,7 +30,9 @@ const Login = () => {
 
     try{
       const response = await axios.post("http://localhost:8080/login",user);
-      console.log(response.data)
+      console.log(response)
+      response.headers.token = response.data.token
+      localStorage.setItem("token", response.data.token);
     }catch(err){
       console.error(err)
     }
