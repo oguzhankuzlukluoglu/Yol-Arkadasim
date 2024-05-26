@@ -97,69 +97,6 @@
     border-bottom: 1px solid #726e72;
 }
 
-.adverts > .advertSection{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px;
-    border-radius: 16px;
-    border: 1px solid black;
-    max-width: 623.2px;
-}
-.adverts > .advertSection:hover{
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-}
-
-.adverts > .advertSection > .advertInfos{
-    display: flex;
-    gap: 20px;
-    height: 60px;
-    width: 600px;
-    justify-content: space-between;
-}
-
-.advertInfos > .infoSection{
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.infoSection > .travelInfo{
-    display: flex;
-    gap: 20px;
-}
-
-.cities{
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.adverts > .advertSection > .advertUser{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.adverts > .advertSection > .advertUser > .advertUserInfo{
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.adverts > .advertSection > .advertUser > .advertButton > a{
-    text-decoration: none;
-    padding: 8px 10px;
-    background-color: #6c757d;
-    color: #fff;
-    border-radius: 6px;
-}
-
-.adverts > .advertSection > .advertUser > .advertButton > a:hover{
-    background-color: #0b5ed7
-}
-
 .ingredient{
     display: flex;
     flex: 1;

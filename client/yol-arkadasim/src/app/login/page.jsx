@@ -1,32 +1,66 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import styles from "./login.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 const Login = () => {
+
+  const [data,setData] = useState({
+    Username:"",
+    Password:""
+  })
+
+  const handleChange = (e) => {
+    const {id , value} = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const user = {
+      Username: data.Username,
+      Password: data.Password
+    }
+
+    try{
+      const response = await axios.post("http://localhost:8080/login",user);
+      console.log(response)
+      response.headers.token = response.data.token
+      localStorage.setItem("token", response.data.token);
+    }catch(err){
+      console.error(err)
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.loginImage}>
         <Image alt="register" src="/loginbg.png" width={800} height={800} />
       </div>
-      <form action="" className={styles.form}>
+      <form action="" onSubmit={handleSubmit} className={styles.form}>
         <h1>Giriş Yap</h1>
         <div className={styles.loginForm}>
           <div className={styles.FormInfo}>
-            <label htmlFor="email">E-posta</label>
-            <input type="email" name="" id="email" autoFocus />
+            <label htmlFor="Username">Username</label>
+            <input type="text" name="" id="Username" autoFocus onChange={handleChange} />
           </div>
           <div className={styles.FormInfo}>
-            <label htmlFor="password">Şifre</label>
-            <input type="password" name="" id="password" />
+            <label htmlFor="Password">Şifre</label>
+            <input type="password" name="" id="Password" onChange={handleChange}/>
           </div>
         </div>
         <div className={styles.loginButton}>
-          <button>Giriş Yap</button>
+          <button type="submit">Giriş Yap</button>
         </div>
         <div className={styles.checkAccount}>
           <span>bir hesabın yok mu ?</span>
-          <Link href="/login">Kayıt Ol</Link>
+          <Link href="/register">Kayıt Ol</Link>
         </div>
         <div className={styles.or}>
           <span> - ya da -</span>
