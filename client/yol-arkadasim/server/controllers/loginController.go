@@ -45,7 +45,7 @@ func LoginHandler(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Login successful", "token": token})
+	c.JSON(http.StatusOK, gin.H{"message": "Login successful", "token": token, "id": user.UserIDHex()})
 }
 
 func findUserByUsername(username string) (*models.User, error) {
