@@ -23,12 +23,18 @@ func CreateAdvertHandler(c *gin.Context) {
 		return
 	}
 
+	// Debug için userID'yi yazdır
+	fmt.Println("userID (interface{}):", userID)
+
 	// userID'yi string türüne dönüştürün
 	userIDStr, ok := userID.(string)
 	if !ok {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Invalid user ID"})
 		return
 	}
+
+	// Debug için userIDStr'yi yazdır
+	fmt.Println("userIDStr (string):", userIDStr)
 
 	if c.Request.Method != http.MethodPost { // Yöntemi HTTP POST olarak kontrol edin
 		c.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Method Not Allowed"})
@@ -46,6 +52,9 @@ func CreateAdvertHandler(c *gin.Context) {
 	advert.AdvertDate = &now
 	advert.AdvertID = primitive.NewObjectID() // Yeni ilan ID'si oluştur
 	advert.PostedByID = userIDStr             // Kullanıcı kimliğini ata
+
+	// Debug için advert'i yazdır
+	fmt.Printf("Advert: %+v\n", advert)
 
 	// İlanı veritabanına kaydet
 	if err := SaveAdvertToDB(&advert); err != nil {
@@ -206,4 +215,109 @@ func DeleteAdvertHandler(c *gin.Context) {
 
 	// Başarılı silme yanıtı
 	c.JSON(http.StatusOK, gin.H{"message": "Advert deleted successfully"})
+}
+
+// ////////////////////////////////////////////////////////////////////////////////////
+func GetAdvertsByUsernameHandler(c *gin.Context) {
+	// URL parametresinden username'i al
+	username := c.Param("username")
+	if username == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Username is required"})
+		return
+	}
+
+	// username'e göre userID'yi al
+	userID, err := GetUserIDByUsername(username)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	if userID == "" {
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+		return
+	}
+
+	// Debug: userID'yi yazdır
+	fmt.Println("userID:", userID)
+
+	// Veritabanı bağlantısını al
+	client := database.GetMongoClient()
+	collection := client.Database("mydatabase").Collection("adverts")
+
+	// İlanları userID'ye göre sorgula
+	cursor, err := collection.Find(context.Background(), bson.M{"posted_by_id": userID})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	defer cursor.Close(context.Background())
+
+	// İlanları bir dilimde depolamak için boş bir dilim oluştur
+	adverts := []models.AdvertModel{}
+
+	// Tüm ilanları döngü ile al
+	for cursor.Next(context.Background()) {
+		var advert models.AdvertModel
+		if err := cursor.Decode(&advert); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+			return
+		}
+		adverts = append(adverts, advert)
+	}
+
+	if err := cursor.Err(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+
+	// Debug: adverts'i yazdır
+	fmt.Printf("Adverts: %+v\n", adverts)
+
+	// İlanları başarıyla aldıktan sonra, JSON olarak yanıt ver
+	c.JSON(http.StatusOK, gin.H{"adverts": adverts})
+}
+
+// GetAdvertsByUserIDHandler HTTP GET isteği ile bir kullanıcının ilanlarını alır.
+func GetAdvertsByUserIDHandler(c *gin.Context) {
+	// URL parametresinden userID'yi alın
+	userID := c.Param("userid") // Burada "userid" parametresini alıyoruz
+	if userID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "User ID is required"})
+		return
+	}
+
+	// MongoDB bağlantısını alın
+	client := database.GetMongoClient()
+	collection := client.Database("mydatabase").Collection("adverts")
+
+	// Belirli bir postedbyid değerine sahip belgeleri sorgulayın
+	filter := bson.M{"posted_by_id": userID}
+	cursor, err := collection.Find(context.Background(), filter)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	defer cursor.Close(context.Background())
+
+	// Belgeleri bir dilimde depolamak için boş bir dilim oluşturun
+	var adverts []models.AdvertModel
+
+	// Tüm belgeleri döngü ile alın
+	for cursor.Next(context.Background()) {
+		var advert models.AdvertModel
+		if err := cursor.Decode(&advert); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+			return
+		}
+		adverts = append(adverts, advert)
+	}
+
+	// İşlem sırasında herhangi bir hata olup olmadığını kontrol edin
+	if err := cursor.Err(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+
+	// Sonuçları JSON formatında yanıtlayın
+	c.JSON(http.StatusOK, gin.H{"adverts": adverts})
 }

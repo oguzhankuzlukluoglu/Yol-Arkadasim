@@ -33,10 +33,14 @@ func main() {
 	router.POST("/login", controllers.LoginHandler)       //aktif
 	router.POST("/logout", controllers.LogoutHandler)     //aktif
 
-	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)                                 //aktif
-	router.POST("/create/advert", controllers.AuthMiddleware, controllers.CreateAdvertHandler)       //aktif
-	router.PUT("advert/update/:id", controllers.AuthMiddleware, controllers.UpdateAdvertHandler)     //silinebilir
-	router.DELETE("/advert/:advert_id", controllers.AuthMiddleware, controllers.DeleteAdvertHandler) //aktif
+	router.GET("/get-all-adverts", controllers.GetAllAdvertsHandler)
+	router.GET("/adverts/user/:userid", controllers.GetAdvertsByUserIDHandler)
+	router.GET("/adverts/:username", controllers.GetAdvertsByUsernameHandler)
+
+	router.POST("/create/advert", controllers.AuthMiddleware, controllers.CreateAdvertHandler)
+	router.PUT("advert/update/:id", controllers.AuthMiddleware, controllers.UpdateAdvertHandler)
+	router.DELETE("/advert/:advert_id", controllers.AuthMiddleware, controllers.DeleteAdvertHandler)
+
 
 	//router.GET("/", controllers.HelloMethod())
 
