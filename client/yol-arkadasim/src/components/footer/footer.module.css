@@ -5,7 +5,7 @@
     padding: 20px 10px;
     justify-content: space-around;
     height: 30vh;
-    background-color:  #b5cfe9;
+    background-color:  #1f1f1f;
 }
 .popular, .routes, .about, .socials{
     display: flex;

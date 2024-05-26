@@ -99,7 +99,6 @@
   padding: 10px 0;
   display: flex;
   gap: 4px;
-  align-items: center;
 }
 
 .findAdvertSection {
@@ -111,6 +110,7 @@
 .whereTitle {
   max-width: 320px;
   font-size: 30px;
+  padding-top: 20px;
 }
 
 .findAdvert {
