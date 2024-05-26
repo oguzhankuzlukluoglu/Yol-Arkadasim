@@ -9,8 +9,27 @@ import styles from "./navbarSection.module.css"
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const NavbarSection = () => {
+
+  const router = useRouter();
+
+  const handleProfileClick = async () => {
+    try {
+      const id = localStorage.getItem("id");
+      const headers = id ? { "id": `${id}` } : {};
+      const response = await axios.get("http://localhost:8080/get-all-users", { headers });
+      console.log(response.data.users)
+      response.data.users.map((user) => {
+        user.id === id ? router.push(`/profile/${user.username}`) : null
+      })
+      const { username } = response.data;
+    } catch (error) {
+      console.error("Error fetching current user data:", error);
+    }
+  };
+ 
 
   const handleLogout = async () => {
     try {
@@ -53,7 +72,7 @@ const NavbarSection = () => {
                     className={styles.navDrop}
                     title="Profil"
                   >
-                    <NavDropdown.Item className={styles.dropItem} href="/profile">Bilgilerim</NavDropdown.Item>
+                    <NavDropdown.Item className={styles.dropItem} onClick={handleProfileClick}>Bilgilerim</NavDropdown.Item>
                     <NavDropdown.Item className={styles.dropItem} href="/">
                       <Link onClick={handleLogout} href="">Çıkış Yap</Link>
                     </NavDropdown.Item>
