@@ -25,6 +25,7 @@ func main() {
 	// CORS ayarları
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:3000"}
+	config.AllowHeaders = []string{"Authorization", "Content-Type"} // "Content-Type" başlığını ekleyin
 	config.AllowCredentials = true
 	router.Use(cors.New(config))
 
