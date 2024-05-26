@@ -262,3 +262,17 @@ func deleteProfileByUserID(userID primitive.ObjectID) error {
 	_, err := client.Database("mydatabase").Collection("profiles").DeleteOne(context.Background(), filter)
 	return err
 }
+func GetUserIDByUsername(username string) (string, error) {
+	client := database.GetMongoClient()
+	collection := client.Database("mydatabase").Collection("users")
+
+	var user models.User
+	err := collection.FindOne(context.Background(), bson.M{"username": username}).Decode(&user)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return "", nil
+		}
+		return "", err
+	}
+	return user.ID.Hex(), nil
+}
