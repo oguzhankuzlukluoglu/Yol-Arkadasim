@@ -106,6 +106,7 @@ func RegisterHandler(c *gin.Context) {
 	user.Surname = register.Surname
 	user.Email = register.Email
 	user.Password = register.Password
+	user.Phone = register.Phone
 	user.RegistrationDate = time.Now()
 	user.Username = register.Username
 	token, err := utils.GenerateToken(user.ID.Hex())
@@ -131,6 +132,7 @@ func CreateProfileForUser(user *models.User) error {
 		UserID:            user.ID,
 		Name:              user.Name,
 		Surname:           user.Surname,
+		Phone:             user.Phone,
 		Comments:          []string{},
 		Interests:         []string{},
 		About:             new(string),
