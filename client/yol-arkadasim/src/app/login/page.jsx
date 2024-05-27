@@ -4,6 +4,7 @@ import styles from "./login.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
+import axiosInstance from "@/utils/axiosInstance";
 
 const Login = () => {
 
@@ -28,16 +29,12 @@ const Login = () => {
       Password: data.Password
     }
 
-    try{
-      const response = await axios.post("http://localhost:8080/login",user);
-      console.log(response.data)
-      response.headers.token = response.data.token
-      response.headers.id = response.data.id
-      console.log(response.headers.id)
-      localStorage.setItem("id",response.data.id)
-      localStorage.setItem("token", response.data.token);
-    }catch(err){
-      console.error(err)
+    try {
+      const response = await axiosInstance.post("/login", user);
+      localStorage.setItem("id", response.data.id);
+      localStorage.setItem("token", response.data.token); // Token'ı localStorage'a kaydet
+    } catch (err) {
+      console.error(err);
     }
   }
 

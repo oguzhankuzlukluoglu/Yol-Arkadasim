@@ -10,6 +10,7 @@ import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import axiosInstance, { removeToken } from '@/utils/axiosInstance';
 
 const NavbarSection = () => {
 
@@ -35,10 +36,13 @@ const NavbarSection = () => {
     try {
       const token = localStorage.getItem("token");
       const headers = token ? { "Authorization": `Bearer ${token}` } : {}; 
-      await axios.post("http://localhost:8080/logout", {}, { headers });
+      await axiosInstance.post("/logout", {}, { headers });
       localStorage.removeItem("token");
+      localStorage.removeItem("id");
+      removeToken();  // Token'ı axios instance'ından kaldır
 
       console.log("Logout successful");
+      router.push('/');  // Ana sayfaya yönlendir
     } catch (error) {
       console.error("Logout error:", error);
     }

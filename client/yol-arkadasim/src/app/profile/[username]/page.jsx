@@ -11,44 +11,42 @@ import Menu from "@/components/menu/Menu";
 
 const ProfilePage = () => {
   const [username, setUsername] = useState(useParams().username)
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
 
 
   useEffect(() => {
     if (username) {
-      // Kullanıcı verilerini API'den çek
       const fetchUserData = async () => {
         try {
           const response = await axios.get(`http://localhost:8080/profile/${username}`);
-          console.log(response)
           setUserData(response.data.profile);
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
       };
-
       fetchUserData();
     }
   }, [username]);
+
 
   if (!userData) {
     return <div>Loading...</div>;
   }
 
-  const { name, surname, about, location, interests,comments, profilePicture } = userData;
-
+  const { name, surname, about, location, interests, comments, profile_picture } = userData;
+  console.log(userData)
   return (
     <div className={styles.container}>
       <div className={styles.userInfos}>
         {/* Profil resmi ve bilgiler */}
         <div className={styles.profile}>
           <div className={styles.profileImage}>
-            <Image alt="profile-photo" src={profilePicture || "/navbarLogo.png"} width={300} height={300}/>
+            <Image alt="profile-photo" src={profile_picture || "/navbarLogo.png"} width={300} height={300}/>
           </div>
           <div className={styles.profileBio}>
             <div className={styles.settings}>
               <span>{username}</span>
-              <ProfileUpdate/>
+              <ProfileUpdate user={userData}/>
             </div>
             <span className={styles.userName}>{`${name} ${surname}`}</span>
             <span className={styles.userDesc}>{about}</span>
