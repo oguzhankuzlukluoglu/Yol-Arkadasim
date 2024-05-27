@@ -8,6 +8,9 @@ const nextConfig = {
         destination: 'http://localhost:8080/:path*'
       }
     ];
+  },
+  images:{
+    domains: ["firebasestorage.googleapis.com"]
   }
 };
 
