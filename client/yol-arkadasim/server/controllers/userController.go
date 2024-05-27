@@ -81,6 +81,15 @@ func UpdateUserProfileHandler(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 		return
 	}
+	if updateUser.Name != nil {
+		existingUser.Name = updateUser.Name
+	}
+	if updateUser.Surname != nil {
+		existingUser.Surname = updateUser.Surname
+	}
+	if updateUser.Username != nil {
+		existingUser.Username = updateUser.Username
+	}
 
 	if updateUser.DateOfBirth != nil {
 		existingUser.DateOfBirth = updateUser.DateOfBirth
