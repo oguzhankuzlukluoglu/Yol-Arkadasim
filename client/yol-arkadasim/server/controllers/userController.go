@@ -90,7 +90,6 @@ func UpdateUserProfileHandler(c *gin.Context) {
 	if updateUser.Username != nil {
 		existingUser.Username = updateUser.Username
 	}
-
 	if updateUser.DateOfBirth != nil {
 		existingUser.DateOfBirth = updateUser.DateOfBirth
 	}
@@ -125,6 +124,53 @@ func UpdateUserProfileHandler(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
 		return
 	}
+
+	// Profile güncellemeleri
+	existingProfile, err := findProfileByUserID(existingUser.ID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	if existingProfile == nil {
+		existingProfile = &models.Profile{UserID: existingUser.ID}
+	}
+	if updateUser.Name != nil {
+		existingProfile.Name = updateUser.Name
+	}
+	if updateUser.Surname != nil {
+		existingProfile.Surname = updateUser.Surname
+	}
+	if updateUser.Phone != nil {
+		existingProfile.Phone = updateUser.Phone
+	}
+	if updateUser.Location != nil {
+		existingProfile.Location = updateUser.Location
+	}
+	if updateUser.Interests != nil {
+		existingProfile.Interests = updateUser.Interests
+	}
+	if updateUser.About != nil {
+		existingProfile.About = updateUser.About
+	}
+	if updateUser.TravelPreferences != nil {
+		existingProfile.TravelPreferences = updateUser.TravelPreferences
+	}
+	if updateUser.ProfilePicture != nil {
+		existingProfile.ProfilePicture = updateUser.ProfilePicture
+	}
+	if updateUser.TravelPhotos != nil {
+		existingProfile.TravelPhotos = updateUser.TravelPhotos
+	}
+	if updateUser.Comments != nil {
+		existingProfile.Comments = updateUser.Comments
+	}
+
+	err = existingProfile.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "profiles")
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+
 	userResponse := UserResponse{
 		ID:                existingUser.ID,
 		Name:              existingUser.Name,
@@ -183,6 +229,12 @@ type UserResponse struct {
 	TravelPreferences []string           `json:"travel_preferences"`
 	ProfilePicture    *string            `json:"profile_picture"`
 	TravelPhotos      []string           `json:"travel_photos"`
+}
+type UserResponse1 struct {
+	Comments []string `json:"comments"`
+}
+type UserResponse2 struct {
+	Interests []string `json:"interests"`
 }
 
 func GetAllUsersHandler(c *gin.Context) {
@@ -284,4 +336,38 @@ func GetUserIDByUsername(username string) (string, error) {
 		return "", err
 	}
 	return user.ID.Hex(), nil
+}
+func GetCommentsByUsername(c *gin.Context) {
+	username := c.Param("username")
+
+	user, err := findUserByUsername(username)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	if user == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+		return
+	}
+	userResponse1 := UserResponse1{
+		Comments: user.Comments,
+	}
+	c.JSON(http.StatusOK, gin.H{"userComments": userResponse1})
+}
+func GetInterestsByUsername(c *gin.Context) {
+	username := c.Param("username")
+
+	user, err := findUserByUsername(username)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	if user == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+		return
+	}
+	userResponse2 := UserResponse2{
+		Interests: user.Interests,
+	}
+	c.JSON(http.StatusOK, gin.H{"userInterests": userResponse2})
 }

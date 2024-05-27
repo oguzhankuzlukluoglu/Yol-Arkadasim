@@ -44,6 +44,8 @@ func main() {
 	router.GET("/get-all-users", controllers.GetAllUsersHandler)
 	router.DELETE("/users/:userID", controllers.AuthMiddleware, controllers.DeleteUserHandler)
 	router.PUT("/user/update_profile", controllers.AuthMiddleware, controllers.UpdateUserProfileHandler)
+	router.GET("/comments/:username", controllers.GetCommentsByUsername)
+	router.GET("/interests/:username", controllers.GetInterestsByUsername)
 
 	router.GET("/profile/:username", controllers.GetUserProfileByUsernameHandler)
 
