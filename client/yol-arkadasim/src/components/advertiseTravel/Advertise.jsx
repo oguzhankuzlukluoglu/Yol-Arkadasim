@@ -58,7 +58,8 @@ const Advertise = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
+    console.log(formData)
     try {
       const response = await axiosInstance.post("/create/advert", formData);
       console.log(response);

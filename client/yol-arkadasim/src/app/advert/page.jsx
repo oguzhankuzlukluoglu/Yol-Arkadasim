@@ -50,6 +50,7 @@ const AdvertPage = () => {
       setCurrentPage(newPage);
     }
   };
+  console.log(adverts)
   
   return (
     <div className={styles.container}>

@@ -75,7 +75,7 @@ const ProfilePage = () => {
         {/* Profil resmi ve bilgiler */}
         <div className={styles.profile}>
           <div className={styles.profileImage}>
-            <Image alt="profile-photo" src={profile_picture || "/navbarLogo.png"} width={300} height={300}/>
+            <Image alt="profile-photo" src={profile_picture || "/user.png"} width={300} height={300}/>
           </div>
           <div className={styles.profileBio}>
             <div className={styles.settings}>
