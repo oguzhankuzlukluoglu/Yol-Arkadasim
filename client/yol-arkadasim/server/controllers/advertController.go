@@ -13,7 +13,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// CreateAdvertHandler HTTP POST isteği ile yeni bir ilan oluşturur.
 func CreateAdvertHandler(c *gin.Context) {
 	var userID any
 	var ok bool
@@ -26,7 +25,7 @@ func CreateAdvertHandler(c *gin.Context) {
 	// Debug için userID'yi yazdır
 	fmt.Println("userID (interface{}):", userID)
 
-	// userID'yi string türüne dönüştürün
+	// userID'yi string türüne dönüştür
 	userIDStr, ok := userID.(string)
 	if !ok {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Invalid user ID"})
@@ -150,7 +149,7 @@ func GetAllAdvertsHandler(c *gin.Context) {
 	// Tüm ilanları bul
 	cursor, err := collection.Find(context.Background(), bson.M{})
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error 2"})
 		return
 	}
 	defer cursor.Close(context.Background())
@@ -162,7 +161,7 @@ func GetAllAdvertsHandler(c *gin.Context) {
 	for cursor.Next(context.Background()) {
 		var advert models.AdvertModel
 		if err := cursor.Decode(&advert); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error 3","message":err.Error()})
 			return
 		}
 		adverts = append(adverts, advert)
