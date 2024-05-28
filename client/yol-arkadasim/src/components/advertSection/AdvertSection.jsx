@@ -39,7 +39,7 @@ const AdvertSection = ({ advert }) => {
   //   console.log(userData); // userData değiştiğinde konsola yazdır
   // }, [userData]);
 
-
+  console.log(journey_time)
   return (
     <div className={styles.advertSection}>
       <div className={styles.advertInfos}>
@@ -58,7 +58,7 @@ const AdvertSection = ({ advert }) => {
             <span>Ulaşım Tercihi: {transport_choice}</span>
           </div>
           <div className={styles.travelInfo}>
-            <span>{new Date(journey_date).toLocaleDateString()} {journey_time ? journey_time.substring(11, 16) : ''}</span>
+            <span>{journey_date} {journey_time ? journey_time.substring(11, 16) : ''}</span>
           </div>
         </div>
         <div>
