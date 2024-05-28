@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import styles from "./advertSection.module.css";
-import Menu from '../menu/Menu';
 import axiosInstance from '@/utils/axiosInstance';
+import Menu from '../menu/Menu';
 
 const AdvertSection = ({ advert }) => {
 
