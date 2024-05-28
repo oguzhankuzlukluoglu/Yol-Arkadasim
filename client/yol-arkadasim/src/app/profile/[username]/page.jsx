@@ -7,7 +7,6 @@ import styles from "./profilePage.module.css"
 import AdvertSection from "@/components/advertSection/AdvertSection";
 import ProfileUpdate from "@/components/updateProfile/ProfileUpdate";
 import UpdateInterest from "@/components/updateInterest/UpdateInterest";
-import Menu from "@/components/menu/Menu";
 import { jwtDecode } from "jwt-decode";
 import axiosInstance from "@/utils/axiosInstance";
 import UpdateComment from "@/components/updateComment/UpdateComment";
