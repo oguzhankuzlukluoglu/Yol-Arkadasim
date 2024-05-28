@@ -5,7 +5,9 @@
     padding: 20px 10px;
     justify-content: space-around;
     height: 30vh;
-    background-color:  #1f1f1f;
+    background-color:  #0d6efd;
+    color: white;
+    border-top: 10px solid rgba(0, 0, 0, 0.38);
 }
 .popular, .routes, .about, .socials{
     display: flex;
@@ -54,7 +56,8 @@
 .company{
     display: flex;
     gap: 4px;
-    background-color: gray;
+    background-color: #0d6efd;
+    color: white;
     padding: 2px;
 }
 .company span{

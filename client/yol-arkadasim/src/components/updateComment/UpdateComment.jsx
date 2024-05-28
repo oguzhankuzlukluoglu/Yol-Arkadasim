@@ -2,11 +2,12 @@
 import Image from 'next/image';
 import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap';
-import styles from "./updateInterest.module.css"
+import styles from "./updateComment.module.css"
 import axiosInstance from '@/utils/axiosInstance';
-const UpdateInterest = ({username,userData,setUserData}) => {
+
+const UpdateComment = ({username,userData,setUserData}) => {
   const [show, setShow] = useState(false);
-  const [formData, setFormData] = useState({ İlgiAlanı: "" });
+  const [formData, setFormData] = useState({ Yorum: "" });
 
 
   const handleClose = () => setShow(false);
@@ -18,20 +19,21 @@ const UpdateInterest = ({username,userData,setUserData}) => {
       console.log(userData)
   };
 
-  const handleAddInterest = async (e) => {
+  const handleAddComment = async (e) => {
     e.preventDefault();
-    const updatedInterests = userData.interests ? [...userData.interests, formData.İlgiAlanı] : [formData.İlgiAlanı];
+    const updatedComments = userData.comments ? [...userData.comments, formData.Yorum] : [formData.Yorum];
+  
     try {
       const response = await axiosInstance.put(`http://localhost:8080/user/update_profile`, {
         ...userData,
-        interests: updatedInterests
+        comments: updatedComments
       });
       console.log(response.data.profile);
       setUserData(response.data.profile);  // Update the user data with the new interests
-      setFormData({ İlgiAlanı: "" });
+      setFormData({ Yorum: "" });
       setShow(false);
     } catch (error) {
-      console.error("Error adding interest:", error);
+      console.error("Error adding comments:", error);
     } finally {
       setShow(false);
     }
@@ -54,17 +56,17 @@ const UpdateInterest = ({username,userData,setUserData}) => {
         dialogClassName={styles.modalDialog}
       >
         <Modal.Header closeButton>
-          <Modal.Title>İlgi Alanı Ekle</Modal.Title>
+          <Modal.Title>Yorum Ekle</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className={styles.container}>
             <div className={styles.interest}>
-              <label htmlFor="interests">İlgi Alanı</label>
+              <label htmlFor="comments">Yorum</label>
               <input
                 type="text"
-                id="interests"
-                name="İlgiAlanı"
-                value={formData.İlgiAlanı}
+                id="comments"
+                name="Yorum"
+                value={formData.Yorum}
                 onChange={handleInputChange}
               />
         
@@ -75,7 +77,7 @@ const UpdateInterest = ({username,userData,setUserData}) => {
           <Button variant="secondary" onClick={handleClose}>
             Kapat
           </Button>
-          <Button variant="primary" onClick={handleAddInterest}>
+          <Button variant="primary" onClick={handleAddComment}>
             Kaydet
           </Button>
         </Modal.Footer>
@@ -84,4 +86,4 @@ const UpdateInterest = ({username,userData,setUserData}) => {
   )
 }
 
-export default UpdateInterest
+export default UpdateComment

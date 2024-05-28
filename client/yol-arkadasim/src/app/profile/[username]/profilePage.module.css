@@ -142,13 +142,10 @@
     animation: fadeIn 1s ease-in-out forwards;
     animation-delay: calc(var(--index) * 0.2s);
 }
-.memorySection > .memoryDesc > .desc{
+.memorySection > .memoryDesc > span{
     border: 1px solid black;
     padding: 10px;
     box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.5);
-}
-
-.memorySection > .memoryDesc > .desc> p{
     width: 250px;
     height: 250px;
     text-align: left;
