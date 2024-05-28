@@ -24,17 +24,9 @@ const AdvertPage = () => {
   });
 
 
-  const fetchAdverts = async (page = 1, filters = {}) => {
+  const fetchAdverts = async () => {
     try {
-      const response = await axiosInstance.get("/get-all-adverts", {
-        params: {
-          page,
-          from: filters.from,
-          to: filters.to,
-          date: filters.date,
-          limit: 3
-        }
-      });
+      const response = await axiosInstance.get("/filter");
       console.log(response)
       setAdverts(response.data.adverts);
       setTotalPages(response.data.totalPages);

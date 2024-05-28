@@ -1,0 +1,22 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.add{
+    cursor: pointer; 
+    margin-right: 4px;
+}
+
+.interest label{
+    min-width: 80px;
+}
+
+.interest input{
+    outline:none;
+    padding-left: 8px;
+}

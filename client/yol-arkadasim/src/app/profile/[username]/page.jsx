@@ -10,6 +10,7 @@ import UpdateInterest from "@/components/updateInterest/UpdateInterest";
 import Menu from "@/components/menu/Menu";
 import { jwtDecode } from "jwt-decode";
 import axiosInstance from "@/utils/axiosInstance";
+import UpdateComment from "@/components/updateComment/UpdateComment";
 
 const ProfilePage = () => {
   const [username, setUsername] = useState(useParams().username)
@@ -22,6 +23,7 @@ const ProfilePage = () => {
         try {
           const response = await axios.get(`http://localhost:8080/profile/${username}`);
           setUserData(response.data.profile);
+          console.log(userData)
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
@@ -32,6 +34,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (username) {
+      console.log(userData)
       const fetchUserAdverts = async () => {
         try {
           const response = await axiosInstance.get(`http://localhost:8080/adverts/${username}`);
@@ -51,7 +54,7 @@ const ProfilePage = () => {
   }
 
   const { name, surname, about, location, interests, comments, profile_picture } = userData;
-
+  console.log(userData)
   const getUserIdFromToken = (token) => {
     try {
       const decodedToken = jwtDecode(token);
@@ -101,7 +104,7 @@ const ProfilePage = () => {
             </span>
                 ))}
             {userData.id === controluserId &&      
-           <Menu type="interest"/>
+            <UpdateInterest username={username} userData={userData} setUserData={setUserData} />
             }
         </div>
       </div>
@@ -113,7 +116,7 @@ const ProfilePage = () => {
                   <span key={index}>{comment}</span>
               ))}
           {userData.id === controluserId && 
-          <Menu type="comment"/>
+          <UpdateComment username={username} userData={userData} setUserData={setUserData}/>
           }
         </div>
       </div>
