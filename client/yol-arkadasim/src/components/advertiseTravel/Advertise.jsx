@@ -1,22 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Alert, Form } from "react-bootstrap";
 import styles from "./advertise.module.css";
 import Where from "../Where/Where";
 import DatePicker from "../datepicker/DatePicker";
 import TimePicker from "../datepicker/TimePicker";
+import axiosInstance from "@/utils/axiosInstance";
 
 const Advertise = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [formData, setFormData] = useState({
-    from: "",
-    to: "",
-    date: "",
-    time: "",
-    transportation: "",
-    phone: "",
-    description: "",
+    From: "",
+    To: "",
+    journey_date: "",
+    journey_time: "",
+    transport_choice: "",
+    phone_number: "",
+    journey_description: "",
   });
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -28,6 +34,41 @@ const Advertise = () => {
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleWhereChange = (type, value) => {
+    console.log("Type:", type, "Value:", value);
+    setFormData({
+      ...formData,
+      [type === "from" ? "From" : "To"]: value,
+    });
+  };
+
+  const handleDateChange = (date) => {
+    setFormData({
+      ...formData,
+      journey_date: date,
+    });
+  };
+
+  const handleTimeChange = (time) => {
+    setFormData({
+      ...formData,
+      journey_time: time,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      const response = await axiosInstance.post("/create/advert", formData);
+      console.log(response);
+      console.log("Advert created successfully:", response.data);
+      setShowAlert(true);
+    } catch (error) {
+      console.error("Error creating advert:", error);
+    } finally {
+      handleClose();
+    }
   };
 
   return (
@@ -45,41 +86,41 @@ const Advertise = () => {
               <div className={styles.advertInfos}>
                 <div className={styles.route}>
                   <div className={styles.from}>
-                    <Where type="from" />
+                    <Where type="from" width="advert" value={formData.From} onChange={handleWhereChange} />
                   </div>
                   <div className={styles.to}>
-                    <Where type="to" />
+                    <Where type="to" width="advert" value={formData.To} onChange={handleWhereChange} />
                   </div>
                 </div>
                 <div className={styles.time}>
                   <div className={styles.date}>
-                    <label htmlFor="date">Tarih</label>
-                    <DatePicker/>
+                    <label htmlFor="JourneyDate">Tarih</label>
+                    <DatePicker selected={formData.journey_date} onChange={handleDateChange} />
                   </div>
                   <div className={styles.clock}>
-                    <label htmlFor="time">Saat</label>
-                    <TimePicker/>
+                    <label htmlFor="JourneyTime">Saat</label>
+                    <TimePicker selected={formData.journey_time} onChange={handleTimeChange} />
                   </div>
                 </div>
                 <div className={styles.information}>
                   <div className={styles.transport}>
-                    <label htmlFor="transportation">Ulaşım yolu</label>
+                    <label htmlFor="transport_choice">Ulaşım yolu</label>
                     <input
                       type="text"
-                      id="transportation"
-                      name="transportation"
+                      id="transport_choice"
+                      name="transport_choice"
                       placeholder="araba vs."
-                      value={formData.transportation}
+                      value={formData.transport_choice}
                       onChange={handleInputChange}
                     />
                   </div>
                   <div className={styles.tel}>
-                    <label htmlFor="phone">Telefon</label>
+                    <label htmlFor="phone_number">Telefon</label>
                     <input
                       type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
+                      id="phone_number"
+                      name="phone_number"
+                      value={formData.phone_number}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -88,13 +129,13 @@ const Advertise = () => {
               <div className={styles.routeInfos}>
                 <div className={styles.desc}>
                   <div className={styles.routeDesc}>
-                    <label htmlFor="description">Açıklama</label>
+                    <label htmlFor="journey_description">Açıklama</label>
                     <textarea
-                      id="description"
-                      name="description"
+                      id="journey_description"
+                      name="journey_description"
                       cols="30"
                       rows="8"
-                      value={formData.description}
+                      value={formData.journey_description}
                       onChange={handleInputChange}
                     ></textarea>
                   </div>
@@ -107,13 +148,14 @@ const Advertise = () => {
           <Button variant="secondary" onClick={handleClose}>
             Kapat
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleSubmit}>
             Kaydet
           </Button>
         </Modal.Footer>
       </Modal>
+      {showAlert && <Alert variant="success">İlan başarıyla oluşturuldu!</Alert>}
     </>
   );
 };
 
-export default Advertise;
+export default Advertise;

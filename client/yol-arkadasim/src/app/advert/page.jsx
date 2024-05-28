@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import styles from "./advertPage.module.css";
 import Link from "next/link";
 import Advertise from "@/components/advertiseTravel/Advertise";
@@ -9,8 +10,54 @@ import DatePicker from "@/components/datepicker/DatePicker";
 import Writer from "@/components/typeWriter/Writer";
 import Pagination from "@/components/pagination/Pagination";
 import AdvertSection from "@/components/advertSection/AdvertSection";
+import axiosInstance from "@/utils/axiosInstance";
 
-const advertPage = () => {
+const AdvertPage = () => {
+
+  const [adverts, setAdverts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [filters, setFilters] = useState({
+    from: "",
+    to: "",
+    date: ""
+  });
+
+
+  const fetchAdverts = async (page = 1, filters = {}) => {
+    try {
+      const response = await axiosInstance.get("/get-all-adverts", {
+        params: {
+          page,
+          from: filters.from,
+          to: filters.to,
+          date: filters.date,
+          limit: 3
+        }
+      });
+      console.log(response)
+      setAdverts(response.data.adverts);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error("Error fetching adverts:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAdverts(currentPage, filters);
+  }, [currentPage, filters]);
+
+  const handleSearch = () => {
+    setCurrentPage(1);
+    fetchAdverts(1, filters);
+  };
+
+  const handlePageChange = (direction) => {
+    const newPage = direction === "next" ? currentPage + 1 : currentPage - 1;
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
   
   return (
     <div className={styles.container}>
@@ -24,7 +71,7 @@ const advertPage = () => {
                 width={28}
                 height={26}
               />
-              <Where type="from" width="advert" />
+              <Where type="from" width="noadvert" onChange={(value) => setFilters(prev => ({ ...prev, from: value }))} />
             </div>
             <div className={styles.to}>
               <Image
@@ -33,28 +80,27 @@ const advertPage = () => {
                 width={28}
                 height={26}
               />
-              <Where type="to" width="advert" />
+              <Where type="to" width="noadvert" onChange={(value) => setFilters(prev => ({ ...prev, to: value }))} />
             </div>
             <div className={styles.date}>
               <Image alt="date" src="/date.png" width={32} height={26} />
               <label>Tarih</label>
-              <DatePicker width="advert" />
+              <DatePicker width="advert" onChange={(value) => setFilters(prev => ({ ...prev, date: value }))} />
             </div>
           </div>
 
           <div className={styles.searchButton}>
-            <Button variant="primary">İlan Ara</Button>
+            <Button variant="primary" onClick={handleSearch}>İlan Ara</Button>
           </div>
         </div>
 
         <div className={styles.advertPage}>
           <div className={styles.adverts}>
             <h1>Aktif İlanlar</h1>
-            <AdvertSection/>
-            <AdvertSection/>
-            <AdvertSection/>
-            
-            <Pagination/>
+            {adverts.map(advert => (
+              <AdvertSection key={advert.id} advert={advert} />
+            ))}
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
           </div>
 
           <div className={styles.ingredient}>
@@ -75,4 +121,4 @@ const advertPage = () => {
   );
 };
 
-export default advertPage;
+export default AdvertPage;

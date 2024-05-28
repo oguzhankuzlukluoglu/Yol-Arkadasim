@@ -1,20 +1,33 @@
 "use client"
-import React, { useState } from 'react'
-import ReactDatePicker from 'react-datepicker'
+import React, { useState, useEffect } from 'react';
+import ReactDatePicker from 'react-datepicker';
 
-const TimePicker = () => {
-    const [startTime,setStartTime] = useState(new Date());
-  return (
-    <div>
-        <ReactDatePicker
-            selected={startTime}
-            onChange={date => setStartTime(date)}
-            showTimeInput
-            dateFormat="HH:mm"
-            timeInputLabel="Time:"
-            customInput={<input />}/>
-    </div>
-  )
-}
+const TimePicker = ({ value, onChange }) => {
+    const [startTime, setStartTime] = useState(value);
 
-export default TimePicker
+    useEffect(() => {
+        setStartTime(value);
+    }, [value]);
+
+    const handleChange = (time) => {
+        setStartTime(time);
+        onChange(time);
+    };
+
+    return (
+        <div>
+            <ReactDatePicker
+                selected={startTime}
+                onChange={handleChange}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="HH:mm"
+                customInput={<input />}
+            />
+        </div>
+    );
+};
+
+export default TimePicker;

@@ -15,6 +15,7 @@
 
 .whereInput{
     display: flex;
+    align-items: center;
 }
 
 .whereInput > .whereLabel{
@@ -23,25 +24,24 @@
 }
 
 .whereInput > .advertLabel{
-    padding: 8px 2px;
-    min-width: 85px;
+    padding: 3px;
+    min-width: 94px;
+    height: 30px;
 }
 
-.whereInput > .advertInput{
-    border-radius: 20px;
-    border: none;
+.whereInput > .advertInput {
     outline: none;
-    height: 40px;
-    width: 140px;
+    height: 32px;
+    width: 225.2px;
     padding-left: 10px;
 }
 
 .whereInput > .whereInputSelect {
     outline: none;
-    padding-left: 6px;
-    border-radius: 0;
+    border-radius: 20px;
     border: 1px solid black;
-    
+    border: none; /* Border kaldırıldı */
+    height: 40px;
 }
 
 .scrollContainer {

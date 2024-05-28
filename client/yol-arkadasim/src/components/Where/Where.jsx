@@ -3,9 +3,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./where.module.css";
 import { iller } from "@/datas/İller";
 
-const Where = ({ type ,width}) => {
-
-  const [il, setIl] = useState("");
+const Where = ({ type, width, value, onChange }) => {
+  const [il, setIl] = useState(value || "");
   const [goster, setGoster] = useState(false);
   const [seciliIndex, setSeciliIndex] = useState(0);
   const scrollRef = useRef(null);
@@ -20,14 +19,13 @@ const Where = ({ type ,width}) => {
             .replace(/i/g, "ı")
             .includes(il.toLocaleLowerCase().replace(/i/g, "ı")),
         setSeciliIndex(0),
-
       ),
     [il]
   );
 
   // otomatik scroll özelliği
   useEffect(() => {
-    if (scrollRef.current + 10) {
+    if (scrollRef.current) {
       scrollRef.current.scrollTop = seciliIndex * 18;
     }
   }, [seciliIndex]);
@@ -42,10 +40,8 @@ const Where = ({ type ,width}) => {
       } else if (e.key === "Enter") {
         if (iller.includes(filtrelenmisIller[seciliIndex])) {
           setIl(filtrelenmisIller[seciliIndex]);
+          onChange(type, filtrelenmisIller[seciliIndex]); // Seçilen değeri geri bildir
         }
-        // if (type === "from") {
-        //   document.getElementById("to").value = "";
-        // }
         setGoster(false);
       } else if (e.key === "Escape") {
         setGoster(false);
@@ -66,7 +62,7 @@ const Where = ({ type ,width}) => {
       document.removeEventListener("keydown", handleKeyPress);
       document.removeEventListener("mousedown", handleClick);
     };
-  }, [seciliIndex, filtrelenmisIller, type]);
+  }, [seciliIndex, filtrelenmisIller, type, onChange]);
 
   // input içeriğini dinamik olarak günceller
   const handleChange = (e) => {
@@ -77,14 +73,17 @@ const Where = ({ type ,width}) => {
   // il seçme işlemini yapar
   const handleChoose = (il) => {
     setIl(il);
+    onChange(type, il); // Seçilen değeri geri bildir
     setGoster(false);
   };
 
   return (
-    <div className={width === "advert" ? styles.advertContainer : styles.whereContainer}>
+    <div className={width === "noadvert" ? styles.advertContainer : styles.whereContainer}>
       <div className={styles.whereInput}>
-        <label className={width==="advert" ? styles.advertLabel : styles.whereLabel} htmlFor={type}>{type === "from" ? "Nereden" : "Nereye"}</label>
-        <input className={width==="advert" ? styles.advertInput : styles.whereInputSelect} type="text" name="" id={type} value={il} onChange={handleChange} />
+        <label className={width === "advert" ? styles.advertLabel : styles.whereLabel} htmlFor={type}>
+          {type === "from" ? "Nereden" : "Nereye"}
+        </label>
+        <input className={width === "advert" ? styles.advertInput : styles.whereInputSelect} type="text" id={type} value={il} onChange={handleChange} />
       </div>
       <div className={styles.scrollContainer} ref={scrollRef}>
         {goster &&
@@ -93,7 +92,6 @@ const Where = ({ type ,width}) => {
               className={index === seciliIndex ? styles.selected : ""}
               onClick={() => handleChoose(il)}
               key={il}
-              value={il}
             >
               {il}
             </p>
