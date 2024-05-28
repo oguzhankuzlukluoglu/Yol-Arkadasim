@@ -1,5 +1,3 @@
-// models/advermodel.go
-
 package models
 
 import (
@@ -31,13 +29,22 @@ const iso8601Format = time.RFC3339
 
 func (cd *CustomDate) UnmarshalJSON(b []byte) error {
 	s := string(b)
-	parsedTime, err := time.Parse(`"`+customDateFormat+`"`, s)
+	var parsedTime time.Time
+	var err error
+
+	// Remove surrounding quotes from the JSON string
+	s = s[1 : len(s)-1]
+
+	// Try custom date format first
+	parsedTime, err = time.Parse(customDateFormat, s)
 	if err != nil {
-		parsedTime, err = time.Parse(`"`+iso8601Format+`"`, s)
+		// Fallback to ISO 8601 format if custom format fails
+		parsedTime, err = time.Parse(iso8601Format, s)
 		if err != nil {
 			return err
 		}
 	}
+
 	cd.Time = parsedTime
 	return nil
 }
