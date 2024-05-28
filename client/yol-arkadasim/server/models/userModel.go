@@ -32,9 +32,9 @@ type User struct {
 
 // UpdateableUser struct contains fields that can be updated by the user after login
 type UpdateableUser struct {
-	Name              *string    `json:"name"`
-	Surname           *string    `json:"surname"`
-	Username          *string    `json:"username"`
+	Name              string    `json:"name"`
+	Surname           string    `json:"surname"`
+	Username          string    `json:"username"`
 	DateOfBirth       *time.Time `json:"date_of_birth"`
 	Phone             *string    `json:"phone"`
 	Location          *string    `json:"location"`

@@ -6,6 +6,7 @@ import (
 	"time"
 	"yol-arkadasim/database"
 	"yol-arkadasim/models"
+	"yol-arkadasim/utils"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
@@ -81,15 +82,13 @@ func UpdateUserProfileHandler(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 		return
 	}
-	if updateUser.Name != nil {
-		existingUser.Name = updateUser.Name
-	}
-	if updateUser.Surname != nil {
-		existingUser.Surname = updateUser.Surname
-	}
-	if updateUser.Username != nil {
-		existingUser.Username = updateUser.Username
-	}
+
+	existingUser.Name = &updateUser.Name
+
+	existingUser.Surname = &updateUser.Surname
+
+	existingUser.Username = &updateUser.Username
+
 	if updateUser.DateOfBirth != nil {
 		existingUser.DateOfBirth = updateUser.DateOfBirth
 	}
@@ -134,37 +133,11 @@ func UpdateUserProfileHandler(c *gin.Context) {
 	if existingProfile == nil {
 		existingProfile = &models.Profile{UserID: existingUser.ID}
 	}
-	if updateUser.Name != nil {
-		existingProfile.Name = updateUser.Name
+	err = utils.DtoToJson(updateUser, existingProfile)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Convert error"})
+		return
 	}
-	if updateUser.Surname != nil {
-		existingProfile.Surname = updateUser.Surname
-	}
-	if updateUser.Phone != nil {
-		existingProfile.Phone = updateUser.Phone
-	}
-	if updateUser.Location != nil {
-		existingProfile.Location = updateUser.Location
-	}
-	if updateUser.Interests != nil {
-		existingProfile.Interests = updateUser.Interests
-	}
-	if updateUser.About != nil {
-		existingProfile.About = updateUser.About
-	}
-	if updateUser.TravelPreferences != nil {
-		existingProfile.TravelPreferences = updateUser.TravelPreferences
-	}
-	if updateUser.ProfilePicture != nil {
-		existingProfile.ProfilePicture = updateUser.ProfilePicture
-	}
-	if updateUser.TravelPhotos != nil {
-		existingProfile.TravelPhotos = updateUser.TravelPhotos
-	}
-	if updateUser.Comments != nil {
-		existingProfile.Comments = updateUser.Comments
-	}
-
 	err = existingProfile.SaveToMongoDB(database.GetMongoClient(), "mydatabase", "profiles")
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
@@ -352,7 +325,7 @@ func GetCommentsByUsername(c *gin.Context) {
 	userResponse1 := UserResponse1{
 		Comments: user.Comments,
 	}
-	c.JSON(http.StatusOK, gin.H{"userComments": userResponse1})
+	c.JSON(http.StatusOK, userResponse1)
 }
 func GetInterestsByUsername(c *gin.Context) {
 	username := c.Param("username")
