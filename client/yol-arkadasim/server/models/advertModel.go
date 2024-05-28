@@ -21,17 +21,22 @@ type AdvertModel struct {
 	PhoneNumber        *string            `bson:"phone_number" json:"phone_number"`
 	JourneyDescription *string            `bson:"journey_description" json:"journey_description"`
 }
+
 type CustomDate struct {
 	time.Time
 }
 
 const customDateFormat = "02.01.2006"
+const iso8601Format = time.RFC3339
 
 func (cd *CustomDate) UnmarshalJSON(b []byte) error {
 	s := string(b)
 	parsedTime, err := time.Parse(`"`+customDateFormat+`"`, s)
 	if err != nil {
-		return err
+		parsedTime, err = time.Parse(`"`+iso8601Format+`"`, s)
+		if err != nil {
+			return err
+		}
 	}
 	cd.Time = parsedTime
 	return nil
