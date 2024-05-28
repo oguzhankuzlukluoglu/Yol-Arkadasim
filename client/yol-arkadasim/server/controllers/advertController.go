@@ -161,7 +161,7 @@ func GetAllAdvertsHandler(c *gin.Context) {
 	for cursor.Next(context.Background()) {
 		var advert models.AdvertModel
 		if err := cursor.Decode(&advert); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error 3","message":err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error 3", "message": err.Error()})
 			return
 		}
 		adverts = append(adverts, advert)
