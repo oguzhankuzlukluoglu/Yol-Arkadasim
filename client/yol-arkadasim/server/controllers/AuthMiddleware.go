@@ -35,7 +35,7 @@ func AuthMiddleware(c *gin.Context) {
 	}
 
 	token, err := jwt.ParseWithClaims(tokenString, &utils.Claims{}, func(token *jwt.Token) (interface{}, error) {
-		return utils.JWTKey, nil // Token anahtarını utils paketinden al
+		return utils.JWTKey, nil
 	})
 	if err != nil || !token.Valid {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Geçersiz token"})

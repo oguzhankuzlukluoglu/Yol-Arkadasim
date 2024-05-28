@@ -321,3 +321,56 @@ func GetAdvertsByUserIDHandler(c *gin.Context) {
 	// Sonuçları JSON formatında yanıtlayın
 	c.JSON(http.StatusOK, gin.H{"adverts": adverts})
 }
+func GetFilteredAdvertsHandler(c *gin.Context) {
+	from := c.Query("from")
+	to := c.Query("to")
+	advertDateStr := c.Query("advertDate")
+
+	var advertDate time.Time
+	var err error
+	if advertDateStr != "" {
+		advertDate, err = time.Parse("02.01.2006", advertDateStr)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid advertDate format. Use DD.MM.YYYY"})
+			return
+		}
+	}
+
+	client := database.GetMongoClient()
+	collection := client.Database("mydatabase").Collection("adverts")
+
+	filter := bson.M{}
+	if from != "" {
+		filter["from"] = from
+	}
+	if to != "" {
+		filter["to"] = to
+	}
+	if !advertDate.IsZero() {
+		filter["journey_date"] = advertDate
+	}
+
+	cursor, err := collection.Find(context.Background(), filter)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+	defer cursor.Close(context.Background())
+
+	var adverts []models.AdvertModel
+	for cursor.Next(context.Background()) {
+		var advert models.AdvertModel
+		if err := cursor.Decode(&advert); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+			return
+		}
+		adverts = append(adverts, advert)
+	}
+
+	if err := cursor.Err(); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"adverts": adverts})
+}

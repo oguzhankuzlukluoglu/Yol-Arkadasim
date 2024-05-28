@@ -46,6 +46,8 @@ func main() {
 	router.PUT("/user/update_profile", controllers.AuthMiddleware, controllers.UpdateUserProfileHandler)
 	router.GET("/comments/:username", controllers.GetCommentsByUsername)
 	router.GET("/interests/:username", controllers.GetInterestsByUsername)
+	router.GET("/comments", controllers.GetAllComments)
+	router.GET("/filter", controllers.GetFilteredAdvertsHandler)
 
 	router.GET("/profile/:username", controllers.GetUserProfileByUsernameHandler)
 
