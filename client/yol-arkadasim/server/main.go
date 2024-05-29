@@ -48,6 +48,7 @@ func main() {
 	router.GET("/interests/:username", controllers.GetInterestsByUsername)
 	router.GET("/comments", controllers.GetAllComments)
 	router.GET("/filter", controllers.GetFilteredAdvertsHandler)
+	router.GET("/advert/:advert_id", controllers.GetAdvertByIDHandler)
 
 	router.GET("/profile/:username", controllers.GetUserProfileByUsernameHandler)
 

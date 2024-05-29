@@ -12,6 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
@@ -395,4 +396,40 @@ func GetFilteredAdvertsHandler(c *gin.Context) {
 
 	// Sayfalama verilerini JSON formatında yanıtla
 	c.JSON(http.StatusOK, gin.H{"adverts": adverts, "totalAdverts": totalAdverts})
+}
+
+// GetAdvertByIDHandler fetches advert details by advert ID.
+func GetAdvertByIDHandler(c *gin.Context) {
+	// Get the advert ID from the URL parameter
+	advertIDParam := c.Param("advert_id")
+	if advertIDParam == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Advert ID is required"})
+		return
+	}
+
+	// Convert advert ID to ObjectID type
+	advertID, err := primitive.ObjectIDFromHex(advertIDParam)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Advert ID"})
+		return
+	}
+
+	// Get the database connection
+	client := database.GetMongoClient()
+	collection := client.Database("mydatabase").Collection("adverts")
+
+	// Find the advert by its ID
+	var advert models.AdvertModel
+	err = collection.FindOne(context.Background(), bson.M{"advert_id": advertID}).Decode(&advert)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Advert not found"})
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		}
+		return
+	}
+
+	// Return the advert details as JSON
+	c.JSON(http.StatusOK, gin.H{"advert": advert})
 }
