@@ -5,13 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import axiosInstance from "@/utils/axiosInstance";
+import { Alert } from "react-bootstrap";
+import { useRouter } from "next/navigation";
+import Error from "next/error";
 
 const Login = () => {
+  const [showAlert,setShowAlert] = useState(false)
+  const [showError,setShowError] = useState(false)
 
   const [data,setData] = useState({
     Username:"",
     Password:""
   })
+
+  const router = useRouter()
 
   const handleChange = (e) => {
     const {id , value} = e.target;
@@ -31,9 +38,14 @@ const Login = () => {
 
     try {
       const response = await axiosInstance.post("/login", user);
-      localStorage.setItem("id", response.data.id);
-      localStorage.setItem("token", response.data.token); // Token'ı localStorage'a kaydet
+      if(response.status === 200){
+        setShowAlert(true)
+        localStorage.setItem("id", response.data.id);
+        localStorage.setItem("token", response.data.token); // Token'ı localStorage'a kaydet
+        router.push("/")
+      }
     } catch (err) {
+      setShowError(true)
       console.error(err);
     }
   }
@@ -47,7 +59,7 @@ const Login = () => {
         <h1>Giriş Yap</h1>
         <div className={styles.loginForm}>
           <div className={styles.FormInfo}>
-            <label htmlFor="Username">Username</label>
+            <label htmlFor="Username">Kullanıcı Adı</label>
             <input type="text" name="" id="Username" autoFocus onChange={handleChange} />
           </div>
           <div className={styles.FormInfo}>
@@ -62,18 +74,8 @@ const Login = () => {
           <span>bir hesabın yok mu ?</span>
           <Link href="/register">Kayıt Ol</Link>
         </div>
-        <div className={styles.or}>
-          <span> - ya da -</span>
-        </div>
-        <div className={styles.GoogleSection}>
-          <Link href="/" className={styles.googleWrap}>
-            <div href="/" className={styles.GoogleLink}>
-              <Image alt="google" src="/google.png" width={32} height={32} />
-              <span>Google</span>
-            </div>
-            <span>ile giriş yap</span>
-          </Link>
-        </div>
+      {showAlert && <Alert variant="success">Giriş Başarılı </Alert>}
+      {showError && <Alert variant="danger">Tekrar deneyin!</Alert>}  
       </form>
     </div>
   );

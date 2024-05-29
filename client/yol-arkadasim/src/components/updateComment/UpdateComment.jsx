@@ -28,8 +28,8 @@ const UpdateComment = ({username,userData,setUserData}) => {
         ...userData,
         comments: updatedComments
       });
-      console.log(response.data.profile);
-      setUserData(response.data.profile);  // Update the user data with the new interests
+      console.log(response);
+      setUserData(response.data.updated_user);  // Update the user data with the new interests
       setFormData({ Yorum: "" });
       setShow(false);
     } catch (error) {

@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarSection from "@/components/navbar/NavbarSection";
 
 export const metadata = {
-  title: "Yol Arkaşım",
+  title: "Yol Arkadaşım",
   description: "Yol Arkadaşıma Hoşgeldin!",
 };
 

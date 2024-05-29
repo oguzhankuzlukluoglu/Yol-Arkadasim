@@ -108,6 +108,8 @@
   align-items: center;
   height: 40vh;
 }
+
+
 .whereTitle {
   max-width: 320px;
   font-size: 30px;
@@ -122,6 +124,20 @@
   height: 20vh;
   gap: 10px;
   padding: 20px 0 0;
+}
+.chooseAdvert{
+  display: flex;
+    padding: 20px 0;
+    gap: 10px;
+    height: 20vh;
+    align-items: center;
+    justify-content: space-between;
+    width: 440px;
+}
+.chooseAdvert > p{
+  font-size: 24px;
+  padding: 10px;
+  font-family: sans-serif;
 }
 
 .buton {
@@ -203,7 +219,7 @@
   height: 20vh;
   align-items: center;
   justify-content: space-between;
-  width: 440px;
+  width: 530px;
 }
 
 .findAdvertTitle {
@@ -211,7 +227,7 @@
   height: 20vh;
   padding: 20px 0;
   font-size: 30px;
-  max-width: 263px;
+  width: 320px;
 }
 
 .createAdvert .name {

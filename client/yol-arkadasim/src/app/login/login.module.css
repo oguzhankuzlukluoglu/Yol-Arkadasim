@@ -41,6 +41,7 @@
     flex-direction: column;
     align-items: start;
     gap: 4px;
+    width: 200px;
 }
 .FormInfo > label{
     font-family: sans-serif;

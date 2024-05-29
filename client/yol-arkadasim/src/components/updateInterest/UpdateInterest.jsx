@@ -4,10 +4,11 @@ import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import styles from "./updateInterest.module.css"
 import axiosInstance from '@/utils/axiosInstance';
+import { useRouter } from 'next/navigation';
 const UpdateInterest = ({username,userData,setUserData}) => {
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({ İlgiAlanı: "" });
-
+  const route = useRouter()
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -26,10 +27,14 @@ const UpdateInterest = ({username,userData,setUserData}) => {
         ...userData,
         interests: updatedInterests
       });
-      console.log(response.data.profile);
-      setUserData(response.data.profile);  // Update the user data with the new interests
-      setFormData({ İlgiAlanı: "" });
-      setShow(false);
+      console.log(response.data.updated_user);
+      if(response.status === 200){
+        setUserData(response.data.updated_user);  // Update the user data with the new interests
+        setFormData({ İlgiAlanı: "" });
+        setShow(false);
+        route.refresh()
+      }
+      
     } catch (error) {
       console.error("Error adding interest:", error);
     } finally {

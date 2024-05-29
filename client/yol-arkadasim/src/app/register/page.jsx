@@ -4,8 +4,12 @@ import React, { useState } from "react";
 import styles from "./register.module.css";
 import Image from "next/image";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { Alert } from "react-bootstrap";
 
 const Register = () => {
+  const [showAlert,setShowAlert] = useState(false)
+  const [showError,setShowError] = useState(false)
 
   const [data,setData] = useState({
     Name:"",
@@ -16,6 +20,8 @@ const Register = () => {
     PasswordAgain:"",
     Phone:""
   })
+
+  const router = useRouter()
 
 
   const handleChange = (e) => {
@@ -44,9 +50,14 @@ const Register = () => {
 
   try{
     const response = await axios.post("http://localhost:8080/register",user);
+    if(response.status === 200){
+      setShowAlert(true)
+      router.push("/login")
+    }
     console.log(response.data)
   }catch (err){
-    console.error(err)
+    setShowError(true)
+    console.error()
   }}
   return (
     <div className={styles.container}>
@@ -97,18 +108,8 @@ const Register = () => {
           <span>bir hesabın var mı?</span>
           <Link href="/login">giriş yap</Link>
         </div>
-        <div className={styles.or}>
-          <span> - ya da -</span>
-        </div>
-        <div className={styles.GoogleSection}>
-          <Link href="/" className={styles.googleWrap}>
-            <div className={styles.GoogleLink}>
-              <Image alt="google" src="/google.png" width={32} height={32} />
-              <span>Google</span>
-            </div>
-            <span>ile kayıt ol</span>
-          </Link>
-        </div>
+        {showAlert && <Alert variant="success">Kayıt Başarılı </Alert>}
+        {showError && <Alert variant="danger">Tekrar deneyin!</Alert>}
       </div>
     </div>
   );

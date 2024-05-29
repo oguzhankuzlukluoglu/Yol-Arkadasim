@@ -22,6 +22,7 @@ const NavbarSection = () => {
   }, []);
 
   const handleProfileClick = async () => {
+
     try {
       const id = localStorage.getItem("id");
       const headers = id ? { "id": `${id}` } : {};
@@ -76,31 +77,23 @@ const NavbarSection = () => {
                   <Nav.Link href="/">Ana Sayfa</Nav.Link>
                   <Nav.Link href="/advert">İlanlar</Nav.Link>
                   <Nav.Link href="/about">Hakkımızda</Nav.Link>
-                  {isLoggedIn ? (
                   <NavDropdown
                     style={{ minWidth: "5rem" }}
                     className={styles.navDrop}
                     title="Profil"
                   >
-                    <NavDropdown.Item
-                      className={styles.dropItem}
-                      onClick={handleProfileClick}
-                    >
-                      Bilgilerim
-                    </NavDropdown.Item>
-                    <NavDropdown.Item className={styles.dropItem}>
-                      <Link href="" onClick={handleLogout}>
-                        Çıkış Yap
-                      </Link>
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                ) : (
-                  <>
-                    <Nav.Link href="/login">Giriş Yap</Nav.Link>
-                    <Nav.Link href="/register">Kayıt Ol</Nav.Link>
-                  </>
-                )}
-                 
+                     <NavDropdown.Item
+                    className={styles.dropItem}
+                    onClick={isLoggedIn ? handleProfileClick : () => router.push('/login')}
+                  >
+                    {isLoggedIn ? "Bilgilerim" : "Giriş Yap"}
+                  </NavDropdown.Item>
+                  <NavDropdown.Item className={styles.dropItem}
+                    onClick={isLoggedIn ? handleLogout : () => router.push('/register')}
+                  >  
+                      {isLoggedIn ? "Çıkış Yap" : "Kayıt Ol"}
+                  </NavDropdown.Item>
+                  </NavDropdown>     
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

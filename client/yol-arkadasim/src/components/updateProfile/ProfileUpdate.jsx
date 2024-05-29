@@ -104,6 +104,7 @@ const ProfileUpdate = ({user}) => {
       };
   
       const response = await axiosInstance.put("/user/update_profile", profileData);
+      console.log(response)
       if (response.status === 200) {
         setShowAlert(true);
         setTimeout(() => setShowAlert(false), 3000);
