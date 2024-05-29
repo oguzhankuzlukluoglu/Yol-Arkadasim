@@ -323,14 +323,14 @@ func GetAdvertsByUserIDHandler(c *gin.Context) {
 func GetFilteredAdvertsHandler(c *gin.Context) {
 	from := c.Query("from")
 	to := c.Query("to")
-	advertDateStr := c.Query("advertDate")
+	journeyDateStr := c.Query("journeyDate")
 
 	var advertDate time.Time
 	var err error
-	if advertDateStr != "" {
-		advertDate, err = time.Parse("02.01.2006", advertDateStr)
+	if journeyDateStr != "" {
+		advertDate, err = time.Parse("02.01.2006", journeyDateStr)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid advertDate format. Use DD.MM.YYYY"})
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid journeyDate format. Use DD.MM.YYYY"})
 			return
 		}
 	}
