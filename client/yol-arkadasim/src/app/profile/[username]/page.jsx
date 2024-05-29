@@ -70,6 +70,7 @@ const ProfilePage = () => {
 
 
   return (
+    
     <div className={styles.container}>
       <div className={styles.userInfos}>
         {/* Profil resmi ve bilgiler */}

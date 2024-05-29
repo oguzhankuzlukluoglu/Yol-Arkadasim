@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import styles from "./advertPage.module.css";
-import Link from "next/link";
 import Advertise from "@/components/advertiseTravel/Advertise";
 import Where from "@/components/Where/Where";
 import Image from "next/image";
@@ -13,22 +12,29 @@ import AdvertSection from "@/components/advertSection/AdvertSection";
 import axiosInstance from "@/utils/axiosInstance";
 
 const AdvertPage = () => {
-
   const [adverts, setAdverts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [filters, setFilters] = useState({
     from: "",
     to: "",
-    date: ""
+    journey_date: ""
   });
 
-
-  const fetchAdverts = async () => {
+  const fetchAdverts = async (page = 1, filters) => {
     try {
-      const response = await axiosInstance.get("/filter");
+      const response = await axiosInstance.get("/filter", {
+        params: {
+          page: page,
+          limit: 3, // Adjust as needed
+          from: filters.from,
+          to: filters.to,
+          journey_date: filters.journey_date,
+        }
+      });
       console.log(response)
       setAdverts(response.data.adverts);
+      console.log(adverts)
       setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error("Error fetching adverts:", error);
@@ -37,6 +43,7 @@ const AdvertPage = () => {
 
   useEffect(() => {
     fetchAdverts(currentPage, filters);
+    console.log(filters)
   }, [currentPage, filters]);
 
   const handleSearch = () => {
@@ -50,8 +57,7 @@ const AdvertPage = () => {
       setCurrentPage(newPage);
     }
   };
-  console.log(adverts)
-  
+
   return (
     <div className={styles.container}>
       <div className={styles.advertContainer}>
@@ -64,7 +70,7 @@ const AdvertPage = () => {
                 width={28}
                 height={26}
               />
-              <Where type="from" width="noadvert" onChange={(value) => setFilters(prev => ({ ...prev, from: value }))} />
+              <Where type="from" width="noadvert" value={filters.from} onChange={(type, value) => setFilters(prev => ({ ...prev, from: value }))}  />
             </div>
             <div className={styles.to}>
               <Image
@@ -73,12 +79,12 @@ const AdvertPage = () => {
                 width={28}
                 height={26}
               />
-              <Where type="to" width="noadvert" onChange={(value) => setFilters(prev => ({ ...prev, to: value }))} />
+              <Where type="to" width="noadvert" value={filters.to} onChange={(type, value) => setFilters(prev => ({ ...prev, to: value }))}  />
             </div>
             <div className={styles.date}>
               <Image alt="date" src="/date.png" width={32} height={26} />
               <label>Tarih</label>
-              <DatePicker width="advert" onChange={(value) => setFilters(prev => ({ ...prev, date: value }))} />
+              <DatePicker width="advert" onChange={(value) => setFilters(prev => ({ ...prev, journey_date: value }))} />
             </div>
           </div>
 
@@ -90,8 +96,8 @@ const AdvertPage = () => {
         <div className={styles.advertPage}>
           <div className={styles.adverts}>
             <h1>Aktif İlanlar</h1>
-            {adverts.map(advert => (
-              <AdvertSection key={advert.id} advert={advert} />
+            {adverts?.map(advert => (
+              <AdvertSection key={advert.advert_id} advert={advert} />
             ))}
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
           </div>
@@ -101,7 +107,7 @@ const AdvertPage = () => {
             <div>
               <p>Yol Arkadaşımda ilan açmak</p>
               <div className={styles.verySection}>
-                  <Writer/>
+                <Writer/>
               </div>
             </div>
             <div className={styles.btns}>
