@@ -56,6 +56,10 @@
     text-align: center;
 }
 
+.row .column h4{
+  font-size:20px;
+}
+
 .column img{
   border-radius: 64px;
   object-fit: cover;
@@ -100,6 +104,7 @@
 .mailText p{
   font-size: 18px;
   font-weight: 400;
+  margin: 0;
 }
 
 .mailText img{
