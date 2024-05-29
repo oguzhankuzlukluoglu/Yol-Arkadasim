@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -13,8 +13,13 @@ import { useRouter } from 'next/navigation';
 import axiosInstance, { removeToken } from '@/utils/axiosInstance';
 
 const NavbarSection = () => {
-
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const handleProfileClick = async () => {
     try {
@@ -71,16 +76,31 @@ const NavbarSection = () => {
                   <Nav.Link href="/">Ana Sayfa</Nav.Link>
                   <Nav.Link href="/advert">İlanlar</Nav.Link>
                   <Nav.Link href="/about">Hakkımızda</Nav.Link>
+                  {isLoggedIn ? (
                   <NavDropdown
-                    style={{minWidth:"5rem"}}
+                    style={{ minWidth: "5rem" }}
                     className={styles.navDrop}
                     title="Profil"
                   >
-                    <NavDropdown.Item className={styles.dropItem} onClick={handleProfileClick}>Bilgilerim</NavDropdown.Item>
-                    <NavDropdown.Item className={styles.dropItem} href="/">
-                      <Link onClick={handleLogout} href="">Çıkış Yap</Link>
+                    <NavDropdown.Item
+                      className={styles.dropItem}
+                      onClick={handleProfileClick}
+                    >
+                      Bilgilerim
+                    </NavDropdown.Item>
+                    <NavDropdown.Item className={styles.dropItem}>
+                      <Link href="" onClick={handleLogout}>
+                        Çıkış Yap
+                      </Link>
                     </NavDropdown.Item>
                   </NavDropdown>
+                ) : (
+                  <>
+                    <Nav.Link href="/login">Giriş Yap</Nav.Link>
+                    <Nav.Link href="/register">Kayıt Ol</Nav.Link>
+                  </>
+                )}
+                 
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
