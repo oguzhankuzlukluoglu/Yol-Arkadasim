@@ -320,7 +320,6 @@ func GetAdvertsByUserIDHandler(c *gin.Context) {
 	// Sonuçları JSON formatında yanıtlayın
 	c.JSON(http.StatusOK, gin.H{"adverts": adverts})
 }
-
 func GetFilteredAdvertsHandler(c *gin.Context) {
 	from := c.Query("from")
 	to := c.Query("to")
@@ -351,7 +350,19 @@ func GetFilteredAdvertsHandler(c *gin.Context) {
 		filter["journey_date"] = journeyDate
 	}
 
-	cursor, err := collection.Find(context.Background(), filter)
+	// Sayfalama değişkenlerini tanımla ve varsayılan değerleri atama
+	page, err := strconv.Atoi(c.Query("page"))
+	if err != nil || page <= 0 {
+		page = 1
+	}
+	limit, err := strconv.Atoi(c.Query("limit"))
+	if err != nil || limit <= 0 {
+		limit = 10 // Varsayılan olarak 10 ilan göster
+	}
+	skip := (page - 1) * limit
+
+	// İlanları belirli sayfa ve limit ile getir
+	cursor, err := collection.Find(context.Background(), filter, options.Find().SetSkip(int64(skip)).SetLimit(int64(limit)))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
 		return
@@ -373,5 +384,13 @@ func GetFilteredAdvertsHandler(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"adverts": adverts})
+	// Toplam ilan sayısını al
+	totalAdverts, err := collection.CountDocuments(context.Background(), filter)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		return
+	}
+
+	// Sayfalama verilerini JSON formatında yanıtla
+	c.JSON(http.StatusOK, gin.H{"adverts": adverts, "totalAdverts": totalAdverts})
 }

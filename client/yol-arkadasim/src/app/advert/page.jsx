@@ -26,20 +26,19 @@ const AdvertPage = () => {
       const response = await axiosInstance.get("/filter", {
         params: {
           page: page,
-          limit: 3, // Adjust as needed
+          limit: 3, // Sayfa başına 3 ilan
           from: filters.from,
           to: filters.to,
           journey_date: filters.journey_date,
         }
       });
-      console.log(response)
       setAdverts(response.data.adverts);
-      console.log(adverts)
-      setTotalPages(response.data.totalPages);
+      setTotalPages(Math.ceil(response.data.totalAdverts / 3)); // Toplam ilan sayısını 3'e böler ve yukarı yuvarlar
     } catch (error) {
       console.error("Error fetching adverts:", error);
     }
   };
+  
 
   useEffect(() => {
     fetchAdverts(currentPage, filters);

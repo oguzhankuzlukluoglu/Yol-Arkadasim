@@ -3,18 +3,26 @@ import { Button } from 'react-bootstrap';
 import styles from "./pagination.module.css";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const goToNextPage = () => {
+    onPageChange('next');
+  };
+
+  const goToPreviousPage = () => {
+    onPageChange('prev');
+  };
+
   return (
     <div className={styles.container}>
       <Button 
         variant='primary' 
-        onClick={() => onPageChange('prev')}
+        onClick={goToPreviousPage}
         disabled={currentPage === 1}
       >
         GERİ
       </Button>
       <Button 
         variant='primary' 
-        onClick={() => onPageChange('next')}
+        onClick={goToNextPage}
         disabled={currentPage === totalPages}
       >
         İLERİ
