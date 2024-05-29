@@ -320,15 +320,16 @@ func GetAdvertsByUserIDHandler(c *gin.Context) {
 	// Sonuçları JSON formatında yanıtlayın
 	c.JSON(http.StatusOK, gin.H{"adverts": adverts})
 }
+
 func GetFilteredAdvertsHandler(c *gin.Context) {
 	from := c.Query("from")
 	to := c.Query("to")
 	journeyDateStr := c.Query("journeyDate")
 
-	var advertDate time.Time
+	var journeyDate time.Time
 	var err error
 	if journeyDateStr != "" {
-		advertDate, err = time.Parse("02.01.2006", journeyDateStr)
+		journeyDate, err = time.Parse("02.01.2006", journeyDateStr)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid journeyDate format. Use DD.MM.YYYY"})
 			return
@@ -345,8 +346,9 @@ func GetFilteredAdvertsHandler(c *gin.Context) {
 	if to != "" {
 		filter["to"] = to
 	}
-	if !advertDate.IsZero() {
-		filter["journey_date"] = advertDate
+	if !journeyDate.IsZero() {
+		// Filter for a specific journey date
+		filter["journey_date"] = journeyDate
 	}
 
 	cursor, err := collection.Find(context.Background(), filter)
