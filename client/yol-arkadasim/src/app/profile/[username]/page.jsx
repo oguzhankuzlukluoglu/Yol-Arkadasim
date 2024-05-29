@@ -15,7 +15,7 @@ const ProfilePage = () => {
   const [username, setUsername] = useState(useParams().username)
   const [userData, setUserData] = useState({});
   const [userAdverts, setUserAdverts] = useState([])
-
+  const router = useRouter()
   useEffect(() => {
     if (username) {
       const fetchUserData = async () => {
@@ -88,8 +88,10 @@ const ProfilePage = () => {
             <span className={styles.userName}>{`${name} ${surname}`}</span>
             <span className={styles.userDesc}>{about}</span>
             <div className={styles.userLocation}>
-              <Image alt="location" src="/location.png" width={16} height={16}/>
-              <span>{location}</span>
+              {location && 
+                <Image alt="location" src="/location.png" width={16} height={16}/>
+              }
+                <span>{location}</span>
             </div>
           </div>
         </div>

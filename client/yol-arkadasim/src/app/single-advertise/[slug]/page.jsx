@@ -1,49 +1,65 @@
 "use client";
-
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "./singleAdvertise.module.css";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import axiosInstance from '@/utils/axiosInstance';
 
-const SingleAdvertise = () => {
-  const { slug } = useParams();
+const SingleAdvertise = (props) => {
+  const params = useParams();
+  const slug = params.slug;
+
 
   const [advert, setAdvert] = useState(null);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-      const fetchAdvert = async () => {
-        try {
-          const response = await axiosInstance.get(`/adverts/${slug}`);
-          console.log(response)
-          setAdvert(response.data);
-          const userResponse = await axiosInstance.get(`/get-all-users`);
-          console.log(userResponse)
-          const fetchedUser = userResponse.data.users.find(user => user.id === response.data.posted_by_id);
-          setUser(fetchedUser);
-          setIsLoading(false);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-          setIsLoading(false);
+    const fetchAdvert = async () => {
+      try {
+        const response = await axiosInstance.get(`/advert/${slug}`);
+        console.log(response)
+        setAdvert(response.data.advert);
+        return response.data.advert.posted_by_id; // Return posted_by_id
+      } catch (error) {
+        console.error('Error fetching advert:', error);
+        setIsLoading(false);
+      }
+    };
+
+    const fetchUser = async (userId) => {
+      try {
+        const response = await axiosInstance.get(`/get-all-users`);
+        console.log(response.data)
+        const user = response.data.users.find((user) => user.id === userId);
+        console.log(user)
+        setUser(user);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+      setIsLoading(false);
+    };
+
+    if (slug) {
+      fetchAdvert().then(postedById => {
+        if (postedById) {
+          fetchUser(postedById);
         }
-      };
-      fetchAdvert();
+      });
+    }
   }, [slug]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  console.log(advert)
-  console.log(user)
 
   if (!advert || !user) {
-    return <div>No advert or user found</div>;
+    return <div>No advert found</div>;
   }
 
-  const { from, to, transport_choice, journey_date, journey_time, journey_description } = advert;
+  const { from, to, transport_choice, journey_date, journey_time, journey_description, phone_number } = advert;
+  console.log(user)
 
   return (
     <div className={styles.container}>
@@ -54,7 +70,7 @@ const SingleAdvertise = () => {
             <div className={styles.generalInfos}>
               <div className={styles.userAndRoad}>
                 <div className={styles.user}>
-                  <Image alt="" src={user.profile_picture || "/navbarLogo.png"} width={64} height={64} />
+                  <Image alt="" src={user.profile_picture || "/user.png"} width={64} height={64} />
                   <span>{user.username}</span>
                 </div>
                 <div className={styles.roadInfos}>
@@ -79,7 +95,7 @@ const SingleAdvertise = () => {
               <span>Hemen İlan sahibiyle iletişime geçin!</span>
             </div>
             <div className={styles.communicateSection}>
-              <Link href={`https://wa.me/${user.whatsapp}`}>
+              <Link href={`https://wa.me/${phone_number}`}>
                 <div className={styles.whatsapp}>
                   <Image alt="whatsapp" src="/whatsapp.png" width={64} height={64} />
                   <span>Whatsapp</span>

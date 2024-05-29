@@ -102,9 +102,12 @@ const HomePage = () => {
       </div>
 
       <div className={styles.findAdvert}>
-        <div className={styles.city}>
+        {/* <div className={styles.city}>
               <Where type="from" width="advert"/>
              <Where type="to" width="advert"/>
+        </div> */}
+        <div className={styles.chooseAdvert}>
+          <p>Güncel ilanlar arasından senin için en uygun olanını seç ve İletişime geç!</p>
         </div>
         <div className={styles.button}>
           <Link href="/advert" className={styles.buttonLink}>

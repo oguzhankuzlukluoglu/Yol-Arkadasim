@@ -10,17 +10,17 @@ const Footer = () => {
         <div className={styles.popular}>
           <h1>Popüler Güzergahlar</h1>
           <div className={styles.roads}>
-            <Link href="">İstanbul &#10230; Ankara</Link>
-            <Link href="">Ankara &#10230; İzmir</Link>
-            <Link href="">Denizli &#10230; Bursa</Link>
+            <Link href="/advert">İstanbul &#10230; Ankara</Link>
+            <Link href="/advert">Ankara &#10230; İzmir</Link>
+            <Link href="/advert">Denizli &#10230; Bursa</Link>
           </div>
         </div>
         <div className={styles.routes}>
           <h1>Linkler</h1>
-          <div className={styles.links}>
+          <div className={styles.links} style={{textAlign:"left"}}>
             <Link href="/">Ana Sayfa</Link>
-            <Link href="/">Giriş Yap</Link>
-            <Link href="/">İlanlar</Link>
+            <Link href="/about">Hakkımızda</Link>
+            <Link href="/advert">İlanlar</Link>
           </div>
         </div>
         <div className={styles.about}>
@@ -55,10 +55,6 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-      </div>
-      <div className={styles.company}>
-        <span>Yol Arkadaşım, 2024 ©</span>
-        <span>Her hakkı saklıdır.</span>
       </div>
     </div>
   );
