@@ -39,7 +39,6 @@ const AdvertSection = ({ advert }) => {
   //   console.log(userData); // userData değiştiğinde konsola yazdır
   // }, [userData]);
 
-  console.log(journey_time)
   return (
     <div className={styles.advertSection}>
       <div className={styles.advertInfos}>
@@ -80,7 +79,7 @@ const AdvertSection = ({ advert }) => {
           )}
         </div>
         <div className={styles.advertButton}>
-          <Link href={`/advert/${advert.advert_id}`}>İlana Göz At</Link>
+          <Link href={`/single-advertise/${advert.advert_id}`}>İlana Göz At</Link>
         </div>
       </div>
     </div>
