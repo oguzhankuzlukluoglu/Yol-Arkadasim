@@ -14,7 +14,8 @@ const AdvertSection = ({ advert }) => {
     return <div>Loading...</div>;
   }
 
-  const {from, to, transport_choice, journey_date, journey_time, posted_by_id } = advert;
+  const {advert_id ,from, to, transport_choice, journey_date, journey_time, posted_by_id } = advert;
+
 
 
   useEffect(() => {
@@ -79,7 +80,7 @@ const AdvertSection = ({ advert }) => {
           )}
         </div>
         <div className={styles.advertButton}>
-          <Link href={`/single-advertise/${advert.advert_id}`}>İlana Göz At</Link>
+          <Link href={`/single-advertise/${advert_id}`}>İlana Göz At</Link>
         </div>
       </div>
     </div>

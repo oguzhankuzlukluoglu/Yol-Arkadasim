@@ -19,7 +19,8 @@ const HomePage = () => {
       try {
         const commentsResponse = await axiosInstance.get("/comments");
         console.log(commentsResponse)
-        const fetchedComments = commentsResponse.data.comments.slice(0,3); // Son 3 yorumu alın
+        const fetchedComments = commentsResponse.data.comments.slice(-3); // Son 3 yorumu alın
+        console.log(fetchedComments)
 
         // Kullanıcı bilgilerini çekmek için kullanıcı adlarıyla yeni istekler yapın
         const userDetailsPromises = fetchedComments.map(comment =>
