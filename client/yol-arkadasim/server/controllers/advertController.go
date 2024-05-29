@@ -322,7 +322,6 @@ func GetAdvertsByUserIDHandler(c *gin.Context) {
 	// Sonuçları JSON formatında yanıtlayın
 	c.JSON(http.StatusOK, gin.H{"adverts": adverts})
 }
-
 func GetFilteredAdvertsHandler(c *gin.Context) {
 	from := c.Query("from")
 	to := c.Query("to")
