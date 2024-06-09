@@ -11,7 +11,7 @@ var client *mongo.Client
 
 func ConnectToMongoDB() error {
 	// MongoDB'ye bağlanmak için bağlantı dizesi oluşturun
-	clientOptions := options.Client().ApplyURI("mongodb+srv://oguzhankuzlukluoglu:Thk8fV2zhtPTmI5h@cluster0.16jwgbi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+	clientOptions := options.Client().ApplyURI("database baglantisini girin")
 
 	// Bağlantı oluştur
 	c, err := mongo.Connect(context.Background(), clientOptions)
