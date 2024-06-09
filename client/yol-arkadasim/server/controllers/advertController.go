@@ -38,7 +38,7 @@ func CreateAdvertHandler(c *gin.Context) {
 	// Debug için userIDStr'yi yazdır
 	fmt.Println("userIDStr (string):", userIDStr)
 
-	if c.Request.Method != http.MethodPost { // Yöntemi HTTP POST olarak kontrol edin
+	if c.Request.Method != http.MethodPost {
 		c.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Method Not Allowed"})
 		return
 	}
@@ -67,7 +67,6 @@ func CreateAdvertHandler(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "Advert created successfully", "advert": advert})
 }
 
-// SaveAdvertToDB, advert modelini MongoDB'ye kaydeder.
 func SaveAdvertToDB(advert *models.AdvertModel) error {
 	client := database.GetMongoClient()
 	collection := client.Database("mydatabase").Collection("adverts")
