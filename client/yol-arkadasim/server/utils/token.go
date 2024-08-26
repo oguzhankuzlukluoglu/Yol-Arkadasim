@@ -9,16 +9,13 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-// JWTKey JWT anahtarını temsil eder
-var JWTKey = []byte("gizli_anahtar")
+var JWTKey = []byte("gizli_anahtar") //your secret key
 
-// Claims JWT taleplerini temsil eder
 type Claims struct {
 	UserID string `json:"user_id"`
 	jwt.StandardClaims
 }
 
-// GenerateToken, belirli bir kullanıcı için JWT oluşturur.
 func GenerateToken(userID string) (string, error) {
 
 	expirationTime := time.Now().Add(24 * time.Hour) // Token geçerlilik süresi 24 saat olarak ayarlandı.
@@ -37,7 +34,6 @@ func GenerateToken(userID string) (string, error) {
 	return tokenString, nil
 }
 
-// VerifyToken, verilen JWT token'ı doğrular ve talepleri döner.
 func VerifyToken(tokenString string) (*Claims, error) {
 
 	fmt.Println(tokenString)
@@ -63,7 +59,6 @@ func VerifyToken(tokenString string) (*Claims, error) {
 	return claims, nil
 }
 
-// ExtractToken, Authorization header'dan token'ı çıkarır.
 func ExtractTokenFromHeader(authHeader string) (string, error) {
 	parts := strings.Split(authHeader, " ")
 	if len(parts) != 2 || parts[0] != "Bearer" {
