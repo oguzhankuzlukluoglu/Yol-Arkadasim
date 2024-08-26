@@ -12,7 +12,6 @@ import (
 //var store *sessions.CookieStore
 
 func main() {
-	// MongoDB'ye bağlanmak için bağlantı oluştur
 	err := database.ConnectToMongoDB()
 	if err != nil {
 		log.Fatal("MongoDB'ye bağlanırken bir hata oluştu: ", err)
@@ -25,7 +24,7 @@ func main() {
 	// CORS ayarları
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:3000"}
-	config.AllowHeaders = []string{"Authorization", "Content-Type", "id"} // "Content-Type" başlığını ekleyin
+	config.AllowHeaders = []string{"Authorization", "Content-Type", "id"} // "Content-Type" 
 	config.AllowCredentials = true
 	router.Use(cors.New(config))
 
