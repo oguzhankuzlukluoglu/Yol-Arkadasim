@@ -1,42 +1,63 @@
-# Yol-Arkadasim-Golang-
+# Yol-Arkadasim-Golang
 
-Yol-Arkadasim, BlaBlaCar benzeri bir platformdur ve kullanıcıların şehir içi veya şehir dışı yolculuklarında paylaşım yaparak seyahat arkadaşları bulmalarını sağlar. Bu proje, **Next.js**, **TailwindCSS**, **MongoDB**, **Go**, **Gin**, **Axios** gibi modern teknolojileri kullanarak geliştirilmiştir.
+Yol-Arkadasim is a platform inspired by BlaBlaCar, designed to help users find travel companions for both city and intercity trips. This project is built using modern technologies like **Next.js**, **TailwindCSS**, **MongoDB**, **Go**, **Gin**, and **Axios**.
 
-## Proje Özeti
+The application allows drivers to share empty seats in their vehicles and passengers to reserve these seats for their journeys. Users can create ads for the routes they plan to travel or apply to existing ads.
 
-Bu uygulama, sürücülerin araçlarında boş koltuklarını paylaşmalarını ve yolculuk yapacak kişilerin bu koltukları rezerve etmelerini sağlar. Kullanıcılar, gitmek istedikleri rota için ilanlar oluşturabilir ya da mevcut ilanlara başvurabilirler.
+## Technologies
 
-### Teknolojiler
+- **Next.js**: A modern frontend framework based on React.
+- **TailwindCSS**: Used for fast and flexible CSS design.
+- **MongoDB**: NoSQL database for managing data.
+- **Go**: Used to build the backend API.
+- **Gin**: A lightweight HTTP web framework for Go.
+- **Axios**: Used for data exchange between frontend and backend.
 
-- **Next.js**: React tabanlı modern bir frontend framework'ü.
-- **TailwindCSS**: Hızlı ve esnek CSS tasarımı için kullanıldı.
-- **MongoDB**: Veritabanı yönetimi için NoSQL veritabanı.
-- **Go**: Backend API'yi oluşturmak için kullanıldı.
-- **Gin**: Go için hafif bir HTTP web framework'ü.
-- **Axios**: Frontend ve backend arasında veri alışverişi için kullanıldı.
+## Setup and Usage
 
-## Kurulum ve Kullanım
+To run this project locally, follow these steps:
 
-Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
-
-1. **Depoyu klonlayın:**
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/oguzhankuzulukluoglu/Yol-Arkadasim.git
    cd Yol-Arkadasim
+Install dependencies for both frontend and backend in one go:
 
-2. **Gerekli bağımlılıkları yükleyin:**
-   cd client/yol-arkadasim
-   npm install
-   npm run dev
-   cd server
-   go mod tidy
-   go run main.go
-   
-3. ***ENV dosyası oluşturun
-  MONGO_URI=your_mongodb_uri
-  PORT=5000
+For the frontend:
 
+bash
+Kodu kopyala
+cd client/yol-arkadasim
+npm install
+npm run dev
+For the backend:
+
+bash
+Kodu kopyala
+cd server
+go mod tidy
+go run main.go
+Create the .env file:
+
+In the project root directory, create a .env file and configure the following environment variables:
+
+bash
+Kodu kopyala
+MONGO_URI=your_mongodb_uri
+PORT=5000
+Run the application:
+
+To start the frontend:
+
+bash
+Kodu kopyala
+npm run dev
+To start the backend:
+
+bash
+Kodu kopyala
+go run main.go
 
 
 ![Login](login.jpeg)
