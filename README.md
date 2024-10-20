@@ -22,47 +22,18 @@ To run this project locally, follow these steps:
    ```bash
    git clone https://github.com/oguzhankuzulukluoglu/Yol-Arkadasim.git
    cd Yol-Arkadasim
-Install dependencies for both frontend and backend in one go:
 
-For the frontend:
+2. Install dependencies for both frontend and backend in one go:
+   ```bash
+   cd client/yol-arkadasim
+   npm install
+   npm run dev
 
-bash
-Kodu kopyala
-cd client/yol-arkadasim
-npm install
-npm run dev
-For the backend:
-
-bash
-Kodu kopyala
-cd server
-go mod tidy
-go run main.go
-Create the .env file:
-
-In the project root directory, create a .env file and configure the following environment variables:
-
-bash
-Kodu kopyala
-MONGO_URI=your_mongodb_uri
-PORT=5000
-Run the application:
-
-To start the frontend:
-
-bash
-Kodu kopyala
-npm run dev
-To start the backend:
-
-bash
-Kodu kopyala
-go run main.go
-
-
+   cd server
+   go mod tidy
+   go run main.go
 ![Login](login.jpeg)
 ![Home Page](homepage.jpeg)
 ![App](ici.jpeg)
 ![Creator](creator.jpeg)
 ![App](content.jpeg)
-
