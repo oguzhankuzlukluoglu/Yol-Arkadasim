@@ -1,4 +1,0 @@
-client/** linguist-vendored
-node_modules/** linguist-vendored
-
-*.go linguist-detectable
