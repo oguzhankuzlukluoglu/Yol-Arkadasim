@@ -1,9 +1,9 @@
+# Frontend ve asset'leri sayma
 client/** linguist-vendored
 node_modules/** linguist-vendored
 *.jpeg linguist-vendored
 *.jpg linguist-vendored
 *.png linguist-vendored
-client/** linguist-vendored
-**/*.css linguist-vendored
-**/*.js linguist-vendored
-**/*.jsx linguist-vendored
+
+# Go dosyaları kesin sayılsın
+*.go linguist-detectable=true
