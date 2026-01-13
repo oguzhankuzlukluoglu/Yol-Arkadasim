@@ -1,0 +1,7 @@
+client/** linguist-vendored
+node_modules/** linguist-vendored
+*.jpeg linguist-vendored
+*.jpg linguist-vendored
+*.png linguist-vendored
+
+*.go linguist-detectable
